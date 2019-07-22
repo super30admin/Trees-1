@@ -1,3 +1,12 @@
+/**
+ * Time Complexity: O(n^2)
+ * Space Complexity : O(1) - no extra space
+ * Idea:
+ * 1. Get data from preorder to create new node. 
+ * 2. search for data in inorder array and left part of inorder array becomes left subtree and right part becomes right subtree
+ * 3. return root
+ */
+
 class InorderToBST {
 
     public class TreeNode {
