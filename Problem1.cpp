@@ -23,19 +23,51 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
+        if(root == NULL){return true;}
+        bool l = recurr(root->left,root->val,false);
+        bool r = recurr(root->right,root->val,true);
+
+        if(l == true && r == true){
+            return true;
+        }
+        return false;
+    }
+private:
+    bool recurr(TreeNode* root, int value, bool right){
         if(root == NULL){
             return true;
         }
-        if((root->left == NULL) || root->left->val < root->val){
-            isValidBST(root->left);
-        }else{return false;}
+        bool check;
+        if(right){
+            check = root->val > value;
+        }else{
+            check = root->val < value;
+        }
+        bool retValLeft = false; bool retValRight = false;
+        if(((root->left == NULL) || (root->left->val < root->val)) && check){
+            retValLeft = recurr(root->left,value,right);
+        }else{retValLeft = false;}
 
-        if((root->right == NULL) || root->right->val > root->val){
-            isValidBST(root->right);
-        }else{return false;}
+        if(((root->right == NULL) || (root->right->val > root->val)) && check){
+            retValRight = recurr(root->right,value,right);
+        }else{retValRight = false;}
+
+        if(retValRight == true && retValLeft == true){
+            return true;
+        }
+        return false;
     }
 };
 
