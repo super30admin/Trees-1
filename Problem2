@@ -1,0 +1,31 @@
+Idea:
+From preorder traversal, we can construct the root. 
+From inorder traversal we can construct the left and right subtrees.
+
+
+
+
+class Solution {
+    private int preIndex = 0;
+    private int inIndex = 0;
+    
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return helper(preorder,inorder,null);
+    }
+    
+    public TreeNode helper(int[] preorder, int[] inorder, TreeNode end)
+    {
+        if(inIndex > inorder.length - 1 || (end != null && end.val == inorder[inIndex])){
+            return null;
+        }
+        
+        TreeNode root = new TreeNode(preorder[preIndex++]);
+        root.left = helper(preorder, inorder, root);
+        
+        inIndex++;
+        root.right = helper(preorder, inorder, end);
+        
+        return root;
+            
+    }
+}
