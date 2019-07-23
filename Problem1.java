@@ -1,15 +1,12 @@
-package org.lkg.algorithms;
-
-//3points :  
+//3points :  Learned from Geek For Greek  
 // A Tree is called a Binary Search Tree if it follows these conditions
 // 1. The left subtree of a node contains only nodes with keys less than the node's key.
 // 2. The right subtree of a node contains only nodes with keys greater than the node's key. 
 // 3. Both the left and right subtrees must also be binary search trees  
 
 
-// Time Complexity : O(n) = only 1 while loop  == total n times.
-// Space Complexity : O(1) Constant.
-
+// Time Complexity : O(n) 
+// Space Complexity : O(1) if Function Call Stack size is not considered, otherwise O(n)
 
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
