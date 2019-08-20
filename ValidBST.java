@@ -5,7 +5,7 @@
  * 1. For a BST, current node should be greater than all the nodes from its left sub tree
  * 2. For a BST, current node should be lesser than all the nodes from its right sub tree
  */
-
+import java.util.*;
 class ValidBST {
 
     public static class TreeNode {
@@ -14,6 +14,20 @@ class ValidBST {
              TreeNode right;
              TreeNode(int x) { val = x; }
          }
+
+    /**Another approach */
+    public boolean helper(TreeNode root, Integer min, Integer max){        
+        if(root == null) return true;
+        if(max != null && root.val >= max) return false;
+        if(min != null && root.val <= min) return false;
+        return helper(root.left, min, root.val) && helper(root.right, root.val, max);
+    }
+
+    public boolean validBST(TreeNode root){
+       return helper(root, null, null);
+    }
+
+    /**Another approach */
 
     public int findMax(TreeNode root){
         if(root == null) return 0;
@@ -39,7 +53,6 @@ class ValidBST {
         return 0;
         
     }
-
     public int findMin(TreeNode root){
         if(root == null) return 0;
 
@@ -83,6 +96,11 @@ class ValidBST {
 
         return isValidBST(root.right) && isValidBST(root.left);
     }
+
+
+
+    
+    
     public static void main(String[] args){
         System.out.println("ValidBST");
         TreeNode root = new TreeNode(10);
@@ -93,7 +111,9 @@ class ValidBST {
 
         ValidBST obj = new ValidBST();
         System.out.println(obj.isValidBST(root));
-        System.out.println("Max "+ obj.findMax(root));
+        // System.out.println("Max "+ obj.findMax(root));
+
+       //  System.out.println(obj.validBST(root));
 
     }
 }

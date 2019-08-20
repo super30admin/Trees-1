@@ -61,6 +61,32 @@ class InorderToBST {
         return root;
     }
 
+    /**rev */
+   // int preorderIndex = 0;
+    public TreeNode helper(int[] preorder, int[] inorder, int inorderStart, int inorderEnd){
+        
+        if(inorderStart>inorderEnd) return null;
+
+        TreeNode newNode = new TreeNode(preorder[preorderIndex]);
+        preorderIndex++;
+        if(inorderStart == inorderEnd) return newNode;
+        System.out.println("Inside " + newNode.val);
+        //find 
+        int inorderIndex = findInInorder(newNode.val, inorder);
+        //left
+        newNode.left = helper(preorder, inorder, inorderStart, inorderIndex-1);
+        newNode.right = helper(preorder, inorder, inorderIndex+1, inorderEnd);
+
+        return newNode;
+    }
+
+    public TreeNode inpretoBST(int[] preorder, int[] inorder){
+        
+        return helper(preorder, inorder, 0, inorder.length-1);
+        // return null;
+    }
+   
+    /**rev */
     public void printInorderTraversal(TreeNode root){
 
         if(root == null) return;
@@ -73,9 +99,11 @@ class InorderToBST {
     public static void main(String[] args){
         System.out.println("InorderToBST");
         InorderToBST obj = new InorderToBST();
-        int[] preorder = {3,9,20,15,7};
-        int[] inorder = {9,3,15,20,7};
-        TreeNode root = obj.buildTree(preorder, inorder);
+         int[] preorder = {3,9,20,15,7};
+         int[] inorder = {9,3,15,20,7};
+        // TreeNode root = obj.buildTree(preorder, inorder);
+        // obj.printInorderTraversal(root);
+        TreeNode root = obj.inpretoBST(preorder, inorder);
         obj.printInorderTraversal(root);
     }
 }
