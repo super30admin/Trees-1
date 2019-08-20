@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Time Complexity: O(n^2)
  * Space Complexity : O(1) - no extra space
@@ -65,17 +67,34 @@ class InorderToBST {
    // int preorderIndex = 0;
     public TreeNode helper(int[] preorder, int[] inorder, int inorderStart, int inorderEnd){
         
-        if(inorderStart>inorderEnd) return null;
+       // if(inorderStart>inorderEnd) return null;
+       if(preorder.length == 0) return null;
 
-        TreeNode newNode = new TreeNode(preorder[preorderIndex]);
-        preorderIndex++;
+        //TreeNode newNode = new TreeNode(preorder[preorderIndex]);
+        TreeNode newNode = new TreeNode(preorder[0]);
+      //  preorderIndex++;
         if(inorderStart == inorderEnd) return newNode;
         System.out.println("Inside " + newNode.val);
-        //find 
-        int inorderIndex = findInInorder(newNode.val, inorder);
+
+
+        //find
+        int inorderIndex = -1;
+        for(int i=0;i<inorder.length;i++){
+            if(inorder[i] == newNode.val){
+                inorderIndex = i;
+            }
+        } 
+        //= findInInorder(newNode.val, inorder);
+        //mod inorder
+        int[] newinorderLeft = Arrays.copyOfRange(inorder, 0, inorderIndex);
+        int[] newinorderRight = Arrays.copyOfRange(inorder, inorderIndex+1, inorder.length);
+        //mod preorder
+
+        int[] newPreorderLeft = Arrays.copyOfRange(preorder, 1, inorderIndex+1);
+        int[] newPreorderRight = Arrays.copyOfRange(preorder, inorderIndex+1, preorder.length);
         //left
-        newNode.left = helper(preorder, inorder, inorderStart, inorderIndex-1);
-        newNode.right = helper(preorder, inorder, inorderIndex+1, inorderEnd);
+        newNode.left = helper(newPreorderLeft, newinorderLeft, inorderStart, inorderIndex-1);
+        newNode.right = helper(newPreorderRight, newinorderRight, inorderIndex+1, inorderEnd);
 
         return newNode;
     }
