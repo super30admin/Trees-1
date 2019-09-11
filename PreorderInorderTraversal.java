@@ -1,5 +1,5 @@
 //Time complexity: O(N)
-//Space Complexity: O(1)
+//Space Complexity: O(N)
 //Ran on leetcode and accepted
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
