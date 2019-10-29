@@ -22,3 +22,9 @@ private boolean helper(TreeNode root, long min, long max) {
             && helper(root.right, root.val, max); 
 }
 }
+
+
+//SC: O(n) recursion stack space -> is this correct
+//TC:O(n)
+//Accpted on leetcode/
+//Using min and max and comapring each node with min and max
