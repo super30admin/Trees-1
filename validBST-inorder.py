@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+#Time complexity - O(n)
+#Space complexity - O(n) because of stack
+#Explanation - Inorder traversal approach using stack
+
 class Solution:
     	def isValidBST(self, root):
             if root == None:
