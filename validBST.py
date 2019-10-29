@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+#Time Complexity - O(n)
+#Space Complexity - O(1)
+#Explanation - Recursive solution using minimum and maximum value approach
+
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         return self.helper(root, None, None)
