@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        if (preorder == null && inorder == null) return null;
+        
+        return helper(preorder, inorder);
+    }
+    
+    private TreeNode helper(int[] preorder, int[] inorder) {
+        // base case
+        if (preorder.length == 0) return null;
+        
+        // root is the 1st element of preorder
+        TreeNode root = new TreeNode(preorder[0]);
+        
+        int index = -1;
+        for (int i=0; i < inorder.length; i++) {
+            // check the index of root node in inorder
+            // 1st element of pre-order is root
+            if (inorder[i] == preorder[0]) {
+                index = i;
+                break;
+            }
+        }
+        // now need to create left pre & in order
+        // and right pre & in order
+        int[] preorderleft = Arrays.copyOfRange(preorder, 1, index+1);
+        int[] inorderleft = Arrays.copyOfRange(inorder, 0, index);
+        int[] preorderright = Arrays.copyOfRange(preorder, index+1, preorder.length);
+        int[] inorderright = Arrays.copyOfRange(inorder, index+1, inorder.length);
+                                       
+        root.left = helper(preorderleft, inorderleft);
+                                       
+        root.right = helper(preorderright, inorderright);
+                                       
+        return root;
+    
+    }
+}
