@@ -5,6 +5,9 @@
 #         self.left = None
 #         self.right = None
 
+#Time complexity - O(n^2)
+#Space complexity -O(n) for the array
+
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         if len(preorder) == 0:
