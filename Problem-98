@@ -1,0 +1,100 @@
+/*
+Complexity: O(n)
+
+Leetcode: one test case failing.
+
+Approach:
+
+check left < root 
+check right >root
+check the grand parent with the grad children
+
+
+Challenges:
+
+could cover edge case, where, a node is always > or less than all the parents.
+
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        
+      //  Queue<Integer> q = new LinkedList<>(); 
+        TreeNode gp=null;
+        HashSet<Integer> hs= new HashSet<>();
+        return recurfun(root,gp,hs);
+        
+    }
+    
+   boolean recurfun(TreeNode root,TreeNode gp,HashSet<Integer> hs)
+    {
+        
+       boolean left,right;
+       
+       //check current subtree
+       
+       if(root==null)
+       {
+           return true;
+       }
+       
+       if(hs.contains(root.val)) return false;
+       hs.add(root.val);
+   //    if((gp.rig!=null&&gp!=null)&&(gp.right.val<=gp.val) return false;
+      
+    //   if((root.left!=null&&gp!=null )&& root.left.val<=gp.val) return false;
+        if(root.left!=null&&gp!=null) System.out.printf("     %d      %d        %d\n ",root.val,root.left.val,gp.val);
+       if(root.left!=null&&root.left.val>=root.val) return false;
+       if((root.right!=null&&root.right.val<=root.val)) return false;
+          
+ //       if((root.left!=null&&gp!=null)&&(root.val<gp.val&&root.left.val>=gp.val)) return false;
+ //       if((root.right!=null&&gp!=null)&&(root.val<gp.val&&root.right.val>=gp.val)) return false;
+ //      if((root.left!=null&&gp!=null)&&(root.val>gp.val&&root.left.val<=gp.val)) return false;
+ //       if((root.right!=null&&gp!=null)&&(root.val>gp.val&&root.right.val<=gp.val)) return false;
+       
+       
+       
+       if(gp!=null)
+       {
+           if(gp.left!=null)
+           {
+               if(gp.left.left!=null&&gp.val<=gp.left.left.val) return false;
+                if(gp.left.right!=null&&gp.val<=gp.left.right.val) return false;
+           }
+           
+             if(gp.right!=null)
+           {
+               if(gp.right.left!=null&&gp.val>=gp.right.left.val) return false;
+                if(gp.right.right!=null&&gp.val>=gp.right.right.val) return false;
+           }
+       }
+       
+       //checkleftsubtree
+       
+       left=recurfun(root.left,root,hs);
+       
+       //checkrightsubtree
+       
+       right=recurfun(root.right,root,hs);
+       
+       if(left&&right)
+       {
+           return true;
+       }
+       else{
+           System.out.println(" left is "+left+"     right is "+right+" root is "+root.val);
+       }
+       
+       return false; 
+    }
+}
