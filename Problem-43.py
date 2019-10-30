@@ -1,5 +1,5 @@
 # Leet code - 105
-# time complexity -O(N^2)
+# time complexity -O(N)
 #Space complexity=O(N)
 # here the root becomes the preorder first value and we get the index using inorder. Anything left of index belongs to lleft and anything right of index belongs to right subtree. 
 
