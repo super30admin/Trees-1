@@ -24,5 +24,5 @@ class Solution:
                 if prev != None and root.val <= prev.val:
                     return False
                 prev = root
-				root = root.right
+		root = root.right
             return True
