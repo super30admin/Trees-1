@@ -5,12 +5,14 @@
 #         self.left = None
 #         self.right = None
 
-#Time complexity - O(n^2)
-#Space complexity -O(n) for the array
+#Optimal solution accepted by leetcode
+#Time complexity - O(n) because we are travesing through inorder array
+#Space complexity - O(h) since we are building the tree 
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        if len(preorder) == 0:
+        #Edge case
+		if len(preorder) == 0:
             return None
         root = TreeNode(preorder[0])
         rootidx = -1
