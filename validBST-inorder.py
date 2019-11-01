@@ -5,9 +5,10 @@
 #         self.left = None
 #         self.right = None
 
-#Time complexity - O(n)
-#Space complexity - O(n) because of stack
-#Explanation - Inorder traversal approach using stack
+#Optimal solution accepted by leetcode
+#Time complexity - O(n) since we are traversing through every node
+#Space complexity - O(n)because of stack creation
+
 
 class Solution:
     	def isValidBST(self, root):
@@ -23,5 +24,5 @@ class Solution:
                 if prev != None and root.val <= prev.val:
                     return False
                 prev = root
+				root = root.right
             return True
-                root = root.right

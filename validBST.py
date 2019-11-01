@@ -5,9 +5,9 @@
 #         self.left = None
 #         self.right = None
 
-#Time Complexity - O(n)
-#Space Complexity - O(1)
-#Explanation - Recursive solution using minimum and maximum value approach
+#Optimal solution accepted by leetcode
+#Time complexity - O(n) since we are traversing through every node
+#Space complexity - O(1) is constant because we are just storing min and max val
 
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
