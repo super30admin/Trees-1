@@ -5,7 +5,8 @@
 #         self.left = None
 #         self.right = None
 
-#Optimal solution accepted by leetcode
+#Accepted on leetcode
+#Optimal recursive inorder traversal approach 
 #Time complexity - O(n) since we are traversing through every node
 #Space complexity - O(1) is constant because we are just storing min and max val
 
