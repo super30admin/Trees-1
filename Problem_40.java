@@ -7,6 +7,24 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+/**
+LeetCode Submitted : YES
+Space Complexity : O(1)
+Time Complexity : O(N)
+
+The idea is to use min and max across any node. By keeping initially min = INTEGER.MIN and max - INTGER.max
+
+**/
+
 class Solution {
     public boolean isValidBST(TreeNode root) {
         if(root == null)
