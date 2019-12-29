@@ -1,5 +1,5 @@
-// Time Complexity - O(n^2)  where n is the number of nodes in the tree
-// Space Complexity - O(n^2)  where n is the number of nodes in the tree
+// Time Complexity - O(n)  where n is the number of nodes in the tree
+// Space Complexity - O(n)  where n is the number of nodes in the tree
 // This solution worked on LeetCode
 
 class Solution {
