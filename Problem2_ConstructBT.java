@@ -1,4 +1,4 @@
-/************ Time Complexity: O(n) ************/
+/************ Time Complexity: O(n^2) ************/
 /************ Space Complexity: O(n) ************/
 
 /**
@@ -13,17 +13,19 @@
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         //base case
-        if(preorder.length==0)
+        if(preorder.length==0 || inorder.length==0)
             return null;
         
         // considering 1st element of preorder to be root
         TreeNode root = new TreeNode(preorder[0]);
         //initialization
         int index = -1;
+        //iterate over inorder array to get root each time
         for(int i=0; i<inorder.length; i++){
             if(inorder[i]==root.val){
                 //root = i index
                 index = i;
+                break;
             }
         }
         

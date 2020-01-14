@@ -1,5 +1,5 @@
 /********** Time Complexity: O(n) **********/
-/********** Space Complexity: O(n) **********/
+/********** Space Complexity: O(h) **********/
 //using stack memory
 
 /**
@@ -13,13 +13,15 @@
  */
 class Solution {
   public boolean isValidBST(TreeNode root) {
-     
+    //base case
+    if(root == null) return true;
+
     //considering stack for dfs processing
     Stack<TreeNode> st = new Stack();
     //initializing with max value to inorder
     double inorder = - Double.MAX_VALUE;
 
-    //while stack is not mepty and has an element
+    //while stack is not empty and has an element
     while (!st.isEmpty() || root != null) {
       while (root != null) {
         st.push(root);
@@ -52,6 +54,8 @@ class Solution {
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        //null -> Integer.MIN_VALUE
+        //null -> Integer.MAX_VALUE
         return isValidBSTRecursive(root,null, null);
     }
     
@@ -60,6 +64,7 @@ class Solution {
         if((min!=null && root.val<=min) || (max!=null && root.val>=max)){
             return false;
         }
+        //range of left and right child
         return(isValidBSTRecursive(root.left,min, root.val) &&
               isValidBSTRecursive(root.right,root.val, max));
     }
