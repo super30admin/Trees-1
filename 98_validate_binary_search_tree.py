@@ -1,13 +1,9 @@
 from math import inf
+from createTree import stringToTreeNode, TreeNode
+from typing import List
 
 
 class Solution:
-    # Definition for a binary tree node.
-    class TreeNode:
-        def __init__(self, x):
-            self.val = x
-            self.left = None
-            self.right = None
 
     def isValidBST(self, root: TreeNode) -> bool:
         """
@@ -39,9 +35,7 @@ class Solution:
                 root = cur.right
         return True
 
-    prev = -inf
-
-    def isValidBST_inorder_recursive(self, root: TreeNode) -> bool:
+    def isValidBST_inorder_recursive_pass_by_reference(self, root: TreeNode) -> bool:
         """
             // Time Complexity : O(n)
                     'n' is the number of nodes
@@ -49,15 +43,38 @@ class Solution:
                     'h' is the height of the tree
             // Did this code successfully run on Leetcode : Yes
         """
-        return self._helper_recursive(root)
+        prev = []
+        return self._helper_recursive_reference(root, prev)
 
     # LDR
-    def _helper_recursive(self, root: TreeNode):
+    def _helper_recursive_reference(self, root: TreeNode, prev: List):
         if root is None: return True
-        if not self._helper_recursive(root.left): return False
+        if not self._helper_recursive_reference(root.left, prev): return False
+        if prev and prev[-1] >= root.val: return False
+        prev.append(root.val)
+        return self._helper_recursive_reference(root.right, prev)
+
+    def isValidBST_inorder_recursive_pass_by_value(self, root: TreeNode) -> bool:
+        """
+            // Time Complexity : O(n)
+                    'n' is the number of nodes
+            // Space Complexity : O(h) Recursive stack space
+                    'h' is the height of the tree
+            // Did this code successfully run on Leetcode : Yes
+        """
+
+        return self._helper_recursive_value(root)
+
+    # LDR
+    # class variable
+    prev = -inf
+
+    def _helper_recursive_value(self, root: TreeNode):
+        if root is None: return True
+        if not self._helper_recursive_value(root.left): return False
         if self.prev >= root.val: return False
         self.prev = root.val
-        return self._helper_recursive(root.right)
+        return self._helper_recursive_value(root.right)
 
     def isValidBST_recursive(self, root: TreeNode) -> bool:
         """
@@ -79,3 +96,12 @@ class Solution:
         if root.val >= max or root.val <= min: return False
         # logic
         return self._helper(root.left, min, root.val) and self._helper(root.right, root.val, max)
+
+
+if __name__ == '__main__':
+    h = Solution()
+    root = stringToTreeNode([5, 1, 4, 'null', 'null', 3, 6])
+    print(h.isValidBST_inorder_recursive_pass_by_reference(root))
+    root = stringToTreeNode([1, 1])
+    print(h.isValidBST_inorder_recursive_pass_by_reference(root))
+    print(h.isValidBST_inorder_recursive_pass_by_value(root))
