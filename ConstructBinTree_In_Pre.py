@@ -13,7 +13,7 @@ class TreeNode:
 
 class Solution:
     
-    def buildTree(self, preorder, inorder):
+    def buildTree(self, preorder, inorder) -> TreeNode:
         len_inOrder = len(inorder)
         len_preOrder = len(preorder)
         if inorder == None or len_inOrder == 0 or preorder == None or len_preOrder == 0:
@@ -39,4 +39,4 @@ inOrder = [3,9,20,15,7]
 preOrder = [9,3,15,20,7]
 
 s = Solution()
-print(s.buildTree(inOrder, preOrder))
+print(s.buildTree(preOrder, inOrder))
