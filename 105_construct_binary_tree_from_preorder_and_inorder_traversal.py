@@ -10,7 +10,41 @@ class TreeNode:
 
 
 class Solution:
+    preorder_index = 0
+    inorder_dict = {}
+
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        """
+            // Time Complexity : O(n)
+            // Space Complexity : O(n) dictionary
+        """
+        if not preorder or not inorder:
+            return None
+
+        # dictionary to store all the inorder index
+        for idx, num in enumerate(inorder):
+            self.inorder_dict[num] = idx
+
+        self._helper(preorder, inorder, 0, len(inorder) - 1)
+
+    def _helper(self, preorder: List[int], inorder: List[int], start: int, end: int):
+        # base case
+        if start > end or self.preorder_index >= len(preorder):
+            return
+        # logic
+        inorder_index = self.inorder_dict[preorder[self.preorder_index]]
+        self.preorder_index += 1
+        root = TreeNode(inorder[inorder_index])
+        if start == end:
+            return root
+
+        # left sub tree
+        root.left = self._helper(preorder, inorder, start, inorder_index - 1)
+        root.right = self._helper(preorder, inorder, inorder_index + 1, end)
+
+        return root
+
+    def buildTreeBruteForce(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         """
             // Time Complexity : O(n^2) if recursive stack
 
@@ -75,11 +109,11 @@ class Solution:
         pre_left = preorder[1:idx + 1]
         # preorder right starts at inorder_root+1 and ends at len(preorder)-1
         pre_right = preorder[idx + 1:]
-        root.left = self.buildTree(pre_left, in_left)
-        root.right = self.buildTree(pre_right, in_right)
+        root.left = self.buildTreeBruteForce(pre_left, in_left)
+        root.right = self.buildTreeBruteForce(pre_right, in_right)
         return root
 
 
 if __name__ == '__main__':
     h = Solution()
-    print(h.buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]))
+    print(h.buildTreeBruteForce([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]))
