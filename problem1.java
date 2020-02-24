@@ -1,3 +1,7 @@
+import java.util.Stack;
+
+import javax.swing.tree.TreeNode;
+
 // ## Problem 1
 
 // Given a binary tree, determine if it is a valid binary search tree (BST).
@@ -10,6 +14,7 @@
 
 class Solution {
     TreeNode prev;
+    // recursive solution - T - O(n) and S - O(n)
     public boolean isValidBST(TreeNode root) {
         return inorder(root);
     }
@@ -24,4 +29,27 @@ class Solution {
         
         return inorder(root.right);  
     }
+
+     // iterative solution - T - O(n) and S - O(n)
+
+    // public boolean isValidBST(TreeNode root) {
+        
+    //     if(root == null) return true;
+    //     Stack<TreeNode> stack = new Stack<>();
+    //     TreeNode prev = null;
+        
+    //     while(root != null || !stack.isEmpty()){
+    //         while(root != null){
+    //             stack.push(root);
+    //             root = root.left;
+    //         }
+    //         root = stack.pop();
+            
+    //         if(prev != null && root.val <= prev.val) return false;
+    //         prev = root;
+    //         root = root.right;
+
+    //     }
+    //     return true;
+    // }
 }
