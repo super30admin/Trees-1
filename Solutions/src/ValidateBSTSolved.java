@@ -1,7 +1,8 @@
 // Time Complexity :O(n)
-// Space Complexity :O(nlogn)
+// Space Complexity :O(1)
 // Did this code successfully run on Leetcode :No
-// Any problem you faced while coding this : Failed Test Case
+// Any problem you faced while coding this : No
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -11,13 +12,13 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-class ValidateBST {
+class ValidateBSTSolved {
     public boolean isValidBST(TreeNode root) {
-        int minVal = Integer.MIN_VALUE;
-        int maxVal =  Integer.MAX_VALUE;
+        long minVal = Long.MIN_VALUE;
+        long maxVal =  Long.MAX_VALUE;
         return helper(root, minVal,maxVal);
     }
-    private boolean helper(TreeNode root, int minVal, int maxVal){
+    private boolean helper(TreeNode root, long minVal, long maxVal){
         if (root == null){
             return true;
 
