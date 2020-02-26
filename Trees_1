@@ -1,0 +1,110 @@
+==============================Is Valid BST====================================
+  
+// Time Complexity : O(n) 
+// Space Complexity : O(n) Recursion Stack space.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+// Check all the nodes with its prev node to see if current node is greater?
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode prev = null;
+    public boolean isValidBST(TreeNode root) {
+        return inOrder(root);
+    }
+    private boolean inOrder(TreeNode root){
+        
+        //Base Case
+        if(root == null )
+            return true;
+        //
+        if( inOrder(root.left) == false)
+            return false;
+        if(prev != null && prev.val >= root.val) return false;
+        prev = root;
+        // root = root.right;
+        return inOrder(root.right);
+        
+    }
+}
+
+
+=================================================Construct Binary Tree from Inorder and Pre-Order============================================
+
+// Time Complexity : O(n) 
+// Space Complexity : O(n) Intermediate hasmap is being used.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+
+// PreOrder --> Root Left Right
+// InOrder  --> Left Root Right
+
+// To construct a binary tree we need both details of inorder and pre-order(Or Inorder and Post order)
+
+//     Approach - 
+//     1 - Left most node in preorder is root node. 
+//     2 - Consider left most node as root node and search the value in in-order
+//     3 - All the element left of root(from preorder) in inorder are left subtree
+//     3 - All the element right of root(from preorder) in inorder are right subtree.
+    
+//     Construct hash map with elements in inorder and its indices.
+//     Once root is identified from preorder - All elements from 0 till inorder index its left subtree. All the elements from index+1 till end of inorder is right subtree.
+//     Return root after assiging left node and right node recursively
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int index = 0;
+    HashMap<Integer, Integer> hash;;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+     
+        hash = new HashMap<Integer, Integer>();
+        for(int i =0; i< inorder.length; i++){
+            hash.put(inorder[i],i);
+        }
+        
+        return  helper(preorder,inorder,0,inorder.length-1);
+        
+    }
+    
+    private TreeNode helper(int[] preorder, int[] inorder, int start, int end){
+    
+        // Base
+        if(preorder == null)
+            return null;
+        if(start > end)
+            return null;
+        
+        //logic
+        TreeNode root = new TreeNode(preorder[index]); 
+        
+        int indx = hash.get(root.val);
+        index++;
+         root.left = helper(preorder, inorder, start, indx-1);
+         root.right =  helper(preorder, inorder, indx+1, end);
+        
+        
+        return root;
+    }
+    
+}
