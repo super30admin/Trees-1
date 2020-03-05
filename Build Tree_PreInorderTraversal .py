@@ -6,14 +6,16 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-#time complexity = O(N)
+#time complexity = O(N*N), index() --> O(N) and all elements of preorder are visited once
 #space complexity = O(1)
 
 class Solution(object):
     def buildTree(self, preorder, inorder):
+        # BASE CASE
         if len(preorder) == 0 or len(inorder) == 0:
             return None
         
+        # LOGIC
         root = TreeNode(preorder.pop(0))
         k = inorder.index(root.key)
         # list.index() ==> O(N) as it has to do a for loop over all elements in list
