@@ -11,7 +11,7 @@ class TreeNode(object):
 
 class Solution(object):
     def buildTree(self, preorder, inorder):
-        # BASE CASE
+        # EDGE CASE
         if len(preorder) == 0 or len(inorder) == 0:
             return None
         
