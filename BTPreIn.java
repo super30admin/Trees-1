@@ -1,3 +1,8 @@
+// Time Complexity : O(n)
+// Space Complexity : O(m +n) n : maxDepth
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
 import java.util.Arrays;
 
 public class BTPreIn {
