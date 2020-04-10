@@ -1,7 +1,9 @@
-// Time Complexity : O(n)
+// Time Complexity : O(
 // Space Complexity : O(n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
+
+import java.util.Stack;
 
 /**
  * Definition for a binary tree node.
@@ -15,44 +17,72 @@
 
 public class ValidateBST {
 
-        // We need to check if all elements in left sub tree are lower than root and
-        // all elements in right sub tree are greater than root for each subtree
+       // Iterative Solution
+       public boolean isValidBSTIterative(TreeNode root) {
+           Stack<TreeNode> stack = new Stack<>();
+           TreeNode prev = null;
 
-        public boolean isValidBST(TreeNode root) {
-            return helper(root, null, null);
-        }
+           // while root is not null - keep going left
+           while(root != null || !stack.isEmpty()){
+               while(root != null){
+                   stack.push(root);
+                   root = root.left;
+               }
 
-        // helper function for recursion
-        public boolean helper(TreeNode node, Integer lower, Integer upper) {
-            // base case
-            if (node == null) {
-                return true;
-            }
+               root = stack.pop();
 
-            int val = node.val;
 
-            // termination cases
-            //1. if root is lower than lower elements in subtree
-            if (lower != null && val <= lower) {
-                return false;
-            }
-            //2. if root is greater than upper elements in subtree
-            if (upper != null && val >= upper) {
-                return false;
-            }
+               if(prev != null && prev.val >= root.val){
+                   return false;
+               }
+               prev = root;
 
-            // recursion
+               root = root.right;
+           }
 
-            //3. checking in left subtree for upper value as val and lower as lower
-            if (!helper(node.left, lower, val)) {
-                return false;
-            }
+           return true;
+       }
 
-            //4. checking in right subtree for upper value as upper and lower as val
-            if (!helper(node.right, val, upper)) {
-                return false;
-            }
+       // Recursive with one global variable
+    TreeNode prev = null;
+    public boolean isValidBSTRecursive(TreeNode root) {
+        return inorder(root);
+    }
 
+    private boolean inorder(TreeNode root){
+        // Base Case
+        if(root == null){
             return true;
         }
+
+
+        if(inorder(root.left) == false){
+            return false;
+        }
+
+        if(prev != null && prev.val >= root.val){
+            return false;
+        }
+
+        prev = root;
+        return inorder(root.right);
+    }
+
+    // Recursive final
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, null, null);
+    }
+
+    private boolean helper(TreeNode root, Integer min, Integer max){
+        // base case
+        if(root == null){
+            return true;
+        }
+
+        if((max != null && root.val >= max )||(min != null && root.val <= min)){
+            return false;
+        }
+        // logic
+        return helper(root.left, min, root.val) && helper(root.right,root.val, max);
+    }
 }
