@@ -1,0 +1,35 @@
+// Time Complexity :
+// Space Complexity :
+// Did this code successfully run on Leetcode :Yes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+class Solution {
+    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        guard let rootVal = preorder.first else { return nil }
+        let root = TreeNode(rootVal)
+        
+        let i = inorder.index(of: rootVal)!
+        let inorderL = Array(inorder[0..<i])
+        let inorderR = Array(inorder[i+1..<inorder.count])
+        let preorderL = Array(preorder[1..<i+1])
+        let preorderR = Array(preorder[i+1..<preorder.count])
+
+        root.left = buildTree(preorderL, inorderL)
+        root.right = buildTree(preorderR, inorderR)
+        return root
+    }
+}
