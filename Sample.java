@@ -44,4 +44,37 @@ class Sample {
         return isBST(node.left, min, node.val) && isBST(node.right, node.val, max);
     }
 
+    //Time complexity: O(N) N is size of array
+    //Space complexity: O(N) N is size of array
+
+    //Steps:
+    /*
+    1.
+    */
+
+
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        return helper(postorder.length-1, 0, inorder.length-1, inorder, postorder);
+    }
+    
+    private TreeNode helper(int postStart, int inStart, int inEnd, int[] inorder, int[] postorder) {
+        
+        if(postStart < 0 || inStart > inEnd)
+            return null;
+        
+        TreeNode node = new TreeNode(postorder[postStart]);
+        
+        int inIndex = 0;
+        for(int i = inStart; i <= inEnd; i++) {
+            if(inorder[i] == postorder[postStart])
+                inIndex = i;
+        }
+        
+        node.left = helper(postStart + inIndex - inEnd - 1, inStart, inIndex - 1, inorder, postorder);
+        node.right = helper(postStart - 1, inIndex + 1, inEnd, inorder, postorder);
+        
+        return node;
+        
+    }
+
 }
