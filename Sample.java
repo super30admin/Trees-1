@@ -16,7 +16,7 @@ class Sample {
     /**
      * Problem 1:
      * Time complexity : O(N) where N is number of nodes
-     * Space complexity : O(N) where N is number of nodes
+     * Space complexity : O(H) where H is height of the tree
      * 
      * Solution
      * 1. Check for every node, if it's left child has less value and right child has greater value.
@@ -45,11 +45,13 @@ class Sample {
     }
 
     //Time complexity: O(N) N is size of array
-    //Space complexity: O(N) N is size of array
-
+    //Space complexity: O(H) H is the height of the tree
     //Steps:
     /*
-    1.
+    1. The root node of the tree is the last element in postorder array.
+    2. Based on the element in postorder array check for the same element in inorder array.
+    3. Create left node as value from postorder array which has index (postStart + inIndex - inEnd - 1)
+    and right node at index (postorder - 1)
     */
 
 
