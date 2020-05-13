@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 // Time Complexity : O(n) ; n - number of nodes in the given tree
 // Space Complexity : O(h) ; h - height of the given tree
@@ -6,9 +6,9 @@ import java.util.*;
 // Three line explanation of solution in plain english
 
 /*
-	1. while the current is not null, keep going to left/right by pushing nodes into a Stack
+	1. Go to the left child
     2. Make sure the previous is greater than current and increment previous to current
-	3. Go to right/left (opposite to the direction in Step 1) child of the current 
+	3. Go to the right child
 */
 
 // Your code here along with comments explaining your approach
@@ -34,32 +34,32 @@ public class ValidBST {
 		}
 	}
 
-
 	// Aproach 1 : Have current and previous pointer and ensure previous > current always
-	// Iterative approach
+	// Recursive approach
+
+	TreeNode prev = null;
+
 	public boolean isValidBST(TreeNode root) {
+		return inOrder(root);
+	}
 
-		TreeNode prev = null;
-		Stack<TreeNode> st = new Stack<>();
+	private boolean inOrder(TreeNode node) {
 
-		while (root != null || !st.isEmpty()) {
-			// left hop
-			while (root != null) {
-				st.push(root);
-				root = root.left;
-			}
-			root = st.pop();
+		if (node == null)
+			// If there are no nodes, it's a Valid BST
+			return true;
 
-			// logic
-			if (prev != null && prev.val >= root.val)
-				return false;
-			prev = root;
+		// left hop
+		if (inOrder(node.left) == false)
+			return false;
 
-			// right hop
-			root = root.right;
-		}
+		// logic
+		if (prev != null && prev.val >= node.val)
+			return false;
+		prev = node;
 
-		return true;
+		// right hop
+		return inOrder(node.right);
 	}
 }
 
