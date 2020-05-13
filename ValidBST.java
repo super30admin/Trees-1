@@ -6,9 +6,11 @@
 // Three line explanation of solution in plain english
 
 /*
-	1. Go to the left child
-    2. Make sure the previous is greater than current and increment previous to current
-	3. Go to the right child
+	1. Maintain min and max at each node and ensure the node val between these min and max
+	2. if going left
+			min same and max = prev node val
+	3. if going right
+			min = prev node val and max same
 */
 
 // Your code here along with comments explaining your approach
@@ -34,32 +36,23 @@ public class ValidBST {
 		}
 	}
 
-	// Aproach 1 : Have current and previous pointer and ensure previous > current always
+	// Aproach 2 : Maintain min and max allowed at each node and check if
+	// the node value is between these values
 	// Recursive approach
-
-	TreeNode prev = null;
-
 	public boolean isValidBST(TreeNode root) {
-		return inOrder(root);
+		return helper(root, null, null);
 	}
 
-	private boolean inOrder(TreeNode node) {
-
+	private boolean helper(TreeNode node, Integer min, Integer max) {
+		// base
 		if (node == null)
-			// If there are no nodes, it's a Valid BST
 			return true;
 
-		// left hop
-		if (inOrder(node.left) == false)
+		if ((max != null && node.val >= max) || (min != null && node.val <= min))
 			return false;
 
 		// logic
-		if (prev != null && prev.val >= node.val)
-			return false;
-		prev = node;
-
-		// right hop
-		return inOrder(node.right);
+		return helper(node.left, min, node.val) && helper(node.right, node.val, max);
 	}
 }
 
