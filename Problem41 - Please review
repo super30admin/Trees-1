@@ -1,5 +1,5 @@
-// Time Complexity :
-// Space Complexity :
+// Time Complexity :O(n^2)
+// Space Complexity :O(h*n)
 // Did this code successfully run on Leetcode :Yes
 
 /**
@@ -23,10 +23,10 @@ class Solution {
         let root = TreeNode(rootVal)
         
         let i = inorder.index(of: rootVal)!
-        let inorderL = Array(inorder[0..<i])
-        let inorderR = Array(inorder[i+1..<inorder.count])
-        let preorderL = Array(preorder[1..<i+1])
-        let preorderR = Array(preorder[i+1..<preorder.count])
+        let inorderL = Array(inorder[0..<i]) //n space
+        let inorderR = Array(inorder[i+1..<inorder.count]) //n space
+        let preorderL = Array(preorder[1..<i+1]) //n space
+        let preorderR = Array(preorder[i+1..<preorder.count]) //n space
 
         root.left = buildTree(preorderL, inorderL)
         root.right = buildTree(preorderR, inorderR)
