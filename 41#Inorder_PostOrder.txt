@@ -1,0 +1,27 @@
+// Time Complexity :O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+
+class Solution {
+public TreeNode buildTree(int[] preorder, int[] inorder) {
+    return helper(0, 0, inorder.length - 1, preorder, inorder);
+}
+
+public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
+    if (preStart > preorder.length - 1 || inStart > inEnd) {   // edge case check
+        return null;
+    }
+    TreeNode root = new TreeNode(preorder[preStart]); // prestart first element is root
+    int inIndex = 0; 
+    for (int i = inStart; i <= inEnd; i++) { // find the value in  inorder to find the left and right part of tree 
+        if (inorder[i] == root.val) {
+            inIndex = i;
+        }
+    }
+    root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder); // left subtree will prestart next and inorder part of left tree
+    root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder); // right subtree will be prestart + index +1 and right of inorder
+    return root;
+}
+}
