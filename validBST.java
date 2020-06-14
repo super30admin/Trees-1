@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 // THe funciton is named checkBST , please give me feedback for my approach
 // I chose a recursive min max approach which uses a helper function.
