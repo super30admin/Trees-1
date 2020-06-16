@@ -91,3 +91,51 @@ class Solution {
         return inOrder(root.right);
     }
 }
+
+
+
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+    // Time Complexity : O(No. of treenodes)
+// Space Complexity : O(height of tree)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+/*
+1.Take min and max as arguements f(root,min,max)
+2. Moving left --> min, root
+3. Moving right --> root, max
+*/
+    
+    public boolean isValidBST(TreeNode root) {
+           return inOrder(root, null, null);
+    }
+    private boolean inOrder(TreeNode root,Integer min, Integer max){
+        //base
+        if(root == null) return true;
+        if((min!= null && root.val<=min) || (max!=null && root.val>=max)) return false;
+        //logic        
+        return (inOrder(root.left, min, root.val) && inOrder(root.right,root.val, max));
+    }
+}
