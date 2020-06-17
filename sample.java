@@ -45,7 +45,7 @@ class Solution {
 }
 
 // Time Complexity : O(n) 
-// Space Complexity : O(h) where h is the height ( no of elements possible in recursive stack at a point)
+// Space Complexity : O(n) for hashmap, h not included as tree is returned as result (output data structure)
 // Did this code successfully run on Leetcode : Yes
 
 /**
