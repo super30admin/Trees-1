@@ -1,5 +1,5 @@
 # Time Complexity : O(n) 
-# Space Complexity :O(n)
+# Space Complexity : (Iterative)O(h) Space, where h is the height of the tree. and O(n) for recursive.
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 # Your code here along with comments explaining your approach
@@ -40,7 +40,7 @@ class Solution:
         
     #     return helper(root,float('-inf'),float('inf'))
     
-    # 3) Iterative Solution => Time = O(n) | O(n) Space 
+    # 3) Iterative Solution => Time = O(n) | O(h) Space, where h is the height of the tree.
     def isValidBST(self,root):
         stack = []
         pre = None 
