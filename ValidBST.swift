@@ -43,3 +43,34 @@ class Solution {
     
   
 }
+
+// Time Complexity : O(n) Number of nodes
+// Space Complexity : O(h) h is the height of the tree
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : missed prev = root assignment
+
+// Your code here along with comments explaining your approach
+//iterative appoach using stack inorder traversal. Inorder traversal return sorted array so compare previous and currently visited val whether current is greater than previous value. make sure to return false while traversing in the left node
+
+class Solution {
+    var prev: TreeNode? = nil
+    func isValidBST(_ rootNode: TreeNode?) -> Bool {
+        var prev:TreeNode? = nil
+        var stack:[TreeNode] = [TreeNode]()
+        var root = rootNode
+        while root != nil || !stack.isEmpty {
+            while root != nil {
+                stack.append(root!)
+                root = root?.left
+            }
+            root = stack.popLast()
+            if prev != nil && prev!.val >= root!.val {
+                return false
+            }
+            prev = root
+            root = root?.right
+        }
+        return true
+    }
+    
+}
