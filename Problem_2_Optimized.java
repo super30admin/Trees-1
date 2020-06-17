@@ -1,5 +1,5 @@
 //  Time complexity - O(n)
-// Space complexity - O(h)
+// Space complexity - O(n) becuase of HashMap
 
 // Use hashmap for getting inorder index and eliminate o(N) complxity oin each recursive call!
 
