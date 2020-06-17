@@ -1,5 +1,9 @@
 import java.util.HashMap;
 
+/**
+ *  * Time Complexity: O(n) n-length of the input array
+ *  * Space Complexity: O(n)
+ */
 class Trial{
     static int index;
     static HashMap<Integer,Integer> hmap = new HashMap<>();
