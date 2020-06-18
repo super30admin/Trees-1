@@ -1,0 +1,66 @@
+// Time Complexity : O(n) -> number of nodes
+// Space Complexity : O(h) - > h-height of the binary search tree. maximum number of elements at once in the stack is the height of the tree. Both O(n) and O(logn) are taken care of.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Iterative process- when there is a loop or repetiition.
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        Stack<TreeNode> st=new Stack<>();
+        TreeNode prev=null;
+        while(root!=null || !st.isEmpty()){
+            while(root!=null){
+                st.push(root);
+                root=root.left;
+            }
+              root=st.pop();
+              if(prev!=null && prev.val>=root.val) return false;
+            prev=root;
+            root=root.right;
+        }
+        
+        return true;
+        
+    }
+}
+
+// Time Complexity : O(n) - n is the number of nodes.
+// Space Complexity : O(h) -stack space maximum number of elements at once in the stack is the height of the tree.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Recursive appproach. Recursive processes when an entity calls itself.
+
+class Solution {
+     TreeNode prev;
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root);
+        
+    }
+    private boolean inorder(TreeNode root){
+        if(root==null) return true;
+        if(inorder(root.left)==false) return false;
+        if(prev!=null && prev.val>=root.val) return false;
+        prev=root;
+        return inorder(root.right);
+    }
+}
+
+// Time Complexity : O(n) - n is the number of nodes. - we must visit all the nodes inorder to validate.
+// Space Complexity : O(h) -stack space maximum number of elements at once in the stack is the height of the tree.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Min-max approach. Check if the node value is between the minimum possible value and the max possible value.
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return helper(root,null,null);  
+    }
+    private boolean helper(TreeNode root,Integer max, Integer min){
+        //base case
+        if (root==null) return true;
+        if((min!=null &&root.val<=min) || (max!=null && root.val>=max )) return false;
+        
+        //logic
+  return helper(root.left,root.val,min) && helper(root.right,max,root.val);
+    }
+}
