@@ -1,8 +1,8 @@
 import java.util.Stack;
 
 /**
- * Time Complexity: O(n) height of the tree
- * Space Complexity: O(h)
+ * Time Complexity: O(n) n-no of nodes
+ * Space Complexity: O(h) h-height of the tree
  */
 class ValidBinarySearchTree{
     static TreeNode prev = null;
