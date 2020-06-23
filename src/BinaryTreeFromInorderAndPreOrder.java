@@ -1,5 +1,5 @@
 // Time Complexity : O(n)
-// Space Complexity :O(h)
+// Space Complexity :O(n)
 // Did this code successfully run on Leetcode : Yes
 // Three line explanation of solution in plain english
 
@@ -38,6 +38,8 @@ class Solution {
         TreeNode root = new TreeNode(preorder[index++]);
         
         //for left call it on elements left to inIdx vice versa for right
+        //for pre order first do left, then right 
+        //why - because we are sharing global var index for preorder
         root.left = helper(preorder, inorder, start, inIdx-1);
         root.right = helper(preorder, inorder, inIdx+1,end);
         
