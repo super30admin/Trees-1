@@ -51,26 +51,27 @@ public class ValidateBST {
 	    }
 	    
 	    
-	    //iterative solution using prev poped node, (using global previous node so it will not be lost when 
-	    // recursion unwinds
-	    private boolean isValidBSTIterative(TreeNode root) {
-	        //base
-	        Stack<TreeNode> st = new Stack<>();
+	    //iterative solution using prev poped node
+	    // for recrusive, use global prev variable so we do not loose the value when recursion unwinds
+	    public boolean isValidBST(TreeNode root) {
 	        
-	         while(root != null || !st.isEmpty()) {
+	        Stack<TreeNode> st = new Stack<>();
+	        TreeNode prev = null;
+	        
+	        while(root != null || !st.isEmpty()) {
 	            while(root != null) {
 	                st.push(root);
 	                root = root.left;
 	            }
 	            
 	            root = st.pop();
-	            if(prev!= null && prev.val >= root.val) return false;
-	             
+	            
+	            if(prev != null && prev.val > root.val) return false;
 	            prev = root;
-	             
+	            
 	            root = root.right;
+	            
 	        }
-	        
 	        return true;
 	    }
 }

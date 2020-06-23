@@ -14,40 +14,33 @@
  *Given preorder and inorder traversal of a tree, construct the binary tree.
  */
 class Solution {
+	Map<Integer, Integer> valIndexMap = new HashMap<>();
+	// index to keep track of preorder array - global so we can use same across all recursive calls
+    int index;
+    
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
-        return treeBuilderRecursive(preorder, inorder, 0, inorder.length-1, 0);
-    }
-    
-    private TreeNode treeBuilderRecursive(int[] preoder, int[] inorder, int inStart, int inEnd, int preStart){
-        
-    	//base
-    	// nothing left in inorder for this call or nothing left in the preorder (means all nodes visited)
-    	if(inStart > inEnd || preStart >= preoder.length) 
-            return null;
-        
-        //logic
-        int val = preoder[preStart];
-        //find this in inorder to get left and right subtree
-        int inLoc = search(inorder, val);
-        
-        TreeNode node = new TreeNode(val);
-    
-        node.left = treeBuilderRecursive(preoder, inorder, inStart, inLoc-1, preStart+1);
-        node.right = treeBuilderRecursive(preoder, inorder, inLoc+1, inEnd, preStart + (inLoc - inStart + 1));
-        
-        return node;
-        
-    }
-    
-    
-    private int search(int[] arr, int key) {
-        
-        for(int i=0; i<arr.length;i++ ) {
-            if(arr[i] == key) 
-                return i;
+    	//create hashmap to retrieve index of the element from the inorder
+        for(int i=0; i<inorder.length;i++ ){
+           valIndexMap.put(inorder[i], i); 
         }
+        return helper(preorder, inorder, 0, preorder.length-1);
+    }
+    
+    private TreeNode helper(int[] preorder, int[] inorder, int start, int end) {
         
-        return -1;
+        //if index reaches end of preorder (note index is global so shared across all recursive calls) , we exhausted all nodes
+    	    // or if start crosses end means nothing on that side
+    	    if(start > end || index == preorder.length) return null;
+        
+        //index of current node from the inorder
+        int inIdx = valIndexMap.get(preorder[index]);
+        TreeNode root = new TreeNode(preorder[index++]);
+        
+        //for left call it on elements left to inIdx vice versa for right
+        root.left = helper(preorder, inorder, start, inIdx-1);
+        root.right = helper(preorder, inorder, inIdx+1,end);
+        
+        return root;
     }
 }
