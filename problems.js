@@ -23,6 +23,22 @@ const isValidBST = function(root) {
     return true;
 };
 
+////////////////
+// Recursive
+let prev = null;
+const inOrder = function(root) {
+    // base 
+    if(!root) return true;
+    // logic
+    if(inOrder(root.left) === false) return false;
+    if(prev !== null && prev.val >= root.val) return false;
+    prev = root;
+    return inOrder(root.right);
+}
+const isValidBST = function(root) {
+    return inOrder(root);
+};
+
 
 
 // ## Problem 2, Construct Binary Tree from Preorder and Inorder Traversal
