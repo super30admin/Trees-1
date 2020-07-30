@@ -4,25 +4,6 @@
 
 import java.util.Stack;
 
-/**Definition for a binary tree node.*/
-class TreeNode {
-
-    // member variable
-    int val;
-    // referneces
-    TreeNode left;
-    TreeNode right;
-
-    // default constructor
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-
 // Your code here along with comments explaining your approach
 // Approach 1: Iterative Solution
 // Time Complexity : O(n)
@@ -31,6 +12,24 @@ class TreeNode {
 //      h: height of the tree/ depth of tree
 
 class Problem1S1 {
+    /**Definition for a binary tree node.*/
+    class TreeNode {
+
+        // member variable
+        int val;
+        // referneces
+        TreeNode left;
+        TreeNode right;
+
+        // default constructor
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
     /** returs true if valid BST */
     public boolean isValidBST(TreeNode root) {
@@ -75,6 +74,25 @@ class Problem1S1 {
 //      h: height of the tree/ depth of tree
 class Problem1S2 {
 
+    /**Definition for a binary tree node.*/
+    class TreeNode {
+
+        // member variable
+        int val;
+        // referneces
+        TreeNode left;
+        TreeNode right;
+
+        // default constructor
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     // global previous
     TreeNode prev = null;
 
@@ -116,6 +134,25 @@ class Problem1S2 {
 //     we dont count recursive space otherwise O(h)
 //      h: height of the tree/ depth of tree
 class Problem1S3 {
+
+    /**Definition for a binary tree node.*/
+    class TreeNode {
+
+        // member variable
+        int val;
+        // referneces
+        TreeNode left;
+        TreeNode right;
+
+        // default constructor
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
     /** validate BST */
     public boolean isValidBST(TreeNode root) {
