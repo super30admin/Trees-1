@@ -13,6 +13,9 @@
  *     }
  * }
  */
+
+//TC: O(n^2)
+//SC: O(n^2), n: number of nodes in the tree
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if(preorder.length == 0 || inorder.length == 0) return null;
@@ -36,7 +39,8 @@ class Solution {
     }
 }
 
-
+//TC: O(n)
+//SC: O(n), n: number of nodes in the tree
 class Solution {
     Map<Integer, Integer> map;
     int idx = 0; //pointer for index in preorder traversal
