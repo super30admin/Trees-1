@@ -13,6 +13,9 @@
  *     }
  * }
  */
+
+//TC: O(n)
+//SC: O(n), n: number of nodes in the tree
 class Solution {
     public boolean isValidBST(TreeNode root) {
         Stack<TreeNode> st = new Stack<>();
@@ -32,7 +35,8 @@ class Solution {
     }
 }
 
-
+//TC: O(n)
+//SC: O(n), n: number of nodes in the tree
 class Solution {
     TreeNode prev = null;
     public boolean isValidBST(TreeNode root) {
@@ -48,7 +52,8 @@ class Solution {
     }
 }
 
-
+//TC: O(n)
+//SC: O(n), n: number of nodes in the tree
 class Solution {
     TreeNode prev = null;
     public boolean isValidBST(TreeNode root) {
