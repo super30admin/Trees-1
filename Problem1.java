@@ -1,5 +1,5 @@
 Time Complexity: O(n). n is nodes in tree
-Space Complexity: O(1)
+Space Complexity: O(1) + recursive stack space O(H). H is height of BST.
 Ran successfully on leetcode?: yes
 
 class Solution {
