@@ -1,5 +1,5 @@
 // Time Complexity : O(T(n/2)+n)where N/2 is because we are dividing and n because of the for loop which is O(n)(Masters Theorm) 
-// Space Complexity : O(h)  where h is the height of the tree  (the recursion calls)
+// Space Complexity : O(n^2)  since we are making two lists(of size n) n times
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
 
@@ -12,6 +12,7 @@
 // create a new node ROOT with val as the val of the first element in preorder(root) 
 // for root.left,we will  buildtree(preleft and inleft)(subprob) similarly for the root.right(subprob)
 // return the new root created
+
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
