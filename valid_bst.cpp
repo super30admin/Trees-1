@@ -57,7 +57,7 @@ public:
         //dfs
         long lower_limit = -2147483649;
         long upper_limit = 2147483648;
-        return dfs(root, lower_limit, upper_limit);
+        return dfs(root, lower_limit, upper_limit,0);
     }
     
     bool dfs(TreeNode* root, long lower_limit, long upper_limit, int level){
