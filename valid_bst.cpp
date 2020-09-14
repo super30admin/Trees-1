@@ -48,6 +48,33 @@ public:
     }
 };
 
+
+//recursive 2 : more intuitive
+    bool isValidBST(TreeNode* root) {
+        //edge
+        if(root==NULL)
+            return true;
+        //dfs
+        long lower_limit = -2147483649;
+        long upper_limit = 2147483648;
+        return dfs(root, lower_limit, upper_limit);
+    }
+    
+    bool dfs(TreeNode* root, long lower_limit, long upper_limit, int level){
+        //return
+        if(root==NULL){
+            return true;
+        }
+        if (level!=0 && (root->val <= lower_limit || root->val >= upper_limit)){
+            return false;
+        }       
+        //logic: recurse
+        bool left =  dfs(root->left, lower_limit, root->val, ++level);
+        bool right = dfs(root->right, root->val, upper_limit, ++level);
+        return (right && left);
+    }
+};
+
 //iterative solution
 class Solution {
 public:
