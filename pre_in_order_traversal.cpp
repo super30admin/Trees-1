@@ -48,6 +48,59 @@ private:
     
 };
 
+
+
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Any problem you faced while coding this :
+
+//Itss very very tricky
+
+// Your code here along with comments explaining your approach
+//1. The pre-order traversal takes into account root first.
+//2. The traversal covers left side first and then the right side.
+//3. So increment pre_idx in the pre_order array for each element traversed on the left side. this will lead to correct pre_idx for the right side. 
+
+
+class Solution {
+public:
+    TreeNode* root;
+    int pre_idx=0;
+     unordered_map <int, int> my_map;
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        //edge
+        if(preorder.size()==0 && inorder.size()==0){
+            return NULL;
+        }
+        //recurse
+       for(int i=0; i<inorder.size();i++){
+           my_map[inorder[i]] = i;
+       }
+        root = dfs( preorder, 0, inorder.size());
+        return root;
+    }
+    
+    TreeNode*  dfs(vector<int>& preorder, int in_left, int in_right){
+        //return
+        if(in_left==in_right){
+           // cout<<preorder[pre_idx]<<" "<<pre_idx<<endl;
+            return NULL;
+        }
+        //logic
+        TreeNode* temp = new TreeNode (preorder[pre_idx]);
+       // cout<<preorder[pre_idx]<<" "<<pre_idx<<endl;
+        int root_index = my_map[preorder[pre_idx]];
+        pre_idx++;
+        temp->left = dfs( preorder,  in_left, root_index);
+        
+        temp->right = dfs( preorder, root_index+1, in_right);
+        
+        return temp;
+    }
+};
+
+
+
 //Recursive solution
 // Time Complexity : O(n^2)
 // Space Complexity : O(n).
