@@ -12,17 +12,6 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
-        def valid(node, low, high):
-            if not node:
-                return True
-            if low is not None and node.val <= low:
-                return False
-            if high is not None and node.val >= high:
-                return False
-            return valid(node.left, low, node.val) and valid(node.right, node.val, high)
-        return valid(root, None, None)
-    
-    
         def find(node, low, high):
             if not node:
                 return True
