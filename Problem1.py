@@ -15,9 +15,9 @@ class Solution:
         def find(node, low, high):
             if not node:
                 return True
-            if low and low < node.val:
+            if low is not None and low >= node.val:
                 return False
-            if right and node.val > high:
+            if high is not None and node.val >= high:
                 return False
             return find(node.left, low, node.val) and find(node.right, node.val, high)
         return find(root, None, None)
