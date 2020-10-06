@@ -1,19 +1,16 @@
-def isValidBST(self, root: TreeNode) -> bool:
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
         
         def helper(node,left =float('-inf'),right=float('inf')):
             if not node:
                 return True
             
             val = node.val
-            if val>=left and val<=right:
-                return True
+            if val<=left or val>=right:
+                return False
             
-            if helper(node.right,val,right):
-                return True
-            if helper(node.left,left,val):
-                return True
-            
-            return False
+            return helper(node.right,val,right) and helper(node.left,left,val)
+
         
         return helper(root)
         
