@@ -1,5 +1,5 @@
 # Time Complexity: O(N)
-# Space Complexity: O(log(N))
+# Space Complexity: O(N)
 # Passed Leetcode
 
 # Definition for a binary tree node.
@@ -31,3 +31,37 @@ class Solution:
         
         
         return self.recurse(root, -float("inf"), float("inf"))
+
+# Iterative approach
+# from collections import deque
+
+# # Definition for a binary tree node.
+# # class TreeNode:
+# #     def __init__(self, val=0, left=None, right=None):
+# #         self.val = val
+# #         self.left = left
+# #         self.right = right
+# class Solution:
+
+    
+#     def isValidBST(self, root: TreeNode) -> bool:
+        
+#         if not root:
+#             return True
+#         queue = deque()
+        
+#         queue.append((root, -float("inf"), float("inf")))
+        
+#         while len(queue) > 0:
+            
+#             node, min_val, max_val = queue.popleft()
+            
+#             if node.val <= min_val or node.val >= max_val:
+#                 return False
+            
+#             if node.left:
+#                 queue.append((node.left, min_val, node.val))
+#             if node.right:
+#                 queue.append((node.right, node.val, max_val))
+        
+#         return True
