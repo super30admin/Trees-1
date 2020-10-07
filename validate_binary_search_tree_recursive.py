@@ -39,5 +39,8 @@ class BST:
 
 
 obj = BST()
-print(obj.isValidBST([2,1,3]))
-print(obj.isValidBST([5,1,4,None,None,3,6]))
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(obj.isValidBST(root))
+# print(obj.isValidBST([5,1,4,None,None,3,6]))
