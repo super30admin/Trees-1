@@ -1,0 +1,67 @@
+     // time complexity: O(n): we need to go through every node of tree
+// SP: O(n): stack space
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+/*class Solution {
+    public boolean isValidBST(TreeNode root) {
+        
+        return helper(root, null, null);
+    }
+    
+    public boolean helper(TreeNode root, Integer min, Integer max){
+        
+        if(root == null) return true;
+        if(min != null && root.val <= min) return false;
+        if(max != null && root.val >= max) return false;
+     
+        return helper(root.left, min, root.val)  &&  helper(root.right, root.val, max);
+    
+    }
+}*/
+class Solution{
+    public boolean isValidBST(TreeNode root){
+        
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+        LinkedList<Integer> upper = new LinkedList<>();
+        LinkedList<Integer> lower = new LinkedList<>();
+        lower.add(null);
+        upper.add(null);
+        
+        while(! stack.isEmpty()){
+            root = stack.poll();
+            if(root == null) continue;
+            Integer lo = lower.poll();
+            Integer up = upper.poll();
+        
+            
+
+            if(lo != null && root.val <= lo)  return false;
+            if(up != null && root.val >= up) return false;
+            
+            stack.add(root.right);
+            lower.add(root.val);
+            upper.add(up); 
+            
+            stack.add(root.left);
+            lower.add(lo);
+            upper.add(root.val);
+            
+            
+        }
+         return true;     
+    }
+}
