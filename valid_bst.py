@@ -23,3 +23,19 @@ class Solution:
             vbst(root.right)
         vbst(root)
         return self.final
+
+        # Another approach:- While doing the inorder traversal maintain the element at the top of the stack instead of maintaing the stack,
+        # and compare with this element. This way we still have the recursion stack but do away with another auxillary stack
+        # self.prev=None
+        # self.final=True
+        # def vbst(root):
+        #     if root is None:
+        #         return
+        #     vbst(root.left)
+        #     if self.prev is not None and root.val<=self.prev:
+        #             self.final=False
+        #             return
+        #     self.prev=root.val
+        #     vbst(root.right)
+        # vbst(root)
+        # return self.final
