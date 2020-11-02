@@ -2,6 +2,8 @@
 
 ## Problem 1
 
+https://leetcode.com/problems/validate-binary-search-tree/
+
 Given a binary tree, determine if it is a valid binary search tree (BST).
 
 Assume a BST is defined as follows:
@@ -37,7 +39,11 @@ Explanation: The root node's value is 5 but its right child's value is 4.
 
 ## Problem 2
 
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+
 Given preorder and inorder traversal of a tree, construct the binary tree.
+
+
 
 Note:
 You may assume that duplicates do not exist in the tree.
