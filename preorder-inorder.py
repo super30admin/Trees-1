@@ -1,3 +1,9 @@
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Approach: 
+# Use the preorder traversal to get the root element
+# Recurse on the left and right half of the inorder array to construct the tree
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
