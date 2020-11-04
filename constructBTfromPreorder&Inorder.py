@@ -14,10 +14,21 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        if inorder:
-            nodeVal = preorder.pop(0)
-            nodeInd = inorder.index(nodeVal)
+        mapping = {}
+        for i in range(len(inorder)):
+            mapping[inorder[i]] = i
+        self.ind = 0
+
+        def build(preorder, inorder, start, end):
+            if start > end:
+                return None
+
+            nodeVal = preorder[self.ind]
+            self.ind += 1
+            nodeInd = mapping[nodeVal]
             node = TreeNode(nodeVal)
-            node.left = self.buildTree(preorder, inorder[:nodeInd])
-            node.right = self.buildTree(preorder, inorder[nodeInd+1:])
+            node.left = build(preorder, inorder, start, nodeInd-1)
+            node.right = build(preorder, inorder, nodeInd+1, end)
             return node
+
+        return build(preorder, inorder, 0, len(inorder)-1)
