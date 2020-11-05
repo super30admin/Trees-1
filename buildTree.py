@@ -34,4 +34,4 @@ n3 = TreeNode(6)
 n1.left = n2
 n1.right = n3
 s = Solution()
-s.isValidBST(n1)
+s.buildTree(n1)
