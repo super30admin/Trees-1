@@ -1,0 +1,26 @@
+//Time Complexity: O(N) ->visit each tree node once
+//Space Complexity: O(N) ->space for storing N nodes
+
+//Accepted in Leetcode: Yes
+
+//Approach:
+//1. Call helper function with root, initial values of lower and upper as null.
+//2. Call left subtree recursively by passing root node's value as upper(higher value)
+//3. Call right subtree recursively by passing root node's value as lower(smaller value)
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, null, null);
+    }
+    public boolean helper(TreeNode node, Integer lower, Integer upper) {
+    if (node == null) return true;
+
+    int val = node.val;
+    if (lower != null && val <= lower) return false;
+    if (upper != null && val >= upper) return false;
+
+    if (! helper(node.right, val, upper)) return false;
+    if (! helper(node.left, lower, val)) return false;
+    return true;
+  }
+}
