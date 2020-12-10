@@ -1,5 +1,6 @@
 //Time Complexity: O(N)
-//Space Complexity: O(N)
+//Space Complexity: O(h) Height of Tree 
+//Same Complexity for both recursive and Iterative Solution
 
 //Approach: Idea is to use stack and perform in-order traversal of the BST.
 //Have additional pointer popped to check if it's value is less than it's root value or not.
