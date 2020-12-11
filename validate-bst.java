@@ -22,3 +22,30 @@ class Solution {
         return true;
     }
 }
+
+// recursive
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        return helper(root, null, null);
+    }
+    
+    private boolean helper(TreeNode root, TreeNode min, TreeNode max) {
+        if(root == null) {
+            return true;
+        }
+        
+        if(min != null && min.val >= root.val) {
+            return false;
+        }
+        
+        if(max != null && max.val <= root.val) {
+            return false;
+        }
+        
+        return helper(root.left, min, root) && helper(root.right, root, max);
+    }
+}
+
