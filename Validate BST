@@ -1,0 +1,35 @@
+//Time Complexity: O(N)
+//Space Complexity: O(h) Height of Tree 
+//Same Complexity for both recursive and Iterative Solution
+
+//Approach: Idea is to use stack and perform in-order traversal of the BST.
+//Have additional pointer popped to check if it's value is less than it's root value or not.
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        
+        Stack<TreeNode> stk = new Stack<>();
+        TreeNode popped = null;
+        while(root!=null || !stk.isEmpty()){
+            
+            while(root!=null){
+                stk.push(root);  
+                root = root.left;
+            }
+           
+            root= stk.pop();
+
+            // System.out.println(root.val);
+            if(popped!=null && popped.val >= root.val){
+                return false;
+            }
+            popped = root;
+            root = root.right;
+
+        }
+        return true;
+    }
+}
