@@ -1,0 +1,23 @@
+/*
+TC: O(N) as we are going to each node and check its min and max
+SC: O(N) depends on implicit stack
+ */
+
+class ValidateBST{
+
+    public boolean isValidBST(TreeNode root) {
+
+        if (root == null) return true;
+
+        return helper(root,Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean helper(TreeNode root, long min, long max){
+        if (root == null) return null;
+
+        if (root.val > min && root.val < max){
+            return helper(root.left,min,root.val) && helper(root.right,root.val,max);
+        }
+        return false;
+    }
+}
