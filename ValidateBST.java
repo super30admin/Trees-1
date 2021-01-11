@@ -12,7 +12,7 @@
            3     10
          1      8   12
 
-  Note : In the interview, ask interviewer about edge case whether all the nodes in the tree will be unique or not. If there will be duplicates, make sure to check equal to while checking greter or less than conditions. 
+  Note : In the interview, ask interviewer about edge case whether all the nodes in the tree will be unique or not. If there will be duplicates, make sure to check (equal to) while checking greater or less than conditions. 
 */
 
 /**
