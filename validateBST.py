@@ -4,6 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+'''
+Time Complexity: O(n)
+Space Complexity: O(h)
+'''
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         def inorder(root):
