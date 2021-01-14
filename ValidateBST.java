@@ -72,5 +72,30 @@ class Solution41 {
         
         return case1 && case2;
     }
+
+
+    /* Just check prev val>= root.val return false;
+    private boolean iterativeInorder(TreeNode root){
+        
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        
+        while(root!=null || !stack.isEmpty()){
+            
+          while(root!=null){
+              stack.push(root);
+              root = root.left;
+          }       
+           
+            root = stack.pop();
+            if(prev!=null && prev.val>=root.val) return false;
+            prev = root;
+            System.out.println(prev.val);
+            root = root.right;
+        }
+        
+       return true; 
+    }*/
+
     
 }
