@@ -1,5 +1,5 @@
 # Time Complexity : O(N) since we visit each node exactly once
-# Space Complexity : O(N) since we keep up to the entire tree.
+# Space Complexity : O(H) since we keep up to the entire tree.
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
