@@ -21,7 +21,7 @@ class Solution:
         if not node:
             return True
         
-        #Check for condition of BST
+        #Check for condition of BST if it fails then return False
         if node.val <= Min or node.val >= Max:
             return False
          
