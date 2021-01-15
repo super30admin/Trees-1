@@ -4,8 +4,8 @@
 # Any problem you faced while coding this : Please verify my time and space complexity I am kind of confuse(weather O(H) or O(N). Thanks 
 
 #After the initial prechecking statements (line #1 and #2), we pop first element of preorder, add that value to node. 
-Then we do two recursions, one for left and one for right subtrees. Note that in this problem, left subtree will be used first. 
-This is done due to the relation between inorder and preorder.
+#Then we do two recursions, one for left and one for right subtrees. Note that in this problem, left subtree will be used first. 
+#This is done due to the relation between inorder and preorder.
 
 
 # Definition for a binary tree node.
