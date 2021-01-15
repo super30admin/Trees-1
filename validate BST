@@ -1,0 +1,40 @@
+// Time Complexity : O(n)
+// Space Complexity : O(h)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    TreeNode prev; 
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        return inorder(root);
+    }
+    
+    private boolean inorder(TreeNode root){
+        if(root == null) return true; //while(root != null || !is.Empty)
+        
+        if(inorder(root.left) == false) return false; ; // while(root!=null) -> st.push; root.left;
+        if(prev != null && prev.val >= root.val) return false; // checks if we have a valid ascending order if not return false
+        prev = root; //if valid then change prev to root
+        return inorder(root.right); //move to right of prev root
+    }
+}

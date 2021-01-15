@@ -1,0 +1,62 @@
+// Time Complexity : O(n)
+// Space Complexity : O(h)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //to store the value and index of inorder
+    HashMap<Integer,Integer> map;
+    //index of preoder get mainitained here
+    int index;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length == 0) return null;
+        //intialize the haspmap
+        map = new HashMap<>();
+        //put the inorder values and index into hashmap
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i],i);
+        }
+        //call the helper function for recursion
+        return helper(preorder, inorder, 0, inorder.length - 1);
+        
+    }
+    //need start and end to see what is going into the sub trees
+    private TreeNode helper(int[] preorder, int[] inorder, int start, int end){
+        //base
+        if(start > end) return null;
+        //logic
+        //first get the root value 
+        int rootVal = preorder[index];
+        //move over the preoder index because that is the next root
+        index++;
+        //make this rootVal the root
+        TreeNode root = new TreeNode(rootVal);
+        //get the index of the root so you can see what array will be the left sub tree and what array will be the right subtree
+        int rootIndex = map.get(rootVal);
+        //call helper on the left subtree start will be the same because its left subtree but end withh the one before the rootindex
+        root.left = helper(preorder, inorder, start, rootIndex-1);
+        //call helper on the right subtree start will be the rootindex plus one because right subtree and end remains the same
+        root.right = helper(preorder, inorder, rootIndex+1, end);
+        //finally return the root which will give the start of the whole tree;
+        return root;
+    }
+}
