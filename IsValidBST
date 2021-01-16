@@ -1,0 +1,23 @@
+/**
+*Time complexity : O(h) where h is the height of the tree
+*Space complexty=O(n) as we are creating stack
+*/
+class IsValidBST {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        TreeNode prev=null;
+        Stack<TreeNode> stack=new Stack();
+        while(root!=null || !stack.isEmpty()){
+            while(root!=null){
+                stack.push(root);
+                root=root.left;                
+            }
+            root=stack.pop();
+            if(prev!=null && prev.val>=root.val) return false;
+            prev=root;
+            root=root.right;
+        }
+        return true;
+        
+    }
+}
