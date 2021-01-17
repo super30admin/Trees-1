@@ -18,6 +18,22 @@ class Solution:
     2. Using a recursive solution where the stack operations are under the hood
     
     """
+    
+    def __init__(self):
+        self.prev = TreeNode(-float('inf'))
+    
+    def isValidBST(self, root: TreeNode) -> bool:
+        return self.inOrder(root)
+    
+    def inOrder(self, root):
+        
+        if root == None: return True
+        if not self.inOrder(root.left): return False
+        if self.prev.val != None and root.val != None:
+            if self.prev.val >= root.val: return False
+        self.prev = root
+        return self.inOrder(root.right)
+    
     """ Iterative Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         
@@ -35,21 +51,19 @@ class Solution:
             root = root.right
             
         return True
-    """
-    
-    def __init__(self):
-        self.prev = TreeNode(-float('inf'))
-    
-    def isValidBST(self, root: TreeNode) -> bool:
-        return self.inOrder(root)
-    
-    def inOrder(self, root):
         
-        if root == None: return True
-        if not self.inOrder(root.left): return False
-        if self.prev.val != None and root.val != None:
-            if self.prev.val >= root.val: return False
-        self.prev = root
-        return self.inOrder(root.right)
-            
-            
+    # Function to insert nodes in level order (from list to a BST)
+    def insertLevelOrder(arr, root, i, n): 
+
+        # Base case for recursion  
+        if i < n: 
+            temp = TreeNode(arr[i])  
+            root = temp  
+            # insert left child  
+            root.left = insertLevelOrder(arr, root.left, 
+                                         2 * i + 1, n) 
+            # insert right child  
+            root.right = insertLevelOrder(arr, root.right, 
+                                          2 * i + 2, n) 
+        return root 
+    """
