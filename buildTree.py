@@ -9,8 +9,9 @@ class Solution:
     
     """
     ### THIS CODE DOES NOT WORK IN LEETCODE BUT WORKS IN MY LOCAL PYTHON ENVIRONMENT ###
-    Time Complexicity: O(n), where n is number of items in preorder/inorder list
-    Space Complexicity: O(h), where h is height of the tree
+    Time Complexicity: O(n^2)
+    Space Complexicity: O(n^2)
+    Where n is number of items in preorder/inorder list
     
     Description: Given preorder and inorder traversal of a tree, construct the binary tree.
     
