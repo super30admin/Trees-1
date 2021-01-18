@@ -1,0 +1,44 @@
+// Time Complexity : O(n) where n = size of inorder or preorder array
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        if(preorder == null || preorder.length == 0) return null; 
+        
+        TreeNode tree = new TreeNode(preorder[0]);
+        int root = -1;
+        for(int i = 0; i < inorder.length; i++){
+            if(inorder[i] == preorder[0]){
+                root = i;
+                break;
+            }
+        }
+        int[] preLeft = Arrays.copyOfRange(preorder, 1, root+1);
+        int[] preRight = Arrays.copyOfRange(preorder, root+1 , preorder.length);
+        
+        int[] inLeft = Arrays.copyOfRange(inorder, 0, root);
+        int[] inRight = Arrays.copyOfRange(inorder, root+1 , inorder.length);
+        
+        tree.left = buildTree(preLeft, inLeft);
+        tree.right = buildTree(preRight, inRight);
+        
+        return tree;
+    }
+}
