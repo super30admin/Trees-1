@@ -8,7 +8,6 @@
 class Solution:
     
     """
-    ### THIS CODE DOES NOT WORK IN LEETCODE BUT WORKS IN MY LOCAL PYTHON ENVIRONMENT ###
     Time Complexicity: O(n^2)
     Space Complexicity: O(n^2)
     Where n is number of items in preorder/inorder list
@@ -35,7 +34,7 @@ class Solution:
         inleft_ = inorder[0:pos]
         inright_ = inorder[pos+1:len(inorder)]
 
-        root.left = buildTree(preleft_, inleft_)
-        root.right = buildTree(preright_, inright_)
+        root.left = self.buildTree(preleft_, inleft_)
+        root.right = self.buildTree(preright_, inright_)
         
         return root
