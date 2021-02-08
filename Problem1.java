@@ -1,8 +1,8 @@
 //Time complexity-O(n)
-//Space complecxity-O(logn)(Recursion space)
-//Did the code run on leetcode- NO 
-//Aproach- remember the roor and pass root's left and right to a function which validates the subtree.
-        //I was not able to pass all the test cases.
+//Space complecxity-O(n)-stack
+//Did the code run on leetcode- Yes 
+//Aproach- pushing all the left elements from root to the stack and checking if the last element inserted is greater than next popped element , if true
+        //the property fails else we continue and add the right element of the popped element to he stack.
 
 /**
  * Definition for a binary tree node.
@@ -21,38 +21,32 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        if(root==null)
+             return true;
         TreeNode prev=null;
-            if(root==null)
-                return true;
-        if(root.left!=null && root.left.val>=root.val)
-            return false;
         
-        if(root.right!=null && root.right.val<=root.val)
-            return false;
         
-        return (BST(root.left, root) && BST(root.right,root));        
-    }
-    public boolean BST(TreeNode root, TreeNode prev)
-    {
+        Stack<TreeNode> st= new Stack<>();
         
-        if(root == null )
-                return true;
-    
-        if(root.left!=null && root.left.val>=root.val)     return false;
-        else
+        while(!st.isEmpty() || root!=null)
         {
-            if(prev.left!=null && root.val==prev.left.val && root.right!=null && root.right.val>=prev.val)  return false;
-            prev=root;
-            BST(root.left,prev);
-        }
-        if(root.right!=null && root.right.val<=root.val)    return false;
-        else
-        { 
-           if(prev.right!=null && root.val==prev.right.val && root.left!=null && root.left.val<=prev.val) return false;
-            prev=root;
-            BST(root.right,prev);
-        }
+            while(root!=null)
+            {
+                st.push(root);
+                root=root.left;
+            }
             
+            TreeNode curr= st.pop();
+            
+            if(prev!=null && prev.val>=curr.val)
+                return false;
+            
+            prev=curr;
+            root=curr.right;
+            
+        }
         return true;
+    
+        
     }
 }

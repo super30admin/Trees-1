@@ -1,8 +1,8 @@
-//Time complexity-O(n)
-//Space complecxity-O(1)
-//Did the code run on leetcode- NO 
-//Aproach- I was able to come up with a logic around with pointers in both preorder and inorder array. But it was a specific to a single scenario.
-            //could not come up with a generic approach.
+//Time complexity-O(n^2)
+//Space complecxity-O(n^2)
+//Did the code run on leetcode- Yes 
+//Aproach- The root will always be first index of preorder and the the inorder will have all the left elements to the left of index of root and right
+            //on right indexes of root, So using this approach we create a recursive solution.
 
 
 /**
@@ -19,18 +19,33 @@
  *         this.right = right;
  *     }
  * }
- */
+ * */
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        TreeNode root=preorder[0];
-        int pr=1;int in=0;
-        TreeNode temp=root;
-        while(preorder[1]!=inorder[in])
+        if(preorder.length==0)
+            return null;
+        
+        TreeNode root= new TreeNode(preorder[0]);
+        
+        int index=-1;
+        for(int i=0;i<inorder.length;i++)
         {
-            temp.left=inorder[in++];
-            temp=temp.left;
-            pr++;
-            
+            if(inorder[i]==root.val)
+            {
+                index=i;
+                break;
+            }
         }
+        int[] preleft= Arrays.copyOfRange(preorder,1,index+1);
+            int[] preright= Arrays.copyOfRange(preorder,index+1,preorder.length);
+            int[] inleft= Arrays.copyOfRange(inorder,0,index);
+            int[] inright= Arrays.copyOfRange(inorder,index+1,inorder.length);
+        
+        root.left=buildTree(preleft,inleft);
+        root.right=buildTree(preright,inright);
+        
+        return root;
+        
+        
     }
 }
