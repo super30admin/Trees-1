@@ -1,0 +1,67 @@
+// Time Complexity : O(V)
+// Space Complexity : O(V)
+// Did this code successfully run on Leetcode : YES
+// Any problem you faced while coding this : NO
+
+
+//recursive
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        if(root==NULL)
+            return true;
+        
+        return check(root,LONG_MIN,LONG_MAX);
+    }
+    
+private: bool check(TreeNode* root,long min,long max){
+    if(root==NULL)
+        return true;
+    
+    if(root->val<=min || root->val>=max)
+        return false;  // when preorder
+    
+    return  check(root->left, min,root->val) && check(root->right, root->val,max);
+ 
+    
+ }
+};
+
+
+
+//iterative
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        if(root==NULL)
+            return true;
+        
+        TreeNode* prev=NULL;
+        
+        stack<TreeNode*> stck;
+        
+        
+        while(!stck.empty() || root!=NULL)
+        {
+            while(root!=NULL)
+            {
+                stck.push(root);
+                root=root->left;
+            }
+            
+            TreeNode* temp=stck.top();
+            stck.pop();
+            if(prev!=NULL && temp->val <= prev->val)
+                return false;
+            else
+                prev=temp;
+              
+            root = temp->right;
+            
+        }
+   
+        return true;
+        
+    }
+};
+
