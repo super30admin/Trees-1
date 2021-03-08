@@ -37,4 +37,25 @@ public class ValidateBST {
         findInorder(root.right);
 
     }
+
+    //method - 2
+    //time complexity : O(n); sc : O(n); bcz of recursion stack
+    public boolean isValidBST1(TreeNode root) {
+        return helper(root, null , null);
+    }
+    private boolean helper(TreeNode root, Integer min, Integer max) {
+
+        if (root == null) return true;
+
+        if ((max != null && root.val >= max) ||(min != null &&  root.val <= min)) {
+            return false;
+        }
+
+
+        boolean left = helper(root.left, min, root.val);
+        boolean right = helper(root.right, root.val, max);
+
+        return left && right;
+
+    }
 }
