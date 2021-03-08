@@ -15,8 +15,8 @@
  */
 class BinaryTreeFromPreorderInorder {
     
-    // Time Complexity: O(n)
-    // Space Complexity: O(h)
+    // Time Complexity: O(n)    (where n -> no. of nodes in the tree)
+    // Space Complexity: O(n)
     
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         // Edge Case Checking
