@@ -1,3 +1,7 @@
+
+//TC: O(N) - Where N is the height of the tree. 
+//SC: O(N) - Since we are using recursive, the memory load with the function and variable based on height of the tree.
+
 class ValidateBinarySearchTree_98 {
 
     public boolean validateBinarySearchTree(TreeNode root) {
@@ -5,7 +9,7 @@ class ValidateBinarySearchTree_98 {
             return false;
         return isValid(root, null, null);
     }
-    
+
     private boolean isValid(TreeNode tree, Integer min, Integer max) {
         if (tree == null)
             return true;
