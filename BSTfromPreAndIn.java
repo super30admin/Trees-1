@@ -1,6 +1,6 @@
 //TC: O(n) -> elements of the array/node
-//SC: O(n) -> height of the tree
-//Leetcode: 
+//SC: O(n) -> Construction of tree - tree that we are storing - 
+//Leetcode: yes!
 //Problem: Python version....not being able to understand.
 /**
  * Definition for a binary tree node.
