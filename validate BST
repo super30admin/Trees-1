@@ -1,0 +1,60 @@
+// Time Complexity : O(n)
+// Space Complexity : O(1) constant
+// Did this code successfully run on Leetcode : yes
+// Three line explanation of solution in plain english
+Approach - inorder and prev.value >= root.value not a BST
+
+// Your code here along with comments explaining your approach
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+    TreeNode prev;
+    Boolean isBST;
+    
+    public boolean isValidBST(TreeNode root) {
+        if(root == null)
+        {
+            return true;
+        }
+        
+        //root has no prev and currently it is a valid BST
+        prev = null;
+        isBST = true;
+        inorder(root);
+        return isBST;
+        
+    }
+    
+    private void inorder(TreeNode root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        
+        inorder(root.left);
+        if(prev != null && prev.val >= root.val)
+        {
+            isBST = false;
+            return;
+        }
+        prev = root;
+        inorder(root.right);
+    }
+}
