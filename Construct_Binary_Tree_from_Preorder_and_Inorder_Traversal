@@ -1,0 +1,76 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    inorder_dict = {}
+    index = 0
+
+    # Bruteforce Approach
+    def buildTree_BF(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder or not inorder or (len(preorder) != len(inorder)):
+            return
+
+        root = TreeNode(preorder[0])
+
+        for i in range(len(inorder)):
+            if inorder[i] == root.val:
+                index = i
+
+        leftpreorder = preorder[1:index + 1]
+        rightpreorder = preorder[index + 1:]
+        leftinorder = inorder[:index]
+        rightinorder = inorder[index + 1:]
+
+        root.left = self.buildTree(leftpreorder, leftinorder)
+        root.right = self.buildTree(rightpreorder, rightinorder)
+
+        return root
+
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder or not inorder or (len(preorder) != len(inorder)):
+            return
+
+        for i in range(len(inorder)):
+            # global inorder_dict
+            Solution.inorder_dict[inorder[i]] = i
+
+        return self.helper(preorder, 0, len(preorder) - 1)
+        # return self.helper_new(preorder,0,0,len(preorder)-1)
+
+    def helper(self, preorder, start, end):
+        # Base
+        if start > end:
+            return None
+
+        # Logic
+        print(preorder[Solution.index])
+        root = TreeNode(preorder[Solution.index])
+        Solution.index += 1
+
+        # global inorder_dict
+        idx = Solution.inorder_dict.get(root.val)
+
+        root.left = self.helper(preorder, start, idx - 1)
+        root.right = self.helper(preorder, idx + 1, end)
+
+        return root
+
+    def helper_new(self, preorder, index, start, end):
+
+        # Base
+        if start > end:
+            return None
+
+        # Logic
+        root = TreeNode(preorder[index])
+        idx = Solution.inorder_dict.get(root.val)
+
+        root.left = self.helper_new(preorder, index + 1, start, idx - 1)
+        root.right = self.helper_new(preorder, index + idx + 1 - start, idx + 1, end)
+
+        return root
+
+
