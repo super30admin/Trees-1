@@ -25,4 +25,4 @@ class Solution:
     
         return self.inorder(root.right)
     
-#  this is recursive solution -> o(h) is the time complexity which is height of tree..    
+#  this is recursive solution -> o(n) is the time complexity  and o(h) is the space complexity which is height of tree..    
