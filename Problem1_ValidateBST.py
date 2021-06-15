@@ -26,7 +26,7 @@ S30 SlackID : RN32MAY2021
 #------------------
 # Space Complexity: 
 #------------------
-# O(1): No auxiliary data structure required. 
+# O(H): Require iterative stack with max size = height of BST. 
 
 #-----------------------
 # Leet Code Performance: 
