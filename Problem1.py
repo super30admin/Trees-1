@@ -11,27 +11,26 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
+    def __init__(self):
+        self.prev = None
     def isValidBST(self, root: TreeNode) -> bool:
-        a = self.inOrder(root,[])
-        b = Counter(a)
-        for i in b:
-            if b[i] > 1:
-                return False
-        if a == sorted(a):
-            return True
-        return False
-    def inOrder(self,root,result):
+        return self.inOrder(root)
+    def inOrder(self,root):
         if root == None:
-            return [];
-        a = []
-        b = []
-        c = []
-        if root.left != None:
-            a = self.inOrder(root.left,result)
-        print(root.val)
-        b = [root.val]
-        if root.right != None:
-            c = self.inOrder(root.right,result)
-        return a+b+c
+            return True
+        if self.inOrder(root.left) == False:
+            return False
+        if self.prev != None and root.val <= self.prev:
+            return False
+        self.prev = root.val
+        return self.inOrder(root.right)
+        
+        
         
