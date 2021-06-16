@@ -163,85 +163,41 @@ Return the following binary tree:
    15   7
 
 
-## Solution 1 for Problem 2
+## Solution 
 
-//Time Complexity = 
-// Space Complexity = 
+// Time Complexity : O(n^2)
+// Space Complexity : O(n^2)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no 
 
-class Pair{
-    TreeNode node;
-    int value; 
-    
-    public Pair(TreeNode node, int value){
-        this.node = node;
-        this.value = value; 
-    }
-    
-    public TreeNode getKey(){
-        return node;
-    }
-    
-    public int getValue(){
-        return this.value; 
-    }
-}
+
+// Your code here along with comments explaining your approach
 
 class Solution {
-    public int sumNumbers(TreeNode root) {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
         
-        Stack<Pair> stack = new Stack<>(); 
+        if(preorder.length == 0 ) return null;  //if the null is empty return null 
+        int val = preorder[0]; //calculate the root node
         
-        int curr = 0; 
-        int result = 0;
+        TreeNode root = new TreeNode(val); //create a node
+        int rootIndex = 0;
         
-        while(root != null || !stack.isEmpty()){
-            
-            while(root != null){
-                curr = curr * 10 + root.val; //calculate the curr sum 
-                stack.push(new Pair(root , curr)); 
-                root = root.left; 
+        for(int i = 0; i < inorder.length; i++)
+        {
+            if(inorder[i] == val)
+            {
+                rootIndex = i; //find the root node index in the inorder traversal
             }
-            
-            Pair p = stack.pop(); // get the root and its curr sum value from the stack 
-            root = p.getKey();     // update the root value
-            curr = p.getValue();  // update the curr value
-            
-            if(root.left == null && root.right == null){        // if leaf node
-                result = result + curr;                         //add its value to the result
-            }
-            
-            root = root.right; 
         }
         
-        return result; 
-    }
-}
-
-## Solution 2 for Problem 2
-
-class Solution {
-    
-    int curr = 0;
-    int result = 0; 
-    
-    public int sumNumbers(TreeNode root) {
-    
-        helper(root, curr); 
+        int[] preLeft = Arrays.copyOfRange(preorder, 1, rootIndex+1); //the left of the tree will be the 1 to rootindex since preorder traversal 
+        int[] preRight = Arrays.copyOfRange(preorder, rootIndex+1, preorder.length); // right will be rootindex+1 to end since preorder traversal
+        int[] inLeft = Arrays.copyOfRange(inorder, 0 , rootIndex); // the left will be 0 to rootindex-1 since inorder traversal
+        int[] inRight = Arrays.copyOfRange(inorder, rootIndex+1, inorder.length); //the right will be rootindex+1 till end since inorder traversal
         
-        return result; 
-    }
-    
-    private void helper(TreeNode root, int curr)
-    {
-        if(root == null) return; 
+        root.left = buildTree(preLeft, inLeft); //build tree recursively 
+        root.right = buildTree(preRight, inRight); 
         
-        curr = curr * 10 + root.val; 
-        helper(root.left, curr);
-        
-        if(root.left == null && root.right == null) result = result + curr; 
-        
-        helper(root.right, curr); 
-        
-        
+        return root; 
     }
 }
