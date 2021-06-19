@@ -1,7 +1,7 @@
 """
-Recursive Solution
-Time Complexity : O(n)
-Space Complexity : O(h)
+Recursive Solution.
+Time Complexity : O(n) where n is the number of nodes in the tree. 
+Space Complexity : O(h) where h is the height of the tree. 
     
 """
 
@@ -22,9 +22,11 @@ class Solution:
             
             if root:
                 inorder(root.left)
+                
                 if self.prev != None and self.prev.val >= root.val:
                     self.result = False 
                     return
+                
                 self.prev = root
                 inorder(root.right)
                 
