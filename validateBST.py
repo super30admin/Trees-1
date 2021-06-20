@@ -18,6 +18,7 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
+        '''
         if root==None:
             return False
         
@@ -35,6 +36,30 @@ class Solution:
             prev = root
             root = root.right
         return True
+        '''
+        
+        return self.helper(root,None,None,None)
+    
+    def helper(self,root,prev,min,max):
+        if root==None:
+            return True
+        if min!=None and min>=root.val:
+            return False
+        if max!=None and max<=root.val:
+            return False
+        
+        #left recursive call - comparison range min remains same, max changes
+        case1 = self.helper(root.left,root,min,root.val)
+        
+        #right recursive call - comparison range max is same, min changes
+        case2 = self.helper(root.right,root,root.val,max)
+        
+        return case1 and case2
+        
+        
+        
+        
+        
         
 
 #TEST CASE
