@@ -1,3 +1,6 @@
+//I have used Recursive approach checking min and max bounds of the node
+//time : O(n)
+//space :O(n)
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
