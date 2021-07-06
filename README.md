@@ -1,6 +1,7 @@
 # Trees-1
 
 ## Problem 1
+https://leetcode.com/problems/validate-binary-search-tree/
 
 https://leetcode.com/problems/validate-binary-search-tree/
 
@@ -38,6 +39,7 @@ Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 
 ## Problem 2
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 
