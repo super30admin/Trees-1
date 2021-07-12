@@ -1,5 +1,6 @@
 # Trees-1
 
+couldn't solve problem-2. I'll solve it after the class!
 ## Problem 1
 
 https://leetcode.com/problems/validate-binary-search-tree/
