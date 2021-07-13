@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//Time: O(n)
+//Space: O(1)
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length==0 || preorder.length==0) return null;
+        
+        //initially there is no index
+        int index=-1;
+        TreeNode root=new TreeNode(preorder[0]);
+        for(int i=0;i<inorder.length;i++)
+        {
+            if(root.val==inorder[i])
+            {//as soon as we found index, break the seraching loop
+                index=i; 
+                break;
+            } 
+        }
+        int [] leftTree=Arrays.copyOfRange(inorder, 0, index);
+        int[] rightTree=Arrays.copyOfRange(inorder,index+1,inorder.length);
+        int[] preLeft=Arrays.copyOfRange(preorder,1, index+1);
+        int[] preRight=Arrays.copyOfRange(preorder,index+1, preorder.length);
+        
+        root.right= buildTree(preRight,rightTree);
+        root.left= buildTree(preLeft,leftTree);
+        return root;
+    }
+}
