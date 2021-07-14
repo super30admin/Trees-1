@@ -1,5 +1,5 @@
 // Time complexity: O(N), where N is the number of nodes in the tree.
-// Space complexity: O(d), where d is the maximum depth of the tree. 
+// Space complexity: O(N)
 
 import java.util.*;
 
