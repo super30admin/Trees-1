@@ -1,5 +1,10 @@
-//Recursive algorithm for check if the given tree is BST or not
-//In this approach, I have initialized two global variable(its not a good practice)
+// Time Complexity : O(N)
+// Space Complexity : O(Height)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,35 +20,35 @@
  *     }
  * }
  */
+
+//recursive approach using min and max 
 class Solution {
     
-    //creating gloabal variable result, prev
     boolean result;
-    TreeNode prev;
     public boolean isValidBST(TreeNode root) {
-        
         if(root == null)
             return true;
         
+        //set result to true initially
         result = true;
-        inorder(root);
+        //root, min, max
+        inorder(root, null, null);
         return result;
     }
     
-    private void inorder(TreeNode root){
+    private void inorder(TreeNode root, Integer min, Integer max){
+        
         //base
         if(root == null)
             return;
         //left
-        inorder(root.left);
-        //root
-        if(prev!=null && prev.val >= root.val){
+        inorder(root.left, min, root.val);
+        //root & check if BST or not 
+        if((min != null && root.val <= min) || (max != null && root.val >= max)){
             result = false;
-            //can just return, because once its false, no need to iterate other nodes in the tree.
             return;
         }
-        prev = root;
         //right
-        inorder(root.right);
+        inorder(root.right, root.val, max);
     }
 }
