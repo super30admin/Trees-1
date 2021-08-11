@@ -1,3 +1,4 @@
+import javax.swing.tree.TreeNode;
 
 // Time Complexity : O(N)
 // Space Complexity : O(h) : height of the tree
@@ -31,6 +32,23 @@
  * }
  */
 class Solution {
+
+    public class TreeNode {
+            int val;
+             TreeNode left;
+             TreeNode right;
+             TreeNode() {}
+             TreeNode(int val) { this.val = val; }
+             TreeNode(int val, TreeNode left, TreeNode right) {
+                 this.val = val;
+                 this.left = left;
+                 this.right = right;
+             }
+         }
+
+
+
+
     public boolean isValidBST(TreeNode root) {
         
         if(root==null)
