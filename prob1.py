@@ -1,3 +1,10 @@
+# Time Complexity : O(N) 
+# Space Complexity : O(H) for height of the tree as there are max H nodes at any given time
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+
+
 class TreeNode:
     
     def __init__(self, val=0, left=None, right=None):
