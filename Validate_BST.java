@@ -1,4 +1,4 @@
-// Iterative Solutio
+// Iterative Solution
 
 /**
  * Definition for a binary tree node.
@@ -52,34 +52,33 @@ class Solution {
  * }
  */
 class Solution {
-    // TreeNode prev;
+    TreeNode prev;
     public boolean isValidBST(TreeNode root) {
         // Stack<TreeNode> st = new Stack<>();
         
-        inorder(root, null);
-        return true;
+        
+        return inorder(root);
         
       
     }
     
-    private boolean inorder(TreeNode root, TreeNode prev){
+    private boolean inorder(TreeNode root){
         
         if(root == null) return true;
         
          // while(root!= null || !st.isEmpty()){
-        if(inorder(root.left, prev) == false) return false; 
+        if(inorder(root.left) == false) return false; 
         // root = st.pop();
         // System.out.println(root.val);
             if(prev != null && prev.val >= root.val) return false;
                 prev = root;
         // root = root.right;  
-                return inorder(root.right, prev);
+                return inorder(root.right);
         
     }
         
     
 
-}
 }
 
 //Time complexity - O(H)
