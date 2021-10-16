@@ -1,0 +1,25 @@
+# Did it run on Leetcode: Yes
+# Time Complexity: O(n*n)
+# Space Complexity: O(n*n)
+
+class Solution(object):
+    def buildTree(self, preorder, inorder):
+        """
+        :type preorder: List[int]
+        :type inorder: List[int]
+        :rtype: TreeNode
+        """
+        if(len(preorder)==0):
+            return None
+        root=TreeNode(preorder[0])
+        index=0
+        for i in range(len(inorder)):
+            if inorder[i]==root.val:
+                index=i
+        inleft=inorder[0:index]
+        inright=inorder[index+1:len(inorder)]
+        preleft=preorder[1:index+1]
+        preright=preorder[index+1:len(preorder)]
+        root.left=self.buildTree(preleft,inleft)
+        root.right=self.buildTree(preright,inright)
+        return root

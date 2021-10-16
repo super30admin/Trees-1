@@ -1,0 +1,29 @@
+# Did it run on Leetcode: yes
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+class Solution(object):
+    #result=False
+    prev=None
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        self.prev=None
+        return self.inorder(root)
+        
+        
+    def inorder(self,root):
+        #base
+        if(root==None):
+            return True
+        if not self.inorder(root.left):
+            return False
+        
+        #logic
+        if(self.prev!=None and self.prev.val>=root.val):
+            return False
+        self.prev=root
+        
+        return self.inorder(root.right)
