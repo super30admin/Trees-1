@@ -4,6 +4,11 @@
 # Time complexiety: O(n)
 # Space complexiety: O(1)
 
+# Logic: Check if the left node is less than the parent node and right node is more than the parent node
+# use min and max values to see if the current node is between them it is correct
+# left value has to be between -inf and root
+# right value has to be between root and inf
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
