@@ -21,7 +21,7 @@ public class Problem1 {
 
         if ((low != null && root.val <= low) || (high != null && root.val >= high)) return false;
 
-        return isValid(root.right, root.val, null) && isValid(root.left, null, root.val);
+        return isValid(root.right, root.val, high) && isValid(root.left, low, root.val);
     }
 
     public static boolean isValidBST(TreeNode root) {
