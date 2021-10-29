@@ -1,5 +1,8 @@
 import java.util.Arrays;
 
+// Time - O(N^2)
+// Space - O(N^2)
+
 public class Problem2 {
 
     public static class TreeNode {
@@ -27,8 +30,6 @@ public class Problem2 {
 
         int[] preLeft = Arrays.copyOfRange(preorder, 1, index + 1);
         int[] preRight = Arrays.copyOfRange(preorder, index + 1, preorder.length);
-
-        System.out.println(Arrays.toString(preLeft));
 
         int[] inLeft = Arrays.copyOfRange(inorder, 0, index);
         int[] inRight = Arrays.copyOfRange(inorder, index + 1, inorder.length);
