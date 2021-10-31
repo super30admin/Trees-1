@@ -37,6 +37,32 @@ Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 
+#Time Complexity=O(n)
+#Space Complexity=O(n)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        
+        def inorder(root):
+            if not root:
+                return True
+            left=inorder(root.left)
+            if self.prev>=root.val:
+                return False
+            self.prev=root.val
+            right=inorder(root.right)
+            return left and right
+        self.prev=float('-inf')
+        return inorder(root)
+        
+
 ## Problem 2
 
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
@@ -71,3 +97,25 @@ Return the following binary tree:
 
 
    15   7
+
+
+
+#Time Complexity=O(n)
+#Space Complexity=O(n**2)
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if len(preorder)==0 or len(inorder)==0:
+            return
+        index=inorder.index(preorder[0])
+        root=TreeNode(preorder[0])
+        root.left=self.buildTree(preorder[1:index+1],inorder[0:index])
+        root.right=self.buildTree(preorder[index+1:],inorder[index+1:])
+        return root
+        
