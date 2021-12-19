@@ -1,5 +1,5 @@
 // Time Complexity :O(n) touched all nodes
-// Space Complexity : O(1)
+// Space Complexity : O(h) maximum nodes in the recursive stack
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this :No
 
