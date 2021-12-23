@@ -17,35 +17,33 @@ using namespace std;
  * };
  */
 
+// Time Complexity --> O(n) --> n be the number of elements in a tree
+// Space Complexity --> O(n) -->n be the number of elements in a tree
 class Solution {
-public:
-    TreeNode* prev;
-    bool isValid = true;
-    void inorder(TreeNode* root){
-        if(root == NULL){
-            return;
+        int index=0;
+        HashMap<Integer,Integer>hm=new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for(int i=0;i<inorder.length;i++){
+                hm.put(inorder[i],i);
+            }
+            return helper(preorder,0,preorder.length-1);
         }
-        inorder(root->left);
-        if(prev != NULL && prev->val >= root->val){
-            isValid = false;
-            return;
+
+    private TreeNode helper(int []preorder,int start,int end){
+            if(start>end){
+                return null;
+            }
+            TreeNode root=new TreeNode(preorder[index++]);
+            int i=hm.get(root.val);
+            root.left=helper(preorder,start,i-1);
+            root.right=helper(preorder,i+1,end);
+            return root;
         }
-        prev = root;
-        inorder(root->right);
     }
 
-    bool isValidBST(TreeNode* root) {
-        inorder(root);
-        return isValid;
-    }
-};
-
-
-
-
-int main() {
+/*int main() {
     string pattern = "abba";
     string s = "dog dog dog dog";
     wordPattern(pattern,s);
     return 0;
-}
+}*/
