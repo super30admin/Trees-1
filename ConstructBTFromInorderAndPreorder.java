@@ -62,4 +62,41 @@ public class ConstructBTFromInorderAndPreorder {
         root.right = right;
         return root;
     }
+
+
+    int idx; // index to kepp track of the current element
+    Map <Integer, Integer> inMap;
+    public TreeNode buildTree2( int[] preorder, int[] inorder){
+        int n = preorder.length;
+        inMap = new HashMap <>();
+        idx = 0;
+
+        // Storing inorder elements in hashmap to access in O(1) time
+        for (int i = 0; i < inorder.length; i++) {
+            inMap.put(inorder[i], i);
+        }
+        return buildTreehelper2(preorder, 0, n - 1);
+    }
+
+    public TreeNode buildTreehelper2(int[] preorder, int inStart, int inEnd){
+        // when the indices cross each other, that means we started moving in wrong direction, hence the node doesn't have any element as its child
+        if (inStart > inEnd) {
+            return null;
+        }
+        // the element at idx is the root node
+        TreeNode root = new TreeNode(preorder[idx]);
+        // finding the index of root node in the inorder array
+        int rootIndex = inMap.get(preorder[idx]);
+        idx++; // incrementing it to pass the next element for the further calls
+
+        // Using recursion to find right and left subtree's nodes
+        // left Tree indices - start remains same, and inEnd is rootIndex -1
+        TreeNode left = buildTreehelper2(preorder, inStart, rootIndex - 1);
+        // right Tree indices - start is rootIndex+1, end remains same
+        TreeNode right = buildTreehelper2(preorder, rootIndex + 1, inEnd);
+
+        root.left = left;
+        root.right = right;
+        return root;
+    }
 }
