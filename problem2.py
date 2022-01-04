@@ -5,10 +5,12 @@
 #         self.left = left
 #         self.right = right
 
-# Time Complexity : O(n)
-# Space Complexity:o(n)
+# Time Complexity : O(n^2)
+# Space Complexity:o(n^2)
 #  Did this code successfully run on Leetcode : Yes
-# Approach 1: we are
+# Approach 1:
+
+
 class Solution(object):
     def buildTree(self, preorder, inorder):
         """
@@ -34,6 +36,8 @@ class Solution(object):
         return root
 
 # approach 2: In this approach, instad of seraching index in inorder array everytime, we store it in a hashmap.
+# Time Complexity : O(n)
+# Space Complexity:o(n)
 
 # Definition for a binary tree node.
 # class TreeNode(object):
