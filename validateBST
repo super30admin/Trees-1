@@ -1,0 +1,31 @@
+//tc: O(h) where h is height of the tree
+//sc: O(1)
+//passed on leetcode: yes
+class Solution {
+    Boolean flag;
+    TreeNode prev;
+    public boolean isValidBST(TreeNode root) {
+        flag = true;
+        prev = null;
+        inorder(root);
+        return flag;
+    }
+    
+    private void inorder(TreeNode root) {
+        //base
+        if (root == null) return;
+        
+        inorder(root.left);
+            //st.pop() node will be popped when the left recursion for the node is complete 
+            //System.out.println(root.val);
+            if (prev != null && prev.val >= root.val){
+                flag = false;
+            }
+        prev = root;
+        inorder(root.right);
+            //st.pop() node will be popped when the right recursion of the node is complete here
+            //System.out.println(root.val);
+        
+    }
+    
+}
