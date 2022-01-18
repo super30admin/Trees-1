@@ -1,0 +1,50 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
+
+We are using start and end here just to check the base condition as in when to stop, inorder is already mapped in a map and we get each root in preorder as consecutive elements are next repective root.
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int index=0;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        for(int i=0; i<inorder.length;i++){
+            map.put(inorder[i], i);
+        }
+        return helper(preorder, 0, inorder.length - 1);
+    }
+    
+    public TreeNode helper(int[] preorder, int start, int end){
+        
+        if(start>end) return null;
+        int rootVal = preorder[index];
+        index++;
+        TreeNode root = new TreeNode(rootVal);
+        int rootIndex = map.get(rootVal);
+        
+        root.left = helper(preorder, start, rootIndex-1);
+        root.right = helper(preorder, rootIndex + 1, end);
+        
+        return root;
+    }
+}
