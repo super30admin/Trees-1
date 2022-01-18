@@ -1,5 +1,5 @@
 # Recursive Approach 
-# // Time Complexity : O(H)
+# // Time Complexity : O(N)
 # // Space Complexity : O(1)
 # // Did this code successfully run on Leetcode :Yes
 # // Any problem you faced while coding this :
@@ -29,6 +29,7 @@ class Solution:
         #stack.pop
         if self.prev != None and self.prev.val >= root.val:
             self.flag = False
+            return
             
         self.prev = root
         self.inorder(root.right)
