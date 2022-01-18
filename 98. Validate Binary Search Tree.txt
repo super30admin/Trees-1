@@ -1,0 +1,85 @@
+//2 solutions
+// Time Complexity :
+// Space Complexity :
+// Did this code successfully run on Leetcode :
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+
+//ini order means each prev node should be smaller than next node
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    TreeNode prev= null;
+    Stack<TreeNode> stack = new Stack<>();
+    public boolean isValidBST(TreeNode root) {
+        while(root!=null || !stack.isEmpty()){
+            while(root!=null){
+            stack.push(root);
+            root=root.left;
+        }
+        TreeNode cur = stack.pop();
+        if(prev!=null){
+            if(prev.val>=cur.val){
+                return false;
+            }
+        }
+        prev = cur;
+        root=cur.right;
+        }
+        return true;
+    }
+}
+
+//in recursion when we visit each node we check if each nod is greater than its left and smaller than its right
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {    
+    public boolean isValidBST(TreeNode root) {
+        //we take min and max Integer as we dont want to compare when we are at  outer left
+        //side of the tree or outer right side of the tree
+        //so we take null there and dont check the cpndition in case of null
+        return helperValidate(root, null, null);
+    }
+    
+    public boolean helperValidate(TreeNode root, Integer min, Integer max){
+        if(root==null) return true;
+        if(max!=null && max<=root.val) return false;
+        if(min!=null && min>=root.val) return false;
+        boolean lft = helperValidate(root.left, min, root.val);
+        if(!lft){
+            return false;
+        }
+         boolean rght = helperValidate(root.right, root.val, max);
+        return lft && rght;
+        
+    }
+}
