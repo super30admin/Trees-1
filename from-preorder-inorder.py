@@ -11,6 +11,7 @@
 #         self.right = right
 from typing import List
 
+#Recursive Approach
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
