@@ -1,0 +1,55 @@
+
+//Time complexity : O(N)
+//Space complexity : O(1)
+
+
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root, null, null);
+    }
+    
+    public boolean isValid(TreeNode root, Integer min, Integer max){
+        if(root == null) return true;
+        
+// if ((min != null && root.val <= min) ||(max != null && root.val >= max)) {
+    if ((min != null && root.val <= min) ||(max != null && root.val >= max)) {
+        return false;
+    }
+        return isValid(root.left, min, root.val) && isValid(root.right, root.val, max);
+    }
+}
+
+
+
+
+//Time complexity : O(N)
+//Space complexity : o(N)
+class Solution {
+    HashMap<Integer, Integer> map ;
+    int index;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length != inorder.length){
+            return null;
+        }
+        map = new HashMap<>();
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
+        }
+        index = 0;
+        return helper(0, inorder.length - 1, preorder, inorder);
+    }
+    private TreeNode helper(int start, int end, int[] pre, int[] in){
+        if(start > end){
+            return null;
+        }
+        int rootval = pre[index];
+        TreeNode root = new TreeNode(rootval);
+        index++;
+        root.left = helper(start, map.get(root.val) - 1, pre, in );
+        root.right = helper(map.get(root.val) + 1, end, pre, in );
+        return root;
+    }
+}
+
+
