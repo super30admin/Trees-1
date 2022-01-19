@@ -1,0 +1,110 @@
+// Time Complexity : check below
+// Space Complexity :check below
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+Solution 1 - Creating new lists for pre left, in left, post left and post right
+              TC - O(n ^ 2) where n - no of nodes
+              SC - O(n ^ 2) where n - no of nodes
+              
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || preorder.length == 0)
+        {
+            return null;
+        }
+        
+        TreeNode root = new TreeNode(preorder[0]);
+        int rootIdx = 0;
+        
+        for(int i = 0; i < inorder.length; i++)
+        {
+            if(inorder[i] == root.val)
+            {
+                rootIdx = i;
+                break;
+            }
+        }
+        
+        int[] preLeft = Arrays.copyOfRange(preorder, 1, rootIdx + 1);       // preorder left is going to be till the rootindex
+        int[] preRight = Arrays.copyOfRange(preorder, rootIdx + 1, preorder.length);
+        int[] inLeft = Arrays.copyOfRange(inorder, 0, rootIdx);
+        int[] inRight = Arrays.copyOfRange(inorder, rootIdx + 1, inorder.length);
+        
+        root.left = buildTree(preLeft, inLeft);
+        root.right = buildTree(preRight, inRight);
+        return root;
+        
+    }
+}
+
+Solution 2 - Optimized - Using a hashmap to reduce search complexity of inorder to O(1) as compared to last solution where we were traversing inorder list for every cursion which was taking o(n) time complexity
+              TC - O(n) where n - no of nodes
+              SC - O(n) where n - no of nodes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    HashMap<Integer, Integer> map;
+    int rootIdx;
+    
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || preorder.length == 0)
+            return null;
+        
+        map = new HashMap<>();
+        for(int i = 0; i < inorder.length; i++)
+        {
+            map.put(inorder[i], i);
+        }
+        
+        return helper(preorder, 0, inorder.length - 1);
+    }
+    
+    private TreeNode helper(int[] preorder, int start, int end)
+    {
+        // base case
+        if(start > end)
+            return null;
+        
+        // logic
+        TreeNode root = new TreeNode(preorder[rootIdx]);
+        rootIdx++;
+        int idx = map.get(root.val);
+        
+        root.left = helper(preorder, start, idx - 1);
+        root.right = helper(preorder, idx + 1, end);
+        return root;
+    }
+    
+    
+}
+    
