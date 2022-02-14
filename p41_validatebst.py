@@ -41,6 +41,32 @@ TC: recursive inorder traversal - O(n+m) where n are the number of number of nod
 Sc: recursive- o(height)
 iterative inorder traversal - On), space O(n)/ O(height)
 """
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def helper(node):
+            nonlocal prev
+            nonlocal result
+            if node:
+                helper(node.left)
+                if prev != None and prev.val >= node.val:
+                    result = False
+                prev = node
+                helper(node.right)
+
+        prev = None
+        result = True
+        helper(root)
+        return result
+
+
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
