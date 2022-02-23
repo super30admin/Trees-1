@@ -7,6 +7,21 @@
 // Your code here along with comments explaining your approach
 
 import java.util.*;
+
+// Definition for a binary tree node.
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
 public class Problem2 {
     
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
