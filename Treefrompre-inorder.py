@@ -1,5 +1,5 @@
-# TC : O(n); n being no. of nodes
-# SC : O(n^2); n being no.of nodes
+# TC : O(n^2); n being no. of nodes
+# SC : O(h); h being height of tree
 
 # Definition for a binary tree node.
 # class TreeNode:
