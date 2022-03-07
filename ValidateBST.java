@@ -39,6 +39,8 @@
 // }
 
 
+// Time Complexity : O(h) height of tree, if skewed then worst case iterate all
+// Space Complexity : O(n) Using List addition for storign all nodes
 class Solution{
 
     public boolean isValidBST(TreeNode root)
