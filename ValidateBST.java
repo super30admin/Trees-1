@@ -1,5 +1,5 @@
-// Time Complexity : O(h) height of tree, if skewed then worst case iterate all
-// Space Complexity : Not using additional list to store, just constant variables
+// Time Complexity : O(n) ~ O(h) h - height of tree because if skewed then worst case visit all nodes
+// Space Complexity : O(n) function stack size; depth of tree nodes. If no function stack size considered then O(1) for constant variables
 // Did this code successfully run on Leetcode : Yes;(https://leetcode.com/submissions/detail/652602545/)
 // Any problem you faced while coding this : No
 // My Notes : Approach 1 : Using recursive using refference to a prev value.
