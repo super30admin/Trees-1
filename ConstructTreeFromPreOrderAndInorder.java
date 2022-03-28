@@ -20,37 +20,33 @@ public class ConstructTreeFromPreOrderAndInorder {
         }
     }
 
-    int index;
+    int index = 0;
     Map<Integer, Integer> map;
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
         map = new HashMap<>();
-        index = postorder.length - 1;
+
         for(int i = 0; i < inorder.length ; i++){
             map.put(inorder[i], i);
         }
-        return helper(postorder, 0 , postorder.length - 1);
+
+        return helper(preorder, 0 , preorder.length - 1);
     }
 
-
-    //in post order - right tree's root will be fetched while traversing postorder arr
-
-    public TreeNode helper(int[] postorder, int start, int end){
+    public TreeNode helper(int[] preorder, int start, int end){
         //base
         if(start > end) return null;
 
         //logic
-        int rootVal = postorder[index];
+        int rootVal = preorder[index];
         TreeNode root = new TreeNode(rootVal);
-        index--;
+        index++;
         //find root in inorder
         int rootIndex = map.get(rootVal);
 
-        //right subtree
-        root.right = helper(postorder, rootIndex+1, end);
-
         //left subtree
-        root.left = helper(postorder, start, rootIndex-1);
-
+        root.left = helper(preorder, start, rootIndex-1);
+        //right subtree
+        root.right = helper(preorder, rootIndex+1,end);
         return root;
     }
 }
