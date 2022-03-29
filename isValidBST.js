@@ -3,8 +3,8 @@
 // Did this code successfully run on GeeksForGeeks : Yes
 // Any problem you faced while coding this : No
 
-// Implemented Inorder Traversal using Stack and added a condition to check if new value getting added to the res Stack is greater than top value in res Stack. 
-// If not return false and break
+// Implemented Inorder Traversal using Stack and added a condition to check if new value getting added to the 
+// res Stack is greater than top value in res Stack. If not return false and break
 
 var isValidBST = function(root) {
     let stack = [];
