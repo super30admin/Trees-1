@@ -50,6 +50,7 @@ class Solution {
             //assign current root to prev
             prev = root;
 
+            //right recursive call
             root = root.right;
         }
 
