@@ -79,4 +79,20 @@ public class Problem1 {
             return inOrder(root.right);
         }
     }
+    //solution with min and max
+    class Solution4 {
+        TreeNode prev = null;
+        public boolean isValidBST(TreeNode root) {
+            return inOrder(root, null, null);
+        }
+        private boolean inOrder(TreeNode root, Integer min, Integer max){
+            if (root == null) return true;
+            if (min != null && root.val <= min) return false;
+            if (max != null && root.val >= max) return false;
+
+            boolean case1 = inOrder(root.left, min, root.val );
+            boolean case2 = inOrder (root.right, root.val, max );
+            return case1 && case2;
+        }
+    }
 }
