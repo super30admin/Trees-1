@@ -71,3 +71,9 @@ Return the following binary tree:
 
 
    15   7
+
+
+
+//problem1. java has O(n) time complexity and O(h) space compelexity
+
+//problem1. java has O(n) time complexity and O(n) space compelexity
