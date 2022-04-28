@@ -24,7 +24,7 @@ public class Problem2 {
         }
     }
 //    TC : O(n^2)
-//    Sc : O(n^2) where h = height of tree
+//    Sc : O(n^2)
 
     class Solution {
         public TreeNode buildTree(int[] preorder, int[] inorder) {
