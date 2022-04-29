@@ -13,6 +13,7 @@
  *     }
  * }
  */
+//TC:O(N) SC : O(h) where h is height of tree
 class Solution {
     public boolean isValidBST(TreeNode root) {
 
