@@ -37,6 +37,65 @@ Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //TC O(n) SCO(1)
+    TreeNode prev = null;
+    boolean isValid = false;
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        
+//         TreeNode prev = null;
+//         Stack<TreeNode> s = new Stack<>();
+//         while(root!=null || !s.isEmpty()){
+//             while(root != null){
+//                 s.push(root);
+//                 root = root.left;
+//             }
+            
+//             root = s.pop();
+//             if(prev != null && prev.val >= root.val) return false;
+//             prev = root;
+//             System.out.println(root.val);
+//             root = root.right;
+            
+//         }
+       isValid = true; 
+       Inorder(root); 
+       return isValid; 
+    }
+    
+    private void Inorder(TreeNode root){
+        
+        if(root == null) return;
+        Inorder(root.left);
+        if(prev != null && prev.val>= root.val){
+            isValid = false;
+            return;
+        }
+        prev = root;
+        System.out.println(root.val);
+        Inorder(root.right);
+
+    }
+}
+
 ## Problem 2
 
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
@@ -71,3 +130,40 @@ Return the following binary tree:
 
 
    15   7
+   
+   /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //TC O(n) SC O(1)
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preprder == null || inorder == null || preorder.length == 0) return null;
+        
+        int rootval = preoder[0];
+        
+        TreeNode root = new TreeNode(rootval);
+        int rootIdx = -1;
+        for(int i = 0; i< inorder.length; i++){
+            if(rootval == inorder[i]){
+                rootIdx = i;
+                break;
+            }
+        }
+        
+        
+        
+    }
+}
+   
