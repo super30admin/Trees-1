@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/validate-binary-search-tree/
+// Time Complexity :O(n) - number of nodes
+// Space Complexity :O(h) - height of tree
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+//Recursion stack
+class Solution {
+    TreeNode prev;
+    boolean isValid;
+    public boolean isValidBST(TreeNode root) {
+        
+        if(root == null) return true;
+        isValid = true;
+        inOrder(root);
+        return isValid;
+        
+    }
+    
+    private void inOrder(TreeNode root){
+        
+        if(root == null) return;
+        
+        inOrder(root.left);
+       
+        if(prev !=null && prev.val>=root.val)
+        {
+           
+            isValid=false;
+            return;
+        }
+        prev =root;
+       
+        inOrder(root.right);
+    }
+}
