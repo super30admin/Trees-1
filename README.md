@@ -146,24 +146,33 @@ Return the following binary tree:
  *     }
  * }
  */
-class Solution {
+
     //TC O(n) SC O(1)
+    class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if(preprder == null || inorder == null || preorder.length == 0) return null;
+        if(preorder == null || inorder == null || preorder.length ==0) return null;
         
-        int rootval = preoder[0];
+        int rootVal = preorder[0];
+        TreeNode root = new TreeNode(rootVal);
+        int rootIdx= -1;
         
-        TreeNode root = new TreeNode(rootval);
-        int rootIdx = -1;
-        for(int i = 0; i< inorder.length; i++){
-            if(rootval == inorder[i]){
-                rootIdx = i;
+        for(int i =0; i< inorder.length;i++)
+        {
+            if(rootVal == inorder[i])
+            {
+                rootIdx =i;
                 break;
             }
         }
+        int[] inorderLeft = Arrays.copyOfRange(inorder , 0, rootIdx);
+        int[] inorderRight = Arrays.copyOfRange(inorder , rootIdx+1,inorder.length);
+        int[] preorderLeft= Arrays.copyOfRange(preorder , 1, 1+rootIdx);
+        int[] preorderRight = Arrays.copyOfRange(preorder , rootIdx+1,preorder.length) ;
         
+        root.left = buildTree(preorderLeft, inorderLeft);
+        root.right = buildTree(preorderRight, inorderRight);
         
+        return root;
         
     }
 }
-   
