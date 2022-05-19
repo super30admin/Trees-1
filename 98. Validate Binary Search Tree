@@ -1,0 +1,32 @@
+class Solution {
+    TreeNode prev;
+    public boolean isValidBST(TreeNode root) 
+    {
+        
+        return inOrder(root);
+    }
+       // if(root == null )
+        
+        
+        private boolean inOrder(TreeNode root)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+           if ( inOrder(root.left) == false)
+           {
+               return false;
+           }
+              
+            if(prev !=null && prev.val>= root.val)
+            {
+                return false;
+            }
+            prev = root;
+        return inOrder(root.right);
+        }
+}
+
+//Space O(h)
+//Time O(n)
