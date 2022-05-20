@@ -1,6 +1,9 @@
 import java.util.Stack;
 
 public class ValidateBST {
+  // Time Complexity : O(N)
+  // Space Complexity : O(N)
+  // Did this code successfully run on Leetcode : Yes
 
   public static class TreeNode {
     int val;
