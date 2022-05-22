@@ -30,8 +30,10 @@ class Solution {
         
         //left node
         inorder(root.left);
-        if(prev!= null && prev.val>=root.val)
+        if(prev!= null && prev.val>=root.val) {
             isValid = false;
+            return;
+        }
         prev = root;
         
         // right node
