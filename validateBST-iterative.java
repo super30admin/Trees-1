@@ -26,7 +26,7 @@ class Solution {
     }
     private void helper(TreeNode root) {
         Stack<TreeNode> st = new Stack<>();
-        while(root!=null || !st.empty()){
+        while(root!=null || !st.empty()){   
             while(root!=null){
                 st.push(root);
                 root = root.left;
@@ -34,11 +34,9 @@ class Solution {
             root = st.pop();
             if(prev!= null && prev.val>= root.val){
                 isValid = false;
-                return;
             } 
             prev = root; // we need to set prev to root
-            if(isValid)
-                root = root.right;
+            root = root.right;
         }
     }
 }
