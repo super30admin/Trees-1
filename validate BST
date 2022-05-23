@@ -1,0 +1,26 @@
+
+//Time Complexity : O(n)
+// Space Complexity : O(height)
+class Solution {
+    TreeNode prev;
+    boolean isValid;
+    public boolean isValidBST(TreeNode root) {
+        prev = null;
+        isValid = true;
+        Inorder(root);
+        return isValid;
+    }
+
+    private void Inorder(TreeNode root) {
+        if(root == null) return;
+        Inorder(root.left);
+        if(prev != null && prev.val >= root.val) {
+            isValid = false;
+        }
+
+        prev = root;
+        if(isValid)
+            Inorder(root.right);
+    }
+}
+    
