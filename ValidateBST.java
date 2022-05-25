@@ -23,3 +23,4 @@ public class ValidateBST {
         return left && right;
     }
 }
+//https://youtu.be/z1MtGavNPZY
