@@ -1,3 +1,9 @@
+/* Time Complexity: O(n)
+ * Space Complexity: O(h), h is the height of the tree
+ * Did this code successfully run on Leetcode : yes
+ * Any problem you faced while coding this : No
+ */
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
