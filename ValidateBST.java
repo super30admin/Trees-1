@@ -31,3 +31,21 @@ class Solution {
         
     }
 }
+// without using boolean flag
+class Solution {
+    TreeNode prev;
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root);
+    }
+    private boolean inorder(TreeNode root){
+        if(null == root) return true;
+        
+        if(false == inorder(root.left)) return false;
+        if(prev != null && prev.val >= root.val) {
+            return false;
+        }
+        prev = root;
+        
+        return inorder(root.right);
+    }
+}
