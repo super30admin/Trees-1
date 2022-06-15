@@ -50,3 +50,23 @@ class Solution {
         return inorder(root.right);
     }
 }
+//nonrecursive inorder 
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if(prev != null && prev.val >= root.val){
+                return false;
+            }
+            prev = root;
+            root = root.right;
+        }
+        return true;
+    }
+}
