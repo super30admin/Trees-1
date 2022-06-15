@@ -1,5 +1,9 @@
 
 //****VALIDATE BINARY SEARCH TREE***
+//Time complexity:o(n);
+//Space complexity:o(h);
+//LeetCode runnable:Y
+//Any doubts:N
 
 class Solution {
     boolean flag=true;
