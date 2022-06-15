@@ -1,6 +1,7 @@
 
 // Time Complexity : o(n)
-// Space Complexity : o(1)
+// Space Complexity : o(1) 
+// Space Complexity : o(h) for recursive  stack
 // Did this code successfully run on Leetcode : yes
 // Three line explanation of solution in plain english
 
