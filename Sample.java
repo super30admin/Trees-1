@@ -1,5 +1,5 @@
 
-//****VALIDATE BINARY SEARCH TREE***
+//****VALIDATE BINARY SEARCH TREE- RECURSIVE SOLUTION***
 //Time complexity:o(n);
 //Space complexity:o(h);
 //LeetCode runnable:Y
@@ -35,3 +35,8 @@ class Solution {
         }
     }
 }
+//****VALIDATE BINARY SEARCH TREE- ITERATIVE SOLUTION***
+//Time complexity:o(n);
+//Space complexity:o(h);
+
+
