@@ -1,0 +1,17 @@
+//TC , SC - O(n) , O(n)
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        TreeNode l = null, r = null;
+        return helper(root,l,r);
+    }
+    
+    public boolean helper(TreeNode root, TreeNode l, TreeNode r){
+        if(root == null) return true;
+        
+        if(l != null && root.val <= l.val) return false;
+        if(r != null && root.val >= r.val) return false;
+        
+        return helper(root.right, root,r ) && helper(root.left, l, root);
+    }
+}
