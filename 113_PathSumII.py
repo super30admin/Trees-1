@@ -5,8 +5,9 @@ Lecture- https://www.youtube.com/watch?v=JW2KxAHFqv8
 FAQ-
 What will happen if you don't deep copy the path? Passing list in recursion is by reference, which means each node will
 share the same list path. *Refer lecture*
-preorder/postorder/inorder - wouldn't matter which travel you use since all will be visiting each node which we want.
-Our path is not affected by which traversal we pick
+preorder/postorder/inorder - wouldn't matter which traversal you use since all will be visiting each node which we want.
+Only thing we will be giving attention to is that the currSum and path should be added when that node instance is
+executing, i.e., done before calling recursive calls.
 
 
 Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values
