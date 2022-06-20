@@ -1,6 +1,5 @@
 from Driver.TreeSerializerDeserializer import deserializer
 
-
 """
 Leetcode- https://leetcode.com/problems/validate-binary-search-tree/
 TC- O(N) - check on each element in the tree, SC- O(1) - no space used
