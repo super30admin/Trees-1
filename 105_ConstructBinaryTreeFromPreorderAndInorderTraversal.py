@@ -51,12 +51,13 @@ class Solution:
 
     This gives us a repeated subproblem so we call our recursion on it.
     """
-    rootIdx = - 1
 
     def buildTree1(self, preorder, inorder):
         n = len(preorder)
         if n == 0:
             return None
+        self.rootIdx = - 1
+
         root = TreeNode(preorder[0])
         # find root in inorder - unique values - O(N)
         for i in range(n):
