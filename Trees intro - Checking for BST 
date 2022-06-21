@@ -1,0 +1,43 @@
+
+Generate tree from Inorder and preorder traversal
+
+Inorder - Left root right
+PReorder - Left root right
+post order - 
+
+Inorder post and pre are always wrt the position of the root
+
+To check if its a valid Binary search tree  - we check if the inorder traversal is in ascending order
+
+Whenever you call recursion on the baby, Abandon(Push) the parent inside the stack and go to the baby
+
+after the leaf is traversed, stack.pop is implemented and the parent which had called the pop will be passed for its left and right traversal 
+
+
+Recursive function, always do Void return type and keep a global flag to track breach of rules of BST or whatever we are checking
+
+Tree
+
+Uncontrolled recursion -  even if we get a sceanario of breach, all the elements in the stack will still be processed
+
+
+LECTURE - Next
+LC -Path Sum II
+Data Structure in a data structure is always a reference
+
+Backtracking ---
+//Action
+//Recurse
+//Backtrack
+
+Whatever action you have taken you will backtrack that action
+
+Backtracking may also lead to two empty lists as solution if we don't make a deep copy
+
+Order of processing doesn't matter - inorder, preorder, preorder all will work 
+
+
+Ever back tracking problem can be done by brute force recursing
+
+String is not immutable
+In case it is string - We can 
