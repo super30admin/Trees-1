@@ -1,4 +1,4 @@
-// Time Complexity: O(n)
+// Time Complexity: O(n^2)
 // Space Complexity: O(n^2)
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
