@@ -10,8 +10,7 @@ Space Complexity: O(h)'''
 class Solution(object):
     
     def __init__(self):
-        self.prev=TreeNode()
-        self.prev=None
+        self.prev=TreeNode(None)
         self.flag=True
     
     def inorder(self,root):
