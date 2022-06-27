@@ -1,5 +1,5 @@
-#Time Complexity: O(n^2)
-#Space Complexity: O(n^2)
+#Time Complexity: O(n)
+#Space Complexity: O(n)
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -8,27 +8,33 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.iMap = dict()
+        self.idx = 0
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         
         if len(preorder) == 0:
             return None
-        rootVal = preorder[0]
-        root = TreeNode(rootVal)
-        rootIdx = -1
         
         for i in range(len(inorder)):
-            if inorder[i] == rootVal:
-                rootIdx = i
-                break
+            self.iMap[inorder[i]] = i
+
+        return self.helper(preorder, 0, len(preorder)-1)
         
-        inLeft = inorder[:rootIdx]
-        inRight = inorder[rootIdx+1:]
-        preLeft = preorder[1:len(inLeft)+1]
-        preRight = preorder[len(inLeft)+1:]
+    def helper(self, preorder, start, end):
+        if start > end:
+            return None
         
-        root.left = self.buildTree(preLeft, inLeft)
-        root.right = self.buildTree(preRight, inRight)
+        rootVal = preorder[self.idx]
+        root = TreeNode(rootVal)
+        self.idx += 1
+        rootIdx = self.iMap[rootVal]
+        
+        root.left = self.helper(preorder, start, rootIdx-1)
+        root.right = self.helper(preorder, rootIdx+1, end)
+        
         return root
+        
         
         
         
