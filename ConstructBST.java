@@ -30,6 +30,7 @@ public class ConstructBST {
     private TreeNode helper(int[] preorder,int start,int end)
     {
         //base
+        //if start is greater than end that means start and end have crossed each other
         if(start > end)
         {
             return null;
