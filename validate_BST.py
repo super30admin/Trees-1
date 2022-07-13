@@ -1,5 +1,5 @@
 # Time complexity: O(n)
-# Space Complexity: O(n)
+# Space Complexity: O(h)
 # Approach: do inorder traversal
 # while traversing, if prev is greater than the current value, make it false.
 
