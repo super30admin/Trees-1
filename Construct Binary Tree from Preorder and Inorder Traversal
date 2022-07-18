@@ -74,37 +74,35 @@ Solution 2 - Optimized - Using a hashmap to reduce search complexity of inorder 
  */
 class Solution {
     HashMap<Integer, Integer> map;
-    int rootIdx;
+    int index = 0;
     
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if(preorder == null || preorder.length == 0)
             return null;
         
         map = new HashMap<>();
+        
         for(int i = 0; i < inorder.length; i++)
         {
             map.put(inorder[i], i);
         }
         
-        return helper(preorder, 0, inorder.length - 1);
+       return createTree(preorder, inorder, 0, inorder.length - 1);
     }
     
-    private TreeNode helper(int[] preorder, int start, int end)
+    public TreeNode createTree(int[] preorder, int[] inorder, int startInorder, int endInorder)
     {
-        // base case
-        if(start > end)
+        if(startInorder > endInorder)
             return null;
         
-        // logic
-        TreeNode root = new TreeNode(preorder[rootIdx]);
-        rootIdx++;
-        int idx = map.get(root.val);
-        
-        root.left = helper(preorder, start, idx - 1);
-        root.right = helper(preorder, idx + 1, end);
+        // get root node from preorder
+        int rootVal = preorder[index++];
+        TreeNode root = new TreeNode(rootVal);
+        int rootIdx = map.get(rootVal);
+
+        // call recursion       
+        root.left = createTree(preorder, inorder, startInorder, rootIdx - 1);
+        root.right = createTree(preorder, inorder, rootIdx + 1, endInorder);
         return root;
     }
-    
-    
 }
-    
