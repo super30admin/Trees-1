@@ -1,0 +1,75 @@
+//Time Complexity : O(n) 
+//Space Complexity : O(n) 
+// Did this code successfully run on Leetcode : Yes
+
+
+
+class Solution 
+{
+    HashMap<Integer, Integer> hmap = new HashMap<Integer, Integer>();
+    int idx = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) 
+    {
+        for(int i=0;i<inorder.length;i++)
+        {
+            hmap.put(inorder[i], i);
+        }
+        
+        return recurr(preorder, inorder, 0, preorder.length-1);
+    }
+    
+    public TreeNode recurr(int[] preorder, int[] inorder, int start, int end)
+    {
+        if(start > end)
+        {
+            return null;
+        }
+        int rootVal = preorder[idx];
+        idx++;
+        TreeNode root = new TreeNode(rootVal);
+        
+        int rootIdx = hmap.get(rootVal);
+        
+        root.left = recurr(preorder, inorder, start, rootIdx-1);
+        root.right = recurr(preorder, inorder, rootIdx+1, end);
+            
+        return root;
+    }
+}
+
+
+
+
+// class Solution {
+//     public TreeNode buildTree(int[] preorder, int[] inorder) 
+//     {
+//         if(preorder == null || inorder == null || preorder.length == 0 || inorder.length ==0)
+//         {
+//             return null;
+//         }
+        
+//         int rootIdx = -1;
+//         int rootVal = preorder[0];
+        
+//         TreeNode t = new TreeNode(rootVal);
+        
+//         for(int i=0;i<inorder.length;i++)
+//         {
+//             if(rootVal == inorder[i])
+//             {
+//                 rootIdx = i;
+//                 break;
+//             }
+//         }
+        
+//         int[] preorderLeft = Arrays.copyOfRange(preorder, 1, rootIdx+1);
+//         int[] preorderRight = Arrays.copyOfRange(preorder, rootIdx+1, preorder.length);
+//         int[] inorderRight = Arrays.copyOfRange(inorder,rootIdx+1,inorder.length);
+//         int[] inorderLeft =  Arrays.copyOfRange(inorder, 0, rootIdx);
+            
+//         t.left = buildTree(preorderLeft, inorderLeft);
+//         t.right = buildTree(preorderRight, inorderRight);
+            
+//         return t;
+//     }
+// }
