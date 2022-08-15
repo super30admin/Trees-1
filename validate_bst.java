@@ -1,6 +1,23 @@
 //TC:O(n)
-//SC:O(1)
+//SC:O(h) max elements in the stack are always lessthan or equal to number of height nodes
 //leecode : successfull
+//approach
+//
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 
 class Solution {
     TreeNode prev;
