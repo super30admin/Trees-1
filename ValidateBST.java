@@ -75,3 +75,22 @@ public boolean isValidBST(TreeNode root){
     return true;
 }    
 }
+
+//Approach 3 - Range of minimum and maximum
+public boolean isValidBST(TreeNode root){
+    return helper(root,null,null);
+}
+
+private boolean helper(TreeNode root, Integer min, Integer max){
+    //base
+    if(root == null)
+        return true;
+    if(min != null && root.val <= min)
+        return false;
+    if(max != null && root.val >=max)
+        return false;
+    //logic
+    boolean left = helper(root.left,min,root.val);
+    boolean right = helper(root.right,root.val,max);
+    return left && right;
+}
