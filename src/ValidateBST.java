@@ -6,7 +6,7 @@
 
 import java.util.Stack;
 
-class TreeNode {
+class TreeNode {                                                           // class for node of tree
     int val;
     TreeNode left;
     TreeNode right;
@@ -33,17 +33,17 @@ class ValidateBST {
         if(root == null)
             return true;
 
-        // Left sub tree
-        boolean isLeftValid = validateBST(root.left);
+        // Left sub tree                  
+        boolean isLeftValid = validateBST(root.left);                      // check for left subtree
 
         if(isLeftValid) {
             // checking val is valid or not
-            boolean isNodeValid = root.val > preVal;
+            boolean isNodeValid = root.val > preVal;                       // check for current node
             preVal = root.val;
 
             if(isNodeValid) {
                 // Right sub tree
-                boolean isRightValid = validateBST(root.right);
+                boolean isRightValid = validateBST(root.right);            // check for right subtree
                 return isRightValid;
             }
         }
@@ -60,7 +60,7 @@ class ValidateBST {
 //
 //    public boolean isValidBST(TreeNode root) {
 //        preVal = Long.MIN_VALUE;
-//        isValidBST = true;
+//        isValidBST = true;                                                // assuming current node is correct as per BST
 //
 //        validateTree(root);
 //
@@ -75,7 +75,7 @@ class ValidateBST {
 //        validateTree(root.left);
 //
 //        // checking BST valid or not
-//        if(root.val <= preVal)
+//        if(root.val <= preVal)                                             // if not then changing flag value
 //            isValidBST = false;
 //        preVal = root.val;
 //
