@@ -1,0 +1,13 @@
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def validate(root, l, h):
+            if not root: 
+                return True
+            if root.val <= l or root.val >= h:
+                return False
+            return validate(root.left, l, root.val) and validate(root.right, root.val, h)
+        return validate(root, -sys.maxsize, sys.maxsize)
+    
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+# Successfully implemented on Leetcode
