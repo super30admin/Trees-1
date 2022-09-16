@@ -1,5 +1,5 @@
 """
-S30 FAANMG Problem #42 {Medium}
+ FAANMG Problem #42 {Medium}
 
 
 105. Construct Binary Tree from Preorder and Inorder Traversal

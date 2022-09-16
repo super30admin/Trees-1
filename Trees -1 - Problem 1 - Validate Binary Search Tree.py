@@ -1,5 +1,5 @@
 """
-S30 FAANMG Problem #41 {Medium}
+ FAANMG Problem #41 {Medium}
 
 98. Validate Binary Search Tree
 
@@ -69,7 +69,7 @@ class Solution:
         return self.flag
         
 """
-S30 FAANMG Problem #41 {Medium}
+ FAANMG Problem #41 {Medium}
 
 98. Validate Binary Search Tree
 
