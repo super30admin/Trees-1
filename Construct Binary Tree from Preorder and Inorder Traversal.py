@@ -5,7 +5,10 @@
 
 # Your code here along with comments explaining your approach
 
-#Optimized
+#Optimized-1
+# TC- O(n)
+# SC - O(n)
+
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         
@@ -25,17 +28,60 @@ class Solution:
         root.right = self.helper(preorder, prestart + num_left + 1, preend, inorder, rootidx + 1, inend, map_inorder)
         return root
 
-
-
-#
+#Optimized-2
+# TC - O(n)
+# SC - O(n)
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        if not preorder or not inorder:
+        
+    
+        def helper(start, end):
+            nonlocal preIdx
+            #base
+            if start > end:
+                return None
+
+            #logic
+            rootVal = preorder[preIdx]
+            root = TreeNode(rootVal)
+            preIdx += 1
+            root.left = helper(start, map[rootVal]-1)
+            root.right = helper(map[rootVal]+1,end)
+            return root
+        
+        if len(preorder) == 0 or preorder == None:
             return None
         
-        root = TreeNode(preorder[0])
-        mid = inorder.index(preorder[0])
-        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
-        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
-        return root
+        map = {}
+        preIdx = 0
+        for idx,val in enumerate(inorder):
+           map[val] = idx
+        return helper(0, len(preorder)-1)
+
+
+
+
+#brute Force
+# TC- O(n^2)
+# SC - O(n^2)
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if len(preorder) == 0:
+            return None
+        rootVal = preorder[0]
+        root = TreeNode(rootVal)
+        idx = -1
         
+        for i in range(0,len(inorder)):
+            if inorder[i] == rootVal:
+                idx = i
+                break
+        inLeft = inorder[:idx]
+        preLeft = preorder[1:idx+1]
+        inRight = inorder[idx+1:]
+        preRight = preorder[idx+1:]
+        root.left = self.buildTree(preLeft,inLeft)
+        root.right = self.buildTree(preRight,inRight)
+        
+        return root
