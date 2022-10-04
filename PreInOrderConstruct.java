@@ -2,7 +2,6 @@
 // Space Complexity :O(N^2)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this :
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -37,13 +36,14 @@ class Solution {
 
         // initialize tree node root
         TreeNode root = new TreeNode(rootValue);
-
         for (int i=0; i< inorder.length; i++) {
             if(rootValue == inorder[i]) {
                 rootIdx = i;
                 break;
             }
         }
+
+
 
         // Breaking the arrays
         int[] inorderLeft = Arrays.copyOfRange(inorder, 0, rootIdx);
@@ -53,9 +53,9 @@ class Solution {
         int[] preorderRight = Arrays.copyOfRange(preorder, rootIdx+1, preorder.length);
 
         // Recursion
-        TreeNode left = helper(preorderLeft, inorderLeft);
-        TreeNode right = helper(preorderRight, inorderRight);
+        root.left = helper(preorderLeft, inorderLeft);
+        root.right = helper(preorderRight, inorderRight);
 
         return root;
     }
-}
+}a
