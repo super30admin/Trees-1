@@ -1,0 +1,27 @@
+Validate Binary Search Tree
+#tc: O(n)
+#sc: O(n)
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        
+        def helper(node, low, high):
+            if not node:
+                return True
+            if not (low < node.val < high):
+                return False
+            return helper(node.left, low, node.val) and helper(node.right, node.val, high)
+        
+        return helper(root, -inf, inf)
+
+Construct Binary Tree from Preorder and Inorder Traversal
+#tc: O(n)
+#sc: O(n)
+class Solution:
+    def buildTree(self, preorder, inorder):
+        if inorder:
+            INDEX = inorder.index(preorder.pop(0))
+            root = TreeNode(inorder[INDEX])
+            root.left = self.buildTree(preorder, inorder[:INDEX])
+            root.right = self.buildTree(preorder, inorder[INDEX+1:])
+			
+            return root
