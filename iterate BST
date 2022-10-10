@@ -1,0 +1,77 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    private:
+    void Inorder(TreeNode* root, vector<int>& ans ){
+        if(root == NULL){
+            return;
+        }
+        
+        Inorder(root->left,ans );
+        
+        ans.push_back(root->val);
+        
+        Inorder(root->right,ans);
+    }
+    
+    public:
+    bool isValidBST(TreeNode* root) {
+        vector<int> ans;
+        Inorder(root,ans);
+        
+        for(int i =0 ; i<ans.size()-1; i++){
+            if(ans[i] >= ans[i+1])
+                return false;
+        }
+    return true;
+    }
+};
+---------------
+/* it is not working for below code, can you please let me know my mistake ? */
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {   
+    public:
+    bool minmaxcheck(TreeNode* root, int min, int max){
+        if(root == NULL){
+            return true;
+        }
+        
+        
+        if(root->val >= max || root->val <=min){
+            return false;
+        }
+        
+        bool case1 = minmaxcheck(root->left, min, root->val);
+        
+        bool case2 = minmaxcheck(root->right, root->val , max);
+        
+        return case1&&case2;
+        }
+    
+    bool isValidBST(TreeNode* root) {
+        if(root == NULL ){
+            return true;
+        }
+    return minmaxcheck(root, INT_MIN, INT_MAX);
+    }
+};
