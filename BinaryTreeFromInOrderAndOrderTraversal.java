@@ -1,4 +1,4 @@
-//TC: O(n*n)
+//TC: O(n)
 //SC: O(h) height of tree
 // use the definition of binary search tree -- sorted order property
 //predecessor value is less than next value in ascending order
@@ -7,12 +7,17 @@
 public class BinaryTreeFromInOrderAndOrderTraversal {
     private static int preorderIndex;
     private static int[] preorder,  inorder;
+    private static Map<Integer, Integer> inorderMap;
 
 
     public static  TreeNode buildTree(int[] preorder1, int[] inorder1) {
         preorderIndex=0;
         preorder= preorder1;
         inorder=inorder1;
+        inorderMap = new HashMap<>();
+        for(int i=0;i< inorder.length;i++){
+            inorderMap.put(inorder[i], i);
+        }
         return buildTree(0, inorder.length-1);
     }
 
@@ -28,20 +33,15 @@ public class BinaryTreeFromInOrderAndOrderTraversal {
         preorderIndex++;
 
 
-        int inorderIndex = getIndex(inorder, inOrderStart,inOrderEnd, node.val);
+        int inorderIndex = getIndex(node.val);
         node.left = buildTree(inOrderStart, inorderIndex-1);
         node.right = buildTree(inorderIndex+1, inOrderEnd);
         return node;
 
     }
 
-    private static int getIndex(int[] arr, int start, int end, int element){
-        for(int i=start; i<= end; i++){
-            if(arr[i]==element)
-                return i;
-        }
-
-        return -1;
+    private static int getIndex(int element){
+        return inorderMap.get(element);
     }
 
 
@@ -53,3 +53,4 @@ public class BinaryTreeFromInOrderAndOrderTraversal {
         System.out.println(tree.val);
     }
 }
+
