@@ -1,0 +1,21 @@
+Time Complexity = O(n) 
+Space Complexity = O(h) 
+class Solution: 
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        Stack = []
+        prev = None
+        #until root is not null and stack is not empty
+        while(root!= None or len(Stack)!=0):
+            #Process the left node
+            while(root!=None):
+                Stack.append(root)
+                root = root.left
+                
+            root = Stack.pop()
+            if(prev!=None and root.val <= prev.val):
+                return False
+            prev = root
+            root = root.right
+            
+        return True
+            
