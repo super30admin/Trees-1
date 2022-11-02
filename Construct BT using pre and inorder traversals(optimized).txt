@@ -1,0 +1,28 @@
+Time complexity = O(n)
+Space complexity = O(n)
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        #optimized O(n^2)
+        self.HashMap_Inorder = dict()
+        self.idx = 0
+        
+        for i in range(len(inorder)):
+            self.HashMap_Inorder[inorder[i]] = i
+            
+        return self.helper(preorder, 0, len(inorder)-1)
+    
+    
+    def helper(self, preorder, start, end):
+        #base case
+        if start > end:
+            return None
+        
+        #logic
+        rootVal = preorder[self.idx]
+        rootidx = self.HashMap_Inorder[rootVal] #index of root in inorder
+        self.idx = self.idx+1
+        root = TreeNode(rootVal)
+        root.left = self.helper(preorder, start, rootidx-1)
+        root.right = self.helper(preorder, rootidx+1, end)
+        
+        return root
