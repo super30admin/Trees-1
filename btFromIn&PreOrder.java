@@ -1,15 +1,3 @@
-
-// Time Complexity : search-> O(n), time to create 4 arrays- O(n), for n
-// recurrance- > O(n^2)
-// Space Complexity : O(n^2)
-// Did this code successfully run on Leetcode : Yes
-
-// Your code here along with comments explaining your approach
-/*
- * Reduce the search space complexity by creating a map , and ans to using a 2
- * pointer apporach to generate the left and right subtree
- */
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -24,6 +12,16 @@
  * this.right = right;
  * }
  * }
+ */
+
+// Time Complexity : O(n)
+// Space Complexity : O(n) + O(h)
+// Did this code successfully run on Leetcode : Yes
+
+// Your code here along with comments explaining your approach
+/*
+ * Reduce the search space complexity by creating a map , and ans to using a 2
+ * pointer apporach to generate the left and right subtree
  */
 class Solution {
 
