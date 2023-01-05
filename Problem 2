@@ -1,0 +1,45 @@
+// Explanation = The first value of the proorder traversal is the root, locate it in the inorder traversal to identify the left and right sides of the tree. Copy the left and right sides of the indorder nad preorder traversals into new arrays and continue the same process to identify the root, left and right nodes.
+// Time Complexity = O(n)
+// Space Complexity = O(1)
+// Executed the code in LeetCode
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+
+        if(preorder.length == 0) return null;
+
+        int rootVal = preorder[0];
+        TreeNode root = new TreeNode(rootVal);
+        int rootIdx = -1;
+
+        for(int i = 0; i < inorder.length; i++){  // Time - O(n)
+            if(inorder[i] == rootVal){
+                rootIdx = i;
+                break;
+            }
+        }
+        // Time - O(n)
+        int[] InLeft = Arrays.copyOfRange(inorder,0,rootIdx); 
+        int[] InRight = Arrays.copyOfRange(inorder, rootIdx + 1, inorder.length);
+        int[] PreLeft = Arrays.copyOfRange(preorder, 1, rootIdx + 1);
+        int[] PreRight = Arrays.copyOfRange(preorder, rootIdx + 1, preorder.length); 
+        root.left = buildTree(PreLeft, InLeft);
+        root.right = buildTree(PreRight, InRight);
+        return root;
+    }
+}

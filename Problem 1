@@ -1,0 +1,29 @@
+// Explanation - Use a TreeNode to store the previous node's value and check if its less that current value to check if the Inorder traversal is in ascending order.
+// Time Complexity - O(n); n - number of nodes in the tree
+// Space Complexity - O(h); h - height of the tree
+// Executed the code on LeetCode
+
+class Solution {
+    boolean flag;
+    TreeNode prev;
+    public boolean isValidBST(TreeNode root) {
+        flag = true;
+        InOrder(root);
+        return flag;
+    }
+
+    private void InOrder(TreeNode root){
+
+        if(root == null) return;
+
+        InOrder(root.left);
+
+        if(prev != null && prev.val >= root.val){
+            flag = false;
+        }
+
+        prev = root;
+
+        InOrder(root.right);        
+    }
+}
