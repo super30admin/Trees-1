@@ -4,7 +4,7 @@ class SimulateRecursionBasic {
         return true;
     }
 
-    // To Trace the Recursion Stack
+    // To Trace the Recursion Stack Push and Pop.
     private void inorder(TreeNode root) {
         if (root == null) return;
 
