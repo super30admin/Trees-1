@@ -6,9 +6,9 @@
 
 
 // Approach
-// Store the Inorder tree value(key) and index(value) in a Map, so that while searching for root & root index -1, will get in O(1) time.
-// Search the root value in Preorder traversal & increase the index after every call.
-// Then search the root value in Map to know the root's index. After getting that we will find the desired array for that particular call and about the start index for right call(which is root index -1) & end index for left call(which is root index -1).
+// Store the Inorder tree value(key) and index(value) in a Map, so that while searching for root & rootindex, will get in O(1) time.
+// Search the root value in Preorder traversal & increase the index after every call to get the next root.
+// Then search the root value in Map to know the root's index. After getting that we will find the desired chunk for that particular call and about the end index for left recursive call(which is root index-1) & start index for the right recursive call(which is root index+1).
 
 
 /**
