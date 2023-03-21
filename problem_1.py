@@ -29,4 +29,30 @@ class Solution:
         
         if self.flag:
            
-            self.inorder(root.right)
+            self.inorder(root.right) 
+
+# Iterative solution for inorder traversal
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        prev = None
+        flag = True
+        stack = []
+
+        while stack or root:
+
+
+            while (root != None):
+                stack.append(root)
+                root = root.left 
+            root = stack.pop() 
+            if prev != None and prev.val >= root.val :
+                    flag = False 
+                    break
+            prev = root 
+                
+
+            root = root.right
+
+        return flag
+            
