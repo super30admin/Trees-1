@@ -8,19 +8,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorder(self, head, arr = []):
-        if head is None:
-            return
-        self.inorder(head.left, arr)
-        arr.append(head.val)
-        self.inorder(head.right, arr)
-
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        arr = []
-        self.inorder(root, arr)
+        def inorder(root):
+            if not root:
+                return
+            inorder(root.left)
+            if root.val <= self.prev:
+                self.flag = False
+            self.prev = root.val
+            return inorder(root.right)
 
-        for i in range(1, len(arr)):
-            if arr[i - 1] >= arr[i]:
-                return False
-        return True
+        self.prev = float('-inf')
+        self.flag = True
+        inorder(root)
+        return self.flag
 
