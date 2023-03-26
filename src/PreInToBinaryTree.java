@@ -15,15 +15,46 @@ public class PreInToBinaryTree {
         for(int i=0; i<inorder.length; i++)
             map.put(inorder[i],i);                                                     // storing all inorder elements' order
         return build(preorder, 0, inorder.length-1);
+        
+// // ******************** Another method ********************
+        
+//         // Base case
+//         if(preorder.length == 0) return null;
+
+//         // getting indexes of root node in preorder and inorder
+//         int rootVal = preorder[0];
+//         int rootIndIn = -1;
+//         for(int i=0; i<inorder.length; i++) {
+//             if(inorder[i] == rootVal) {
+//                 rootIndIn = i;
+//                 break;
+//             }
+//         }
+
+//         // left and right subarrays for recursion
+//         int[] preLeft = Arrays.copyOfRange(preorder, 1, rootIndIn+1);
+//         int[] preRight = Arrays.copyOfRange(preorder, rootIndIn+1, preorder.length);
+//         int[] inLeft = Arrays.copyOfRange(inorder, 0, rootIndIn);
+//         int[] inRight = Arrays.copyOfRange(inorder, rootIndIn+1, inorder.length);
+
+//         // Recursion
+//         TreeNode root = new TreeNode(rootVal);
+//         root.left = buildTree(preLeft, inLeft);
+//         root.right = buildTree(preRight, inRight);
+
+//         return root;
+        
     }
     private TreeNode build(int[] preorder, int start, int end) {
         if(start > end)
             return null;
         TreeNode root = new TreeNode(preorder[preIndex++]);                            // creating new node to be added in a tree(new temp root)
-        if(root == null)                                                            
-            return null;
-        if(start == end)                                                               // leaf node
-            return root;
+
+// ******************** Not need to handle these cases ********************
+//         if(root == null)                                                            
+//             return null;
+//         if(start == end)                                                               // leaf node
+//             return root;
 
         int index = map.get(root.val);
 
