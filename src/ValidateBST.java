@@ -88,8 +88,6 @@ class ValidateBST {
 // ****************************** Another Approach ******************************
 //class ValidateBST {
 //
-//    private long preVal;
-//
 //    public boolean isValidBST(TreeNode root) {
 //        TreeNode prev = null;
 //        Stack<TreeNode> stack = new Stack<>();
@@ -121,8 +119,6 @@ class ValidateBST {
 
 // ****************************** Another Approach ******************************
 //class ValidateBST {
-//
-//    private long preVal;
 //
 //    public boolean isValidBST(TreeNode root) {
 //        TreeNode prev = null;
