@@ -1,6 +1,6 @@
 import java.util.HashMap;
-// Time Complexity :O(n)
-// Space Complexity : O(n)
+// Time Complexity :O(n) where n is the number of nodes in the tree
+// Space Complexity : O(n) where n is the number of nodes in the tree as we're maintaining one auxiliary HashMap of length n
 // Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this :
  class TreeNode {
