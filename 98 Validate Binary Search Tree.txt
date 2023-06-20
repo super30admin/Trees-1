@@ -1,0 +1,85 @@
+98. Validate Binary Search Tree
+
+//void based recursion
+class Solution {
+    boolean flag=true;
+    public boolean isValidBST(TreeNode root) {
+        this.flag=true;
+        inorder(root,null,null);
+    return this.flag;
+    }
+
+    private void inorder(TreeNode root,Integer low,Integer high){
+    //base
+    if(root==null)return;
+     System.out.println(root.val);
+    if(low!=null && root.val<=low  ||
+    high!=null && root.val >=high){
+    flag=false;
+    return;
+    }
+
+    //left
+    if(flag) //this condition is to save nodes
+    inorder(root.left,low,root.val);
+    //right
+    if(flag)//this condition is to save nodes
+    inorder(root.right,root.val,high);
+
+    }
+
+}
+
+/**
+Solution 1 - Void based
+class Solution {
+    TreeNode prev;
+    boolean flag=true;
+    public boolean isValidBST(TreeNode root) {
+        this.flag=true;
+        inorder(root);
+    return this.flag;
+    }
+
+    private void inorder(TreeNode root){
+        if(root==null)return;
+      if(flag) // to save the node if breach happens it terminates
+        inorder(root.left);
+        //    System.out.println(root.val);
+        if(prev!=null && prev.val>=root.val){
+            flag=false;
+        }
+        prev=root;
+       
+        if(flag)// to save the node if breach happens it terminates
+        inorder(root.right);
+
+    }
+
+}
+
+ */
+//Solution 2 --> boolean recursion
+// class Solution {
+//     TreeNode prev;
+//     public boolean isValidBST(TreeNode root) {
+//        return inorder(root);
+//     }
+
+//     private boolean inorder(TreeNode root){
+//         if(root==null)return true;
+//         System.out.println(root.val);
+//         boolean left=inorder(root.left);
+//         if(left==false){
+//             return false;
+//         }
+//         if(prev!=null && prev.val>=root.val){
+//             return false;
+//         }
+//         prev=root;
+//         boolean right=inorder(root.right);
+//     return (left && right);
+//     }
+
+
+// }
