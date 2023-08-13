@@ -1,0 +1,24 @@
+class Solution {
+    TreeNode prev;
+    boolean flag;
+    public boolean isValidBST(TreeNode root) {
+        this.flag = true;
+        inorder(root);
+        return this.flag;
+
+    }
+    public void inorder(TreeNode root){
+        //base
+        if(root == null) return;
+        //logic
+        if(flag)
+            inorder(root.left);
+        if(prev != null && prev.val >= root.val){
+            flag = false;
+        }
+        prev = root;
+        if(flag)
+            inorder(root.right);
+        
+    }
+}
