@@ -7,12 +7,12 @@ public class Problem98 {
     boolean helperFlag;
     public boolean isValidBST(TreeNode root) {
         this.helperFlag=true;
-        /*this.flag=true;
+        this.flag=true;
         inOrder1(root);
         if(flag)
             System.out.println("Valid BST for inorder");
         else
-            System.out.println("In-Valid BST for inorder");*/
+            System.out.println("In-Valid BST for inorder");
         helper(root,null,null);
         if(helperFlag)
             System.out.println("Valid BST");
