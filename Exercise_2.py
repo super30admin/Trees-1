@@ -59,6 +59,8 @@ class Solution:
 
     def helper(self, preorder, inorder, start, end):
         # base
+        if start > end:
+            return None
 
         # logic
         # getting root value from preorder
