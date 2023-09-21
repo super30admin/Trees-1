@@ -13,21 +13,21 @@ The right subtree of a node contains only nodes with keys greater than the node'
 Both the left and right subtrees must also be binary search trees.
 Example 1:
 
-   2
+2
 
-   / \
+/ \
 
-  1   3
+1 3
 
 Input: [2,1,3]
 Output: true
 Example 2:
 
-   5
+5
 
-   / \
+/ \
 
-  1   4
+1 4
 
      / \
 
@@ -43,8 +43,6 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
 
 Given preorder and inorder traversal of a tree, construct the binary tree.
 
-
-
 Note:
 You may assume that duplicates do not exist in the tree.
 
@@ -54,20 +52,15 @@ For example, given
 
 preorder = [3,9,20,15,7]
 
-
 inorder = [9,3,15,20,7]
 Return the following binary tree:
 
-   3
+3
 
+/ \
 
-   / \
-
-
-  9  20
-
+9 20
 
     /  \
 
-
-   15   7
+15 7
