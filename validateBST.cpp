@@ -1,33 +1,31 @@
-//I have used Recursive approach checking min and max bounds of the node
-//time : O(n)
-//space :O(n)
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
+/*
+TC: O(n)
+SC: O(n)
+
  */
 class Solution {
 public:
+bool valid=true;
+TreeNode* prev;
     bool isValidBST(TreeNode* root) {
-        
-        return dfs(root,NULL,NULL);
+        if(root==nullptr)
+            return true;  
+        //prev=root; 
+         dfs(root);
+         return valid;
     }
-    bool dfs(TreeNode* root, TreeNode* low, TreeNode* high)
+    void dfs(TreeNode* root)
     {
         if(root==nullptr)
-            return true;
-        if((low!=nullptr and root->val<=low->val) or (high!=nullptr and root->val>=high->val))
+            return; 
+        dfs(root->left);
+        if(prev!=nullptr and prev->val>=root->val)
         {
-            return false;
+            valid=false;
+            return;
         }
-        bool l=dfs(root->left,low,root);
-        bool r=dfs(root->right,root,high);
-        return (l and r);
+        prev=root;
+        dfs(root->right);
+     
     }
 };

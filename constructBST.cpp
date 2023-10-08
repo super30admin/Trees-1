@@ -1,54 +1,37 @@
-//I have used recusrive approach to divide and conquer the sub trees 
-//used hashmaps for O(1) search in the inorder traveral for indices in preorder
-//Time complexity- O(n)
-//Space complexity- O(n) //stack call space
+//TC: O(n)
+//SC: O(n)
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+//Approach: make use of preoder to find root of the tree
+//find the index of root in inorder -> that we can get from hashmap
+//then find size of left and right subtrees 
+//make use of these numleft and numright to find indices for the next subtree construxction - each time we consider first halves of the trees
+//and make it equal to left and right pointers of rhe root
 class Solution {
 public:
-     unordered_map<int,int>m;
+unordered_map<int,int> map;
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-       
         
-        for(int i=0;i<inorder.size()-1;i++)
+        for(int i=0;i<inorder.size();i++)
         {
-            m[inorder[i]]=i;
+            map[inorder[i]]=i;
         }
-        return helper(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1);
+    return dfs(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1);
     }
-    
-    TreeNode* helper(vector<int>& preorder, int startP, int endP,vector<int>& inorder, int startI, int endI)
+    TreeNode* dfs(vector<int>& preorder, int startP, int endP, vector<int>& inorder, int startI, int endI)
     {
-        //Base case: size 0 and size 1 sub problem 
+        //base
         if(startP>endP)
-        {
-            return NULL;           
-        }
+            return nullptr;
         if(startP==endP)
-        {
-         // TreeNode* node= TreeNode(preorder[startP]);
             return new TreeNode(preorder[startP]);
-        }
-        //Recursive Case
-        //make sure to locate a root in pre-order 
-        TreeNode* root=new TreeNode(preorder[startP]);
-        int rootindex=m[preorder[startP]];
-        int numleft=rootindex-startI;
-        int numright=endI-rootindex;
-        root->left=helper(preorder,startP+1,startP+numleft,inorder,startI, rootindex-1);
-            root->right=helper(preorder,numleft+startP+1, endP,inorder, rootindex+1,endI);
-        
-        
+        //recursive call
+            TreeNode* root=new TreeNode(preorder[startP]);
+            int index=map[preorder[startP]];
+            int numleft=index-startI;
+            int numright=endI-index;
+    
+        root->left=dfs(preorder, startP+1, startP+numleft, inorder, startI, index-1);
+        root->right=dfs(preorder, startP+numleft+1, endP, inorder, index+1, endI);
         return root;
     }
 };
