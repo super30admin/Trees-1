@@ -22,7 +22,7 @@
 
 // Your code here along with comments explaining your approach
 
-class Solution {
+class ValidateBST {
     List<Integer> list = new ArrayList();
     public boolean isValidBST(TreeNode root) {
         int cnt = 0;
