@@ -1,0 +1,30 @@
+// Time Complixity --> O(n)
+// Space Complixity --> O(h).
+
+class Solution {
+    boolean flag ;
+    TreeNode prev;
+    public boolean isValidBST(TreeNode root) {
+        this.flag = true;
+        helper(root);
+        return flag;
+        
+    }
+    private void helper(TreeNode root) {
+        if(root == null) return;
+        helper(root.left);
+        System.out.print("up");
+         System.out.println(root.val);
+        if(prev != null && prev.val >= root.val) {
+            flag = false;
+        }
+        prev = root;
+        if(flag) {
+             helper(root.right);
+        }
+       
+        System.out.print("down");
+         System.out.println(root.val);
+
+    }
+}
