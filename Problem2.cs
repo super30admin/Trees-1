@@ -30,6 +30,10 @@ public class ConstructBTPreOrderAndInOrder
         {
             int n = preorder.Length - 1;
             Dictionary<int, int> inOrderMap = new Dictionary<int, int>();
+            for(int i = 0; i < inorder.Length; i++)
+            {
+                inOrderMap.Add(inorder[i], i);
+            }
             return helper(preorder, inOrderMap, 0, n);
         }
 
