@@ -1,5 +1,5 @@
 # time complexity: O(n)
-# space complexity: O(1)
+# space complexity: O(h) where h is height of tree
 # Did it run on leetcode: yes
 # Definition for a binary tree node.
 # class TreeNode:
