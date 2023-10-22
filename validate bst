@@ -1,0 +1,31 @@
+# time complexity: O(n)
+# space complexity: O(1)
+# Did it run on leetcode: yes
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+prev = TreeNode()
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]):   
+        global prev
+        prev = None    
+        return self.inorder(root)
+
+    def inorder(self, root:[TreeNode]) -> bool:
+        #base case
+        global prev
+        if root is None:
+            return True
+    
+        #logic
+        if self.inorder(root.left) is False:
+            return False
+
+        if prev is not None and prev.val >= root.val:
+            return False
+
+        prev = root
+        return self.inorder(root.right)        
