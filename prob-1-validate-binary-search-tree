@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        """
+        Approach: Use the iterative solution. 
+                  Use DFS and stack to visit complete right and left subtree for each node.
+		    Time Complexity: O(n) - we visit each node once
+        Space Complexity: O(n) - we are using recursion and storing variable for each node. Worst case is O(n)
+        Did this code successfully run on Leetcode: Yes
+    
+        Any problem you faced while coding this: No
+        """
+        if not root:
+            return True
+
+        # Keep a stack of tuples. Tuple is the node, and the low and high bounds
+        stack = [(root, -math.inf, math.inf)]
+
+        while stack:
+            some_node, low, high = stack.pop()
+
+            # This takes care of the NULL nodes
+            if not some_node:
+                continue
+            
+            val = some_node.val
+            if val <= low or val >= high:
+                return False
+            # right subtree
+            stack.append((some_node.right, val, high))
+            # left subtree
+            stack.append((some_node.left, low, val))
+        return True
