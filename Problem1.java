@@ -54,7 +54,7 @@ class Solution2 {
 
     private void inOrder(TreeNode root){
         
-        if(root==null){
+        if(root==null || !flag){
             return;
         }
 
@@ -77,5 +77,52 @@ class Solution2 {
         flag=true;
         inOrder(root);
         return flag;
+    }
+}
+
+// Time Complexity :  O(n)
+// Space Complexity :  O(h)
+// Did this code successfully run on Leetcode :  Yes
+
+// Different from solution2 in a way that we are not maintaining a global flag boolean
+// instead we will validate left if ok go for curr and then if ok go right and return true if all are true else false;
+// So we will call recursivelt at each node.
+
+
+
+
+class Solution3 {
+
+    private long preVal;
+
+    private boolean check(TreeNode root){
+
+        //base
+        if(root==null){
+            return true;
+        }
+
+        //left
+        boolean left= check(root.left);
+
+        if(left){
+            //node
+            boolean curr= root.val>preVal;
+            preVal=root.val;
+
+            if(curr){
+                //right
+                boolean right= check(root.right);
+                return right;
+            }
+        }
+        return false;
+    }
+
+    public boolean isValidBST(TreeNode root) {
+
+        preVal= Long.MIN_VALUE;
+        
+        return check(root);
     }
 }
