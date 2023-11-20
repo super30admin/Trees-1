@@ -126,3 +126,43 @@ class Solution3 {
         return check(root);
     }
 }
+
+
+
+// Time Complexity :  O(n)
+// Space Complexity :  O(h)
+// Did this code successfully run on Leetcode :  Yes
+
+// Maintian a stack and iteratively add and pop nodes to and from the stack and
+// simultaneously check if the popped value is greter than previous. If not then not a valid BST
+
+
+
+class Solution4 {
+    public boolean isValidBST(TreeNode root) {
+        Long preVal= Long.MIN_VALUE;
+        Stack<TreeNode> myStack= new Stack<>();
+        while(root.left!=null){
+            myStack.push(root);
+            root=root.left;
+        }
+        myStack.push(root);
+        while(!myStack.isEmpty()){
+            TreeNode popped= myStack.pop();
+            if(popped.val<=preVal){
+                return false;
+            }
+            preVal= (long)popped.val;
+            TreeNode curr= popped.right;
+            if(curr==null){
+                continue;
+            }
+            while(curr.left!=null){
+                myStack.push(curr);
+                curr=curr.left;
+            }
+            myStack.push(curr);
+        }
+        return true;
+    }
+}
