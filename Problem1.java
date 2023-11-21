@@ -203,3 +203,34 @@ class Solution5 {
         return true;
     }
 }
+
+
+// Time Complexity :  O(n)
+// Space Complexity :  O(h)
+// Did this code successfully run on Leetcode :  Yes
+
+// We will specify a range of values for a each node based on it's parent's value.
+// We will check each node if it is in its specified range. If not return false;
+// range of left child would be (min,node.val) and right child would be (node.val,max)
+
+
+
+class Solution6 {
+
+    public boolean isValidBST(TreeNode root) {
+        return valid(root,null,null);
+    }
+
+    private boolean valid(TreeNode root, Integer min, Integer max){
+
+        if(root==null){
+            return true;
+        }
+        
+        if((min!=null && root.val<=min) || (max!=null && root.val>=max)){  // min and max are wraper classes so can be null
+            return false;
+        }
+
+        return valid(root.left, min, root.val) && valid(root.right, root.val, max);
+    }
+}
