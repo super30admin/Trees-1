@@ -166,3 +166,40 @@ class Solution4 {
         return true;
     }
 }
+
+
+// Time Complexity :  O(n)
+// Space Complexity :  O(h)
+// Did this code successfully run on Leetcode :  Yes
+
+// Same as above solution except that we will maintain a reference instead of a Long.Min value
+// to handle cases when root is Long.Min
+
+
+class Solution5 {
+    public boolean isValidBST(TreeNode root) {
+
+        TreeNode prev=null;
+
+        Stack<TreeNode> myStack= new Stack<>();
+
+        while(root!=null || !myStack.isEmpty()){
+
+            while(root!=null){
+                myStack.push(root);
+                root=root.left;
+            }
+
+            root=myStack.pop();
+
+            if(prev!=null && root.val<=prev.val){
+                return false;
+            }
+
+            prev=root;
+
+            root=root.right;
+        }
+        return true;
+    }
+}
