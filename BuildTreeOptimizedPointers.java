@@ -36,10 +36,18 @@ public class BuildTreeOptimizedPointers {
         TreeNode root = new TreeNode(rootVal);
 
         rIdx = inMap.get(rootVal);
-
+        System.out.println(rootVal+ " "+ sIdx+ " "+ ((int)rIdx-1)+ " " + rIdx );
         root.left = helper(preorder,sIdx, rIdx -1, rIdx);
+        System.out.println(rootVal+ " "+ rIdx+1+ " "+ eIdx+ " " + rIdx );
         root.right = helper(preorder,rIdx+1, eIdx, rIdx);
 
         return root;
+    }
+
+
+    public static void main(String[] args) {
+        BuildTreeOptimizedPointers p = new BuildTreeOptimizedPointers();
+        TreeNode n = p.buildTree(new int[]{3,9,5,4,20,15,7}, new int[]{5,9,4,3,15,20,7});
+        System.out.println(n);
     }
 }
