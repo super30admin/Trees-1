@@ -27,33 +27,63 @@ import java.util.Map;
  */
 class Solution {
     Map<Integer, Integer> inMap;
+    int idx;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int n = inorder.length;
-        int preIdx = 0;
-        
         inMap = new HashMap<>();
+        int n = inorder.length;
+
         for (int i = 0; i < n; i++) {
             inMap.put(inorder[i], i);
         }
 
-        return helper(preorder, inorder, preIdx, 0, n - 1, n);
+        // return helperBruteForce(preorder, inorder);
+        return helperoptimized(preorder, -1, 0, n - 1, n);
 
     }
 
-    private TreeNode helper(int[] preorder, int[] inorder, int preIdx, int inStrtIdx, int inEndIdx, int n) {
-       
-        if(preIdx >= n || inStrtIdx > inEndIdx) {
+    private TreeNode helperoptimized(int[] preorder, int rootIdx, int inStrtIdx, int inEndIdx, int n) {
+
+        if (inStrtIdx > inEndIdx) {
             return null;
         }
 
-        int element = preorder[preIdx];
+        int element = preorder[idx];
+        idx++;
         TreeNode root = new TreeNode(element);
-        int position = inMap.get(element);
+        rootIdx = inMap.get(element);
 
-        root.left = helper(preorder, inorder, preIdx + 1, inStrtIdx, position -1, n);
-        root.right = helper(preorder, inorder, preIdx + (position - inStrtIdx + 1), position + 1, inEndIdx, n);
+        root.left = helperoptimized(preorder, rootIdx, inStrtIdx, rootIdx - 1, n);
+        root.right = helperoptimized(preorder, rootIdx, rootIdx + 1, inEndIdx, n);
 
+        return root;
+    }
+
+    private TreeNode helperBruteForce(int[] preorder, int[] inorder) {
+
+        if (preorder.length == 0) {
+            return null;
+        }
+        
+        int rootElement = preorder[0];
+        TreeNode root = new TreeNode(rootElement);
+        int rootInOrIdx = -1;
+
+        for (int i = 0; i < inorder.length; i++) {
+            if (inorder[i] == rootElement) {
+                rootInOrIdx = i;
+                break;
+            }
+        }
+
+        int inLeft[] = Arrays.copyOfRange(inorder, 0, rootInOrIdx);
+        int inRight[] = Arrays.copyOfRange(inorder, rootInOrIdx + 1, inorder.length);
+
+        int preLeft[] = Arrays.copyOfRange(preorder, 1, inLeft.length + 1);
+        int preRightt[] = Arrays.copyOfRange(preorder, inLeft.length + 1, preorder.length);
+
+        root.left = helperBruteForce(preLeft, inLeft);
+        root.right  = helperBruteForce(preRightt, inRight);
 
         return root;
     }
