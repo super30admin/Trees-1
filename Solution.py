@@ -3,6 +3,8 @@ class Solution(object):
         """
         :type root: TreeNode
         :rtype: bool
+        time: O(n)
+        space: O(height)
         """
         def helper(t, max=float("inf"), min=float("-inf")):
             if not t:
@@ -17,6 +19,8 @@ class Solution(object):
         :type preorder: List[int]
         :type inorder: List[int]
         :rtype: TreeNode
+        time: O(n)
+        space: O(n)
         """
         elem2idx_inorder = {inorder[i]:i for i in range(len(inorder))}
 
