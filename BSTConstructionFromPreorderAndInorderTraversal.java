@@ -1,6 +1,6 @@
 import java.util.*;
 
-// Time Complexity : O(n) - where n is the number of nodes in the preorder or inorder
+// Time Complexity : O(n) - where n is the number of nodes in the preorder or inorder array
 // Space Complexity : O(1) - O(h) - where h is the height of the BST (Recursive stack space)
 
 // Did this code successfully run on Leetcode : Yes
@@ -11,11 +11,11 @@ Approach -:
 
 
 
-Fact - > The first element in preorder is always root of BST
+Fact - > The first element in preorder array is always root of BST
          Inorder will be having root in such a way that elements which are left to the root
          forms the left subtree and to the right forms the right subtree.
 
-Constructed the BST by the way inorder traversal. Stored all the inorder elements in
+Constructed the BST by the way preorder traversal. Stored all the inorder elements in
 hashmap by index to know the left and right subtree elements by moving the index of
 preorder array.
 
