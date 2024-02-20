@@ -44,6 +44,7 @@ class Solution {
         int[] inRight = Arrays.copyOfRange(inorder,idx + 1,inorder.length);
         int[] preRight = Arrays.copyOfRange(preorder, 1 + inLeft.length, preorder.length);
 
+        // we have to do the left recursive call first because preorder is root left right
         root.left = buildTree(preLeft,inLeft);
         root.right = buildTree(preRight,inRight);
 
@@ -97,9 +98,11 @@ class Solution {
         TreeNode root = new TreeNode(rootVal);
         
         int rootIdx = map.get(rootVal);// index of root in inorder arr
-        //left : start = same & end = root idx -1;
+
+        // we have to do the left recursive call first because preorder is root left right
+        //left : start = same & end = rootidx -1;
         root.left = helper(start, rootIdx-1,preorder); 
-        //right : start = root idx + 1 , end = same;
+        //right : start = rootidx + 1 , end = same;
         root.right = helper(rootIdx+1,end,preorder); 
 
         return root;
