@@ -1,5 +1,5 @@
 // Time Complexity : O(n)
-// Space Complexity : O(1)
+// Space Complexity : O(h)
 // Did this code successfully run on Leetcode : Yes
 // Three line explanation of solution in plain english
 /*
@@ -103,4 +103,11 @@ class TreeNode {
         this.left = left;
         this.right = right;
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode [val=" + val + ", left=" + left + ", right=" + right + "]";
+    }
+
+    
 }
