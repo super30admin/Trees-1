@@ -1,0 +1,92 @@
+Time complexity: O(n*n) : n of elements and another n is time taken to copy the elements from one array to another.
+Space complexity:O(n*n): For each and every element we are creating new array. For n elements multipled by n.
+Challenges: Copying the range of elements using ArrayCopyRange. Taking an example will help to come up with range easily.
+Approach: Pre order: root-left-right, In order: left-root-right 
+Step1: Identify the root element in pre order array. Traverse the inorder array to find the left and right array. 
+	   Get the index when the preorder root element is found in inorder array.
+Step2: Copy the elements to inorderLeft, copy from 0 to index; note than end pointer is always 1 less(Ex: if value is 4 then it copies until index 3)
+	   inorderRight=(index+1, inorder.length)
+	   preOrderLeft=(1, inorderleft.length+1)
+	   preOrderRight=(inorderLeft.length+1, preOrder.length)
+Step3: Keep traversing for left and right elements. If either of arrays become empty return 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length==0 || inorder.length==0) return null;
+        //preorder//3,9,5,4,6,20,15
+        //inorder//4,5,6,9,3,15,20      
+        TreeNode root =new TreeNode(preorder[0]);    
+        int i;//index
+        for(i=0;i<inorder.length;i++)
+        {
+             if(inorder[i]==preorder[0])
+                 break;
+        }        
+        int[] inorderLeft=Arrays.copyOfRange(inorder, 0, i);
+        int[] inorderRight=Arrays.copyOfRange(inorder, i+1, inorder.length);
+        int[] preorderLeft=Arrays.copyOfRange(preorder, 1, inorderLeft.length+1);
+        int[] preorderRight=Arrays.copyOfRange(preorder, i+1, preorder.length);        
+        root.left=buildTree(preorderLeft, inorderLeft);
+        root.right=buildTree(preorderRight, inorderRight);      
+        return root;
+    }
+}
+
+//**** Optimized Approach  *****//
+Time Complexity: O(n): We are traversing each element only once with any extra copy.
+Space Complexity: O(n): HashMap takes O(n) space complexity and O(h) for Stack space.
+Approach: Identify root element from preorder traversal and get the index associated with it. 
+Inorder is always left-root-right. So get the left elements and right elements from Inorder traversal.
+Left part of the array is always start till index-1 and 
+Right part of the array is always index+1 till end.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    HashMap<Integer, Integer> map=new HashMap<>();
+    int index=0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {       
+        for(int i=0;i<inorder.length;i++){
+            map.put(inorder[i], i);
+        }
+       return helper(preorder, 0, preorder.length-1);
+    }
+
+    public TreeNode helper(int[] preorder, int start, int end){
+        if(end<start) return null;
+        TreeNode node=new TreeNode(preorder[index]);        
+        int indexValue = map.get(preorder[index]);
+        index++;
+        node.left=helper(preorder, start, indexValue-1);
+        node.right=helper(preorder, indexValue+1, end);
+        return node;
+    }
+}
