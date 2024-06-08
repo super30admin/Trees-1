@@ -36,6 +36,47 @@ Example 2:
 Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
+Solution
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+      if(root==null) return true;
+      Stack<TreeNode> s=new Stack<>();
+      TreeNode prev=null;
+      while(root!=null || !s.isEmpty())
+      {
+        while(root!=null)
+        {
+            s.push(root);
+            root=root.left;
+        }
+         root=s.pop();
+        if(prev!=null && prev.val>=root.val)
+        {
+            return false;
+        }
+        prev=root;
+       
+        root=root.right;
+      }
+
+return true;
+    }
+}
 
 ## Problem 2
 
@@ -71,3 +112,53 @@ Return the following binary tree:
 
 
    15   7
+
+   Solution 
+
+   /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int ind;
+    Map<Integer,Integer> map;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+       if(preorder==null|| preorder.length==0||inorder==null|| inorder.length==0)
+       {
+        return null;
+       } 
+       ind=0;
+       map=new HashMap<>();
+       for(int i=0;i<inorder.length;i++)
+       {
+        map.put(inorder[i],i);
+       }
+       return recurse(preorder,0,preorder.length-1);
+       
+    }
+    private TreeNode recurse(int[] preorder,int start,int end)
+    {
+        if(start>end)
+        {
+            return null;
+        }
+        int rootVal=preorder[ind];
+        ind++;
+        int rootind=map.get(rootVal);
+        TreeNode root=new TreeNode(rootVal);
+        root.left=recurse(preorder, start,rootind-1);
+        root.right=recurse(preorder,rootind+1,end);
+        return root;
+    }
+}
