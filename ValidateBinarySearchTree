@@ -1,0 +1,22 @@
+T.c --> O(n)
+S.c --> O(h)
+
+class Solution {
+    boolean flag = true;
+    TreeNode prev ; 
+    public boolean isValidBST(TreeNode root) {        
+        inorder(root);
+        return flag;
+    }
+    private void inorder(TreeNode root){
+      if(root == null){
+        return ;
+      }
+      inorder(root.left);
+      if(prev != null && root.val <= prev.val){
+        flag = false;
+      }
+      prev = root;
+      inorder(root.right);
+    }
+}
