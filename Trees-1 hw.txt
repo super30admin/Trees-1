@@ -1,0 +1,131 @@
+Trees-1
+
+Problem 1
+https://leetcode.com/problems/validate-binary-search-tree/
+
+solution 1:
+
+#recursion sol without returning anything
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root == None :
+            return True
+        self.isValid = True
+        self.prev = None
+        self.inorder(root)
+        return self.isValid
+    
+    def inorder(self, root: Optional[TreeNode]) -> None:
+        if root == None:
+            return
+        self.inorder(root.left)
+        if self.prev != None and self.prev.val >= root.val:
+            self.isValid = False
+            return
+        self.prev = root
+        self.inorder(root.right)
+
+
+solution 2:
+
+#recursion sol with returning 
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root == None :
+            return True
+        self.isValid = True
+        self.prev = None
+        return self.inorder(root)
+        
+    
+    def inorder(self, root: Optional[TreeNode]) -> bool:
+        if root == None:
+            return True
+        if self.inorder(root.left) == False:
+            return False
+        if self.prev != None and self.prev.val >= root.val:
+            return False
+        self.prev = root
+        return self.inorder(root.right)
+
+
+
+solution 3:
+
+# itertive sol
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root == None :
+            return True
+        
+        stack = []
+        prev = None
+        isValid = True
+        while root != None or len(stack) > 0:
+            while root != None :
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if prev != None and prev.val >= root.val:
+                isValid = False
+                break
+            prev = root
+            root= root.right
+        return isValid
+
+
+solution 4:
+
+#bounds approach
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root == None:
+            return True
+
+        self.isValid = True
+        self.dfs(root,None,None)
+        return self.isValid
+    
+    def dfs(self,root: Optional[TreeNode], Min : int, Max : int) -> None:
+        if root == None:
+            return
+        if (Min != None and root.val <= Min) or (Max != None and root.val >= Max):
+            self.isValid = False
+            return
+        self.dfs(root.left, Min, root.val)
+        self.dfs(root.right, root.val,Max)
+
+
+
+
+Problem 2
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+
+
+Time Complexity: O(n^2)
+Space Complexity: O(n)
+
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if len(preorder) == 0 or len(inorder) == 0:
+            return None
+
+        root = TreeNode(preorder[0])
+        mid = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1 : mid + 1], inorder[:mid])
+        root.right = self.buildTree(preorder[mid + 1 : ], inorder[mid + 1: ])
+
+        return root
