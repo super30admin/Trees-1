@@ -1,0 +1,146 @@
+/*
+
+
+Approach 1: helper function
+recursive approach.
+
+Approach 2: helper1 function
+
+check inorder traversal
+
+
+go to the left end of the tree and in the process put everything in the stack.
+once reached at the end, 
+untill we find a right of a node, we keep on poping the stack and adding it to the array list, 
+once we find a right element to any of the node, we simply go to node.right.
+
+We then again follow the entire process
+
+once all nodes are touched, come back to array list check if it is sorted or not.
+
+
+Approach 3:
+
+same as approach 2, but without arraylist 
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        
+        Integer min=null;
+        Integer max=null;
+        
+//   Approach 1 //    return helper(root,min,max);
+        
+    return helper1(root);
+    }
+    
+   boolean helper1(TreeNode root)
+   {
+       if(root==null) return true;
+       Stack<TreeNode> st = new Stack<TreeNode>();
+       ArrayList<TreeNode> al = new ArrayList<TreeNode>();
+       
+       while(root!=null)
+       {
+       
+       while(root.left!=null)
+       {
+           st.push(root);
+           root=root.left;
+       }
+       
+       al.add(root);
+       while(root.right==null&&st.size()>0)
+       {
+           root=st.pop();
+           al.add(root);
+       }
+           
+       root=root.right;
+       
+       }
+    
+       for(int i=0;i<al.size()-1;i++)
+       {
+           if(al.get(i).val>=al.get(i+1).val)    return false;
+       }
+       
+       return true;
+       
+   }
+    
+    boolean helper2(TreeNode root)
+   {
+       if(root==null) return true;
+       Stack<TreeNode> st = new Stack<TreeNode>();
+       ArrayList<TreeNode> al = new ArrayList<TreeNode>();
+       int prev=Integer.MIN_VALUE;
+       while(root!=null)
+       {
+       
+       while(root.left!=null)
+       {
+           st.push(root);
+           root=root.left;
+       }
+       
+       
+       
+        if(prev>=root.val) return false;
+        prev=root.val;
+     //  al.add(root);
+       while(root.right==null&&st.size()>0)
+       {
+           root=st.pop();
+         //  al.add(root);
+           if(prev>=root.val) return false;
+            prev=root.val;
+       }
+           
+       root=root.right;
+       
+       }
+    
+ //      for(int i=0;i<al.size()-1;i++)
+ //      {
+ //          if(al.get(i).val>=al.get(i+1).val)    return false;
+ //      }
+       
+       return true;
+       
+   }
+   
+    boolean helper(TreeNode root,Integer min, Integer max)
+    {
+        boolean left,right;
+        
+        
+        // base case
+        
+        if(root==null) return true;
+
+        if((max!=null)&&(root.val>=max)) return false;
+        if((min!=null)&&(root.val<=min)) return false;        
+        
+        // go left 
+        left=helper(root.left,min,root.val);
+    
+        // go right
+        right=helper(root.right,root.val,max);
+        
+        if(left&&right) return true;
+        
+        return false;
+        
+    }
+}

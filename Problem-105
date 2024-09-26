@@ -1,0 +1,60 @@
+/*
+tried to comeup with a solution but could not fixate on the algorithm.
+Incomplete code.
+
+
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        //inorder : left root right
+        //preorder : root left right.
+        
+        TreeNode root = new TreeNode(preorder[0]);
+        int i=0;
+        int leftcount =0;
+        
+        while(inorder[i]!=preorder[0])
+        {
+            leftcount++;
+            i++;
+        }
+        int rightcount=0;
+        if(inorder.length>leftcount+1)
+        {
+            rightcount=   inorder.length-leftcount-1;
+        }
+        
+        
+        
+    }
+    
+    recurfun(TreeNode root, inorder,preorder,startin,startpre,endin,endpre)
+    {
+        
+        int i=startin;
+        while(i<)
+        
+    }
+    
+       recurfunright(TreeNode root, inorder,preorder,startin,startpre)
+    {
+        
+        
+        
+        
+    }
+    
+    
+}

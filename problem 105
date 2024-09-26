@@ -1,0 +1,74 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+  
+        /*
+        HashMap<Integer,Integer> hmpreorder = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> hminorder = new HashMap<Integer,Integer>();
+
+        for(int i=0;i<preorder.length;i++) hmpreorder.put(preorder[i],i);
+        for(int i=0;i<preorder.length;i++) hminorder.put(inorder[i],i);
+        
+  //      TreeNode rt= new TreeNode();
+        int root=preorder[i];
+        TreeNode rt= new TreeNode(root);
+        for(int i=0;i<preorder.length;i++)
+        {
+            
+            
+            for(int j=0;j<hminorder.get(root);j++)
+            {
+                
+                            
+            }
+            
+        }
+
+        */
+        
+       return  helper(preorder,inorder);
+        
+    }
+    
+    
+   TreeNode helper( int [] preorder, int [] inorder)
+    {
+        //base condition
+        
+        if(preorder.length==0) return null;
+        TreeNode root = new TreeNode(preorder[0]);
+        
+        int i=0;
+        while(i<inorder.length&&root.val!=inorder[i])
+        {
+            
+            i++;
+        }
+        
+        
+        int [] newleftpre= Arrays.copyOfRange(preorder,1,i+1);
+        int [] newrightpre= Arrays.copyOfRange(preorder,i+1,preorder.length);
+        
+        int [] newleftinorder= Arrays.copyOfRange(inorder,0,i);
+        int [] newrightinorder= Arrays.copyOfRange(inorder,i+1,preorder.length);
+        root.left=helper(newleftpre,newleftinorder);
+        root.right=helper(newrightpre,newrightinorder);
+        
+        
+        return root;
+        
+        
+        
+        
+    }
+
+}
