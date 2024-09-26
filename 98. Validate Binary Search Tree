@@ -1,0 +1,33 @@
+Time complexity: O(h)
+Space complexity: O(1)
+Did this code submitted succesfully on leetcode: Yes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode t = new TreeNode();
+    public boolean isValidBST(TreeNode root) {
+        return check(root,null,null);
+    }
+    
+    private boolean check(TreeNode root, Integer max, Integer min){
+        
+        //base case
+        if(root==null) 
+            return true;
+        
+        if(max!=null && root.val>=max || min!=null && root.val<=min)
+            return false;
+        
+        //logic
+        return check(root.left,root.val,min) && check(root.right,max,root.val);  
+    }
+}
+
