@@ -1,0 +1,24 @@
+// Time Complexity :O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return dfs(root,null,null);
+    }
+    public boolean dfs(TreeNode root, Integer low,Integer high)
+    {
+        if(root == null) return true; // edge case
+        int val = root.val;           // current root value
+        if(low != null && val<= low)    // value is less than low then return false
+            return false;
+        if(high != null && val>= high)  // value is greater than high then return false
+            return false;
+        if(!dfs(root.right,val,high))  // if right tree is not valid subtree and the values in right tree should be great thn root.val
+            return false;
+        if(!dfs(root.left,low,val))  // if left tree is not valid subtree and the values in left tree should be less than root.val
+            return false;
+        return true; //by default its true
+    }
+}
