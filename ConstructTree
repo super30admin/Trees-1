@@ -1,0 +1,51 @@
+//TC: o(n)
+/SC: o(n)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private Map<Integer, Integer> inorderIndexMap;
+    private int preorderIndex;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        preorderIndex = 0;
+        inorderIndexMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inorderIndexMap.put(inorder[i], i);
+        }
+        return buildTreeHelper(preorder, 0, inorder.length - 1);
+    }
+    private TreeNode buildTreeHelper(int[] preorder, int inorderLeft, int inorderRight) {
+        // If there are no elements to construct the subtree
+        if (inorderLeft > inorderRight) {
+            return null;
+        }
+
+        // Select the preorderIndex element as the root and increment it
+        int rootValue = preorder[preorderIndex++];
+        TreeNode root = new TreeNode(rootValue);
+
+        // Split inorder list into left and right subtrees
+        int inorderRootIndex = inorderIndexMap.get(rootValue);
+
+        // Recursively build the left subtree
+        root.left = buildTreeHelper(preorder, inorderLeft, inorderRootIndex - 1);
+
+        // Recursively build the right subtree
+        root.right = buildTreeHelper(preorder, inorderRootIndex + 1, inorderRight);
+
+        return root;
+    }
+}
