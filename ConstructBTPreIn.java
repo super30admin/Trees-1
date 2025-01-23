@@ -40,3 +40,63 @@ class Solution {
 
     }
 }
+
+// Optimized approach:
+// In this approach, using hashmap for O(1) lookup for the index of the root in
+// each call. And also instead of creating new arrays everytime, just keeping
+// the indices start and end for the inorder array, so it will be space
+// optimized as well.
+
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+class Solution {
+    // This is the idx of root, which will be given by incrementing everytime from
+    // preorder array
+    int idx;
+    // Hashmap for storing the all the nodes of inorder array and it's index
+    HashMap<Integer, Integer> map;
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // Base case
+        if (preorder == null || preorder.length == 0 || inorder.length == 0) {
+            return null;
+        }
+        // Initialize map and idx
+        map = new HashMap<>();
+        idx = 0;
+        // Put all the nodes of inorder array and it's index in hashmap
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        // Call the recursive createtree function with start as 0 and end as
+        // inorder.length-1
+        return createTree(preorder, 0, inorder.length - 1);
+
+    }
+
+    private TreeNode createTree(int[] preorder, int start, int end) {
+        // Base case, any point if start is > end, that we means we have reached to the
+        // leaf node and there are no more left and right subtrees to that node, so
+        // return null
+        if (start > end) {
+            return null;
+        }
+        // Root will be given from preorder array
+        int rootVal = preorder[idx];
+        // Increment the index to get the correct root in the next recursive call
+        idx++;
+        // Then create that root node
+        TreeNode root = new TreeNode(rootVal);
+        // Get the position of root node in inorder array
+        int rootIdx = map.get(rootVal);
+        // Make the left recursive call, so the start will be same and end will be root
+        // idx - 1
+        root.left = createTree(preorder, start, rootIdx - 1);
+        // Make the right recursive call, start rootidx+1 and end as same
+        root.right = createTree(preorder, rootIdx + 1, end);
+        // return root
+        return root;
+    }
+}
