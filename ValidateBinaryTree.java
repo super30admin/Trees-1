@@ -89,4 +89,15 @@ public class ValidateBinaryTree {
         }
         return true;
     }
+
+    public void checkValidity(TreeNode root, Integer min, Integer max) {
+        if (root == null)
+            return;
+
+        checkValidity(root.left, min, root.val);
+        checkValidity(root.right, root.val, max);
+        if (min != null && min >= root.val || (max != null && max <= root.val)) {
+            isValid = false;
+        }
+    }
 }
