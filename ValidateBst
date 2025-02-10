@@ -1,0 +1,61 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+/*
+Compare each node with the left and right to know root <=low and root >= high
+ */
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class ValidateBST {
+    Deque<TreeNode> stack=new LinkedList<>();
+    Deque<Integer> low=new LinkedList<>();
+    Deque<Integer> high=new LinkedList<>();
+
+    public void update(TreeNode root,Integer l,Integer h){
+        stack.add(root);
+        low.add(l);
+        high.add(h);
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        Integer l = null, h = null, val;
+        update(root,null,null);
+
+        while(!stack.isEmpty()){
+            root=stack.poll();
+            l=low.poll();
+            h=high.poll();
+
+            if(root==null) continue;
+            val=root.val;
+            if(l!=null && val<=l)
+                return false;
+            if(h!=null && val>=h)
+                return false;
+
+            update(root.right,val,h);
+            update(root.left,l,val);
+        }
+
+        return true;
+
+    }
+}
