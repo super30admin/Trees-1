@@ -37,6 +37,22 @@ Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 
+
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def valid(node,left,right):
+            if not node:
+                return True
+            if not (node.val > left and node.val < right):
+                return False
+            
+            return (valid(node.left,left,node.val)and 
+                    valid(node.right,node.val,right))
+        return valid(root,float(-inf),float(inf))
+
+        
+
 ## Problem 2
 
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
