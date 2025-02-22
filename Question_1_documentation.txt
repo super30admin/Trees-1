@@ -1,0 +1,8 @@
+Time Complexity : O(n)
+Space Complexity : O(h)
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+
+
+Your code here along with comments explaining your approach in three sentences only
+Used post order traversal tocheck if left child and right child are valid bsts first. Then checked if maximum element of left subtree is less than the current element and minimum element of the right subtree is greater than the current element
