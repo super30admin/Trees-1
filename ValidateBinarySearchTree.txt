@@ -1,0 +1,19 @@
+class Solution {
+    boolean valid = true;
+    TreeNode prev = null;
+    public boolean isValidBST(TreeNode root) {
+        helper(root);
+        return valid;
+    }
+    private void helper(TreeNode root){
+        if(root == null) return ;
+        // left 
+        helper(root.left);//(1,n)
+        // update prev - if left passes update prev to 
+        if(prev != null && root.val <= prev.val) valid = false;
+        // if(!left) return false; 
+        prev = root;  
+        // right
+        helper(root.right);
+    }
+}
