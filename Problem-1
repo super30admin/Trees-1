@@ -1,0 +1,33 @@
+# Time Complexity : O(2n)
+# Space Complexity : O(n)
+# Did this code successfully run on Leetcode : Yes
+# Three line explanation of solution in plain english:
+"""1. Optimizing brute force approach is to do boolean recursion to check if the tree is a valid BST or not 
+2. In this solution we compare left node within the range of low(None, root.val) and right node within the range of root to high(root.val, +inf))
+3. return False whenever there is a violation of the BST property, otherwise return True when we reach the
+4. To save the space we validate either left or right subtree, a conditional recursion at line 31 if the left is false then we dont have to call the right subtree recursion"""
+
+
+# Definition for a binary tree node.
+class TreeNode(object):
+     def __init__(self, val=0, left=None, right=None):
+         self.val = val
+         self.left = left
+         self.right = right
+
+
+# Your code here along with comments explaining your approach
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: bool
+        """
+        def validate(root,low,high):
+            if not root: return True
+            
+            if (low!=None and root.val<=low) or (high!=None and root.val>=high):
+                return False
+            return validate(root.left,low,root.val) and validate(root.right,root.val,high)
+
+        return validate(root,None,None)

@@ -1,0 +1,66 @@
+//  Time Complexity: o(n) where n is the number of nodes in the tree
+//  Space Complexity: O(h) where h is the height of the tree (due to recursion stack)
+//  Did this code successfully run on Leetcode: Yes
+//  Any problem you faced while coding this: No 
+//  Three line explanation of solution in plain english:
+//  1. We recursively find the root of the tree using preorder and inorder arrays.  
+//  2. The first element of the preorder array is the root, and we find its index in the inorder array.
+//  3. We then split the inorder and preorder arrays into left and right subtrees
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return traverse(preorder, inorder);
+        
+    }
+    public TreeNode traverse(int[] preorder, int[] inorder){
+        //if the inorder array is empty then return null
+        if(inorder.length==0){
+            return null;
+        }
+        //find the index of the root in the inorder array
+        int rootIndex=-1;
+        //the root is the first element in the preorder array
+        int rVal=preorder[0];
+        //create root node with the root value
+        TreeNode root=new TreeNode(rVal);
+        //find the index of the root value in the inorder array
+        for(int i=0;i<inorder.length;i++){
+            if(inorder[i]==rVal){
+                rootIndex=i;
+                break;
+            }
+        }
+        //find the left and right subtrees in the inorder and preorder arrays
+        //the left subtree is the elements before the root in the inorder array
+        int[] inLeft=Arrays.copyOfRange(inorder,0,rootIndex);
+        //the right subtree is the elements after the root in the inorder array
+        int[] inRight=Arrays.copyOfRange(inorder,rootIndex+1,inorder.length);
+        //the left subtree in the preorder array is the elements after the root
+        int[] preLeft=Arrays.copyOfRange(preorder,1,1+inLeft.length);
+        //the right subtree in the preorder array is the elements after the left subtree
+        //which is the elements after the left subtree in the preorder array
+        int[] preRight=Arrays.copyOfRange(preorder,1+inLeft.length,preorder.length);
+        //recursively traverse the left and right subtrees
+        root.left= traverse(preLeft,inLeft);
+
+        root.right= traverse(preRight,inRight);
+        //return the root node of left and right subtrees
+        return root;
+    }
+}
