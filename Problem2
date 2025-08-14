@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+   // TreeNode root;
+   int preIdx;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || inorder == null || preorder.length ==0 ){
+            return null;
+        }
+        //Preorder --> Root L R
+        //Inorder --> L Root R
+        //In preorder, 1st element is Root, find root in inorder and node befor that are to left and after are right
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for(int i = 0; i< inorder.length; i++){
+            hm.put(inorder[i], i);
+        }
+        preIdx = 0;
+        return helper(preorder, 0, preorder.length -1, hm);
+    }
+
+    private TreeNode helper(int[] preorder, int start, int end, HashMap<Integer, Integer> map){
+        if(start > end){
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[preIdx]);
+        preIdx++;
+        int inIdx = map.get(root.val);
+        root.left = helper(preorder, start, inIdx-1, map);
+        root.right = helper(preorder,inIdx + 1, end, map);
+        return root;
+    }
+}
