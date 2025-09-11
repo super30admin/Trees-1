@@ -12,6 +12,8 @@
  * }
  */
 
+// Time complexity - O(n), n = number of ndes
+// Space complexity - O(h), h= height of the tree
 function isValidBST(root: TreeNode | null): boolean {
 	const result = helper(root, null, null);
 	return result;
