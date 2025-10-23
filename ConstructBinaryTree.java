@@ -3,6 +3,8 @@ import java.util.Arrays;
 /**
  * LeetCode 105. Construct Binary Tree from Preorder and Inorder Traversal
  * https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+ * Time Complexity: O(n^2) in the worst case due to the findPos function
+ * Space Complexity: O(n) for the recursion stack and the arrays created during the process
  * 
  * Solution Approach: Recursion
  * 1. The first element in the preorder array is the root of the tree.
