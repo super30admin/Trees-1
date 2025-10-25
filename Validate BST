@@ -1,0 +1,44 @@
+//We do a range-based recursion to check if every node fits within valid min–max bounds.
+// If any node breaks the rule, the recursion immediately returns false.
+// No external flag is needed — the && handles conditional recursion on its own.
+
+// time o(n)
+// space o(h)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, null, null);
+    }
+
+    private boolean helper(TreeNode root, Integer min, Integer max){
+
+        if(root == null) return true;
+
+        //min and max conditions can be checked in inorder, preorder or postorder manner
+        if(min != null && root.val <= min){
+           return false;
+        }
+
+        if(max != null && root.val >= max){
+            return false;
+        }
+
+        //conditional recursion is handled by the && operator itself.
+        return helper(root.left, min, root.val) && helper(root.right, root.val, max);
+    }
+}
