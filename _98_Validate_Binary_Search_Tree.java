@@ -14,13 +14,20 @@
 
 // Rather than using the inorder property of BST, we can use an pointer and store the prev value,use global prev value(as it won't change when function call ends) traverse the tree in inorder and while going to left check if prev is less than root or not, if not return false, else update prev with root and move right.
 
+/**** Method 3 ****/
+//Time Complexity: O(n)
+//Space Complexity: O(n)
+
+//Successfully submitted in LeetCode
+
+// Rather than using the global previous variable, we can use a min and max, we initiate min and max with LONG.MIN_VALUE and LONG.MAX_VALUE, and check we node value lies in between min and max if not return false else continue left recursive call but max will be replaced by node value as left should not be greater than node or root, and do the same with right but replacing min with node value.
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class _98_Validate_Binary_Search_Tree {
 
-  public static void main(String[] args) {}
-
+  /**** Method 1 ****/
   public boolean isValidBST(TreeNode root) {
     List<Integer> list = new ArrayList<>();
 
@@ -45,6 +52,8 @@ public class _98_Validate_Binary_Search_Tree {
     helper(root.right, list);
   }
 
+  /**** Method 2 ****/
+
   TreeNode prev;
 
   public boolean isValidBST1(TreeNode root) {
@@ -62,5 +71,19 @@ public class _98_Validate_Binary_Search_Tree {
 
     prev = root;
     return helper(root.right);
+  }
+
+  /**** Method 3 ****/
+
+  public boolean isValidBST2(TreeNode root) {
+    return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+  }
+
+  private boolean isValid(TreeNode node, long min, long max) {
+    if (node == null) return true;
+    if (node.val <= min || node.val >= max) return false;
+    return (
+      isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
+    );
   }
 }
