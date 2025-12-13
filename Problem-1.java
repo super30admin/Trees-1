@@ -1,3 +1,11 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Three line explanation of solution in plain english:
+// Perform an inorder traversal of the tree.
+// In a valid BST, inorder values must be strictly increasing.
+// If any value is not greater than the previous one, return false.
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
