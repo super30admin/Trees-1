@@ -1,3 +1,11 @@
+# Time Complexity : O(n)
+# Space Complexity : O(n)
+# Did this code successfully run on Leetcode : Yes
+# Three line explanation of solution in plain english:
+# The first unused element in preorder is always the root of the current subtree.
+# Inorder traversal is used to split the tree into left and right subtrees.
+# Recursively build left and right subtrees using these boundaries.
+
 # Definition for a binary tree node.
 #
 class Solution:
