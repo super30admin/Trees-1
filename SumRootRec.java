@@ -1,38 +1,22 @@
 public class SumRootRec {
-    int result = 0;
+    int sum;
 
     public int sumNumbers(TreeNode root) {
         return helper(root, 0);
     }
 
     public int helper(TreeNode root, int num) {
-        if (root == null) {
-            result += num;
-            return result;
-        }
-        num = num * 10 + root.val;
-        helper(root.left, num);
-        helper(root.right, num);
-
-        return result;
+        helper(root, 0);
+        return sum;        
     }
+    private void helper(TreeNode root, int currSum) {
+        if (root==null) return;
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
+        currSum = currSum * 10 + root.val;
+        if (root.right == null && root.left==null) {
+            sum += currSum;
         }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
+        helper(root.left, currSum);
+        helper(root.right, currSum);
     }
 }

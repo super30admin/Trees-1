@@ -1,51 +1,23 @@
 import java.util.*;
 
 class ValidateBST {
-
+    boolean flag;
     public boolean isValidBST(TreeNode root) {
-        Stack<TreeNode> s = new Stack<>();
-        TreeNode prev = null;
-
-        while (root != null || !s.isEmpty()) {
-            // Left
-            while (root != null) {
-                s.push(root);
-                root = root.left;
-            }
-            // Node
-            root = s.pop();
-            System.out.println(root.val);
-
-            // Compare root and prev for the num to grow (10, 25, 30, 50, 60, 70, 80)
-            if (prev.val >= root.val && prev != null) {
-                return false;
-            }
-            // Right
-            prev = root;
-            root = root.right;
-        }
-        return true;
+        this.flag = true;
+        helper(root, null, null);
+        return flag;
     }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
+    private void helper(TreeNode root, Integer min, Integer max) {
+        if (root==null) return;
+        
+        helper(root.left, min, root.val);
+        if (min != null && root.val <= min) {
+            flag = false;
         }
-
-        TreeNode(int val) {
-            this.val = val;
+        if (max != null && root.val >= max){
+            flag = false;
         }
+        helper(root.right, root.val, max);
 
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
     }
 }
-// O(n)
-// O(n)
-// Inorder traversal is always sorted array.
