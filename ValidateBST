@@ -1,0 +1,103 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    boolean flag;
+    TreeNode prev;
+
+    public boolean isValidBST(TreeNode root) {
+        /*this.flag = true;
+        helper(root);
+        return flag;*/
+
+        return booleanBasedRecursion(root);
+
+    }
+  /* Iterative Approach:Do in order traversal and see if prev value is less than curr val. In other words in order traversal of BST should be sorted. 
+
+    Time: O(N) -> N- number of nodes in a tree.
+    Space: O(H)-> H is the height of the tree. In worst case H will be N.
+    */
+    private boolean isValidBSTIterative(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            //push left side in the stack
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            //when left side ends then pop value from stack.
+            curr = stack.pop();
+            if (prev != null && prev.val >= curr.val)
+                return false;
+            prev = curr;
+            curr = curr.right;
+        }
+
+        return true;
+    }
+
+    /*Void based Recursive Approach:Do in order traversal and see if prev value is less than curr val. In other words in order traversal of BST should be sorted. 
+
+    Time: O(N) -> N- number of nodes in a tree.
+    Space: O(H)-> H is the height of the tree. In worst case H will be N.
+    */
+    private void helper(TreeNode root) {
+        //base
+        if (root == null)
+            return;
+
+        helper(root.left);
+
+        //logic
+        if (prev != null && prev.val >= root.val) {
+            flag = false;
+        }
+        prev = root;
+
+        //recurse
+        if (flag) {
+            helper(root.right);
+        }
+
+    }
+
+    /*Boolean Based Recursive Approach:Do in order traversal and see if prev value is less than curr val. In other words in order traversal of BST should be sorted. 
+
+    Time: O(N) -> N- number of nodes in a tree.
+    Space: O(H)-> H is the height of the tree. In worst case H will be N.
+    */
+    private boolean booleanBasedRecursion(TreeNode root) {
+        //base
+        if (root == null)
+            return true;
+
+        // call recursive function on left subtree
+        if(!booleanBasedRecursion(root.left)) return false;
+
+        //logic
+        if (prev != null && prev.val >= root.val) {
+            return false;
+        }
+        prev = root;
+
+        //recurse
+         return booleanBasedRecursion(root.right);
+        
+
+    }
+}
