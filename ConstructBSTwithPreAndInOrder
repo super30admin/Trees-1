@@ -1,0 +1,78 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    int idx;
+
+    /**
+     * Approach: the idea is take root from preorder[]. search that root inside inorder[]. all the elements to the left in inorder[] will be left subtree and right elements will be right subtree. Do this recursively.
+     - In order to search root element in inorder[] we are using hashmap.
+    */
+
+    /*Time Complexity: O(N)
+    HashMap Construction: We iterate through the inorder array of size N exactly once to populate the HashMap. This takes O(N) time.
+    
+    Tree Construction (Recursion): Eecursive helper function processes every node exactly once (tracked by the global idx moving from 0 to N-1). Inside the function, looking up the index in the HashMap and creating a new node both take O(1) time. Therefore, building the tree takes O(N) time.
+    
+    Total Time: O(N) + O(N) = O(N).
+    
+    */
+
+    /*
+    Space Complexity: O(N)
+    - The HashMap: Storing all N nodes and their indices takes O(N) space.
+    - The Call Stack (Implicit Space): Because this is a recursive solution, the system uses the call stack to   manage the function calls. The maximum depth of this stack is equal to the height of the tree (H).
+    - In the worst-case scenario (a completely skewed tree, like a linked list), the call stack will go N levels deep, taking O(N) space.
+    - In the best-case scenario (a perfectly balanced tree), the call stack takes O(log N) space.
+    */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.idx = 0;
+        //1. Create a map for o(1) search of root elemnt in inorder[]
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return helper(preorder, 0, inorder.length - 1, map);
+    }
+
+    //Preorder --> root -left-right
+    //Preorder --> left -root-right
+    private TreeNode helper(int[] preorder, int inStart, int inEnd, Map<Integer, Integer> inOrderMap) {
+        //1. Base case
+        //end index should be greter than start index
+        if (inStart > inEnd)
+            return null;
+
+        //2. Logic
+        //In PreOrder traversal first node is root node. Create root node
+        int rootNodeVal = preorder[idx];
+        idx++;
+        TreeNode root = new TreeNode(rootNodeVal);
+
+        //search root value index inside inorder[]
+        int inRootIndx = inOrderMap.get(rootNodeVal);
+
+        //3. Recursion
+        //In inorder traversal left subtree will be from inStart to the rootIndex-1;
+        root.left = helper(preorder, inStart, inRootIndx - 1, inOrderMap);
+
+        //In inorder traversal right subtree will be from inRootIndx+1 to the inEnd
+        root.right = helper(preorder, inRootIndx + 1, inEnd, inOrderMap);
+
+        return root;
+
+    }
+}
